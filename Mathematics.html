@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_HTML" async></script>
+<script type="text/x-mathjax-config">
+    window.MathJax.Hub.Config({
+        showProcessingMessages: false, //关闭js加载过程信息
+        messageStyle: "none",          //不显示信息
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+            inlineMath: [["\\$", "\\$"], ["\\(", "\\)"]], //行内公式选择符
+            displayMath: [["$$", "$$"], ["\\[", "\\]"]],  //段内公式选择符
+            skipTags: ["script", "noscript", "style", "textarea", "pre", "code", "a", "tips"], //避开某些标签
+            ignoreClass:"not_math"  // 避开class
+        },
+        "HTML-CSS": {
+            availableFonts: ["STIX", "TeX"], //可选字体
+            showMathMenu: false     //关闭右击菜单显示
+        },
+        elements: [document.getElementsByClassName("math_formula")]  // 允许渲染的dom
+    </script>
+<html>
+<head>
+    <title> Mathematics </title>
+    <style>
+        p{font-family:"Times New Roman", Times, serif;}
+    </style>
+</head>
+
+<body>
+    <body style="background-image:url('background.jpeg'); ">
+        <h1 id="rings">Rings</h1>
+        <h2 id="one">One</h2>
+        <div class="definition">
+        <p>A <strong>ring</strong> is a set <span
+        class="math inline"><em>K</em></span>, together with two operations
+        <span
+        class="math inline">(<em>x</em>,<em>y</em>) → (<em>x</em> + <em>y</em>)</span>
+        and <span
+        class="math inline">(<em>x</em>,<em>y</em>) → <em>x</em><em>y</em></span>
+        satisfying:</p>
+        <ol>
+        <li><p><span class="math inline"><em>K</em></span> is a commutative
+        group under the operation <span
+        class="math inline">(<em>x</em>,<em>y</em>) → (<em>x</em> + <em>y</em>)</span>
+        (K is a commutative group under addition);</p></li>
+        <li><p><span
+        class="math inline">(<em>x</em><em>y</em>)<em>z</em> = <em>x</em>(<em>y</em><em>z</em>)</span>
+        (multiplication is associative);</p></li>
+        <li><p><span
+        class="math inline"><em>x</em>(<em>y</em>+<em>z</em>) = <em>x</em><em>y</em> + <em>x</em><em>z</em></span>;
+        <span
+        class="math inline">(<em>y</em>+<em>z</em>)<em>x</em> = <em>y</em><em>x</em> + <em>z</em><em>x</em></span>
+        (distributive laws hold.</p></li>
+        </ol>
+        <p>If <span
+        class="math inline"><em>x</em><em>y</em> = <em>y</em><em>x</em></span>
+        for all <span class="math inline"><em>x</em></span> and <span
+        class="math inline"><em>y</em></span> in <span
+        class="math inline"><em>K</em></span>, we say that the ring <span
+        class="math inline"><em>K</em></span> is <strong>commutative</strong>.
+        If there is an element <span class="math inline">1</span> in <span
+        class="math inline"><em>K</em></span> such that <span
+        class="math inline">1<em>x</em> = <em>x</em>1 = <em>x</em></span> for
+        each <span class="math inline"><em>x</em></span>, <span
+        class="math inline"><em>K</em></span> is said to be a <span
+        class="math inline"><em>r</em><em>i</em><em>n</em><em>g</em><em>w</em><em>i</em><em>t</em><em>h</em><em>i</em><em>d</em><em>e</em><em>n</em><em>t</em><em>i</em><em>t</em><em>y</em></span>,
+        and <span class="math inline">1</span> is called the
+        <strong>identity</strong> for <span
+        class="math inline"><em>K</em></span>.</p>
+        </div>
+</body>
+
+</html>
