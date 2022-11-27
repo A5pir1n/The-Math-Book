@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Mathematics </title>
+    <style>
+        p{font-family:"Times New Roman", Times, serif;}
+    </style>
+</head>
+
+<body>
+    <body style="background-image:url('background.jpeg'); ">
+        <h1 id="equivalence-theorems">Equivalence Theorems</h1>
+        <h2 id="basis">Basis</h2>
+        <p>The following statements are equivalent:</p>
+        <ul>
+        <li><p>A set <span class="math inline"><em>B</em></span> is a basis for
+        a vector space <span class="math inline"><em>V</em></span></p></li>
+        <li><p>The spanning set of the vector space <span
+        class="math inline"><em>V</em></span> does not have strict subset that
+        is also a spanning set</p></li>
+        <li><p>The set <span class="math inline"><em>B</em></span> does not have
+        any strict superset that is also linearly independent.</p></li>
+        </ul>
+        <h2 id="square-matrices">Square matrices</h2>
+        <p>For all <span
+        class="math inline"><em>A</em> ∈ <em>M</em><sub><em>n</em> × <em>n</em></sub></span>,
+        the following statements are equivalent:</p>
+        <ol>
+        <li><p><span id="nonsing" label="nonsing"></span> <span
+        class="math inline"><em>A</em></span> is nonsingular;</p></li>
+        <li><p><span id="identity" label="identity"></span> <span
+        class="math inline">$\RREF(A) = I_n$</span></p></li>
+        <li><p><span id="unique solution" label="unique solution"></span> for
+        all <span
+        class="math inline"><strong>b</strong> ∈ <em>M</em><sub><em>n</em> × 1</sub></span>,
+        the linear system <span
+        class="math inline"><em>A</em><strong>x</strong> = <strong>b</strong></span>
+        has a unique solution;</p></li>
+        <li><p><span id="homogeneous" label="homogeneous"></span> the
+        homogeneous linear system <span
+        class="math inline"><em>A</em><strong>x</strong> = <strong>0</strong></span>
+        has only the trivial solution <span
+        class="math inline"><strong>x</strong> = <strong>0</strong></span>;</p></li>
+        <li><p><span id="elementary" label="elementary"></span> <span
+        class="math inline"><em>A</em></span> is a product of elementary
+        matrices;</p></li>
+        <li><p><span id="no zero row" label="no zero row"></span> <span
+        class="math inline"><em>A</em></span> is not row equivalent to a matrix
+        with a row (or column) of zeros;</p></li>
+        <li><p><span id="det nonzero" label="det nonzero"></span> <span
+        class="math inline">det (<em>A</em>) ≠ 0</span>;</p></li>
+        <li><p><span id="null space" label="null space"></span> <span
+        class="math inline">nullspace(<em>A</em>) = {<strong>0</strong>}</span>;</p></li>
+        <li><p><span id="cols A" label="cols A"></span> the columns of <span
+        class="math inline"><em>A</em></span> are linearly independent;</p></li>
+        <li><p><span id="nullity A" label="nullity A"></span> <span
+        class="math inline">$\nullity(A) = 0$</span>;</p></li>
+        <li><p><span id="rank A" label="rank A"></span> <span
+        class="math inline">$\rank(A) = n$</span>;</p></li>
+        <li><p><span id="row rank" label="row rank"></span> <span
+        class="math inline">$\rrank(A) = n$</span>;</p></li>
+        <li><p><span id="col rank" label="col rank"></span> <span
+        class="math inline">$\crank(A) = n$</span>;</p></li>
+        <li><p><span id="rows A" label="rows A"></span> the rows of <span
+        class="math inline"><em>A</em></span> are linearly independent;</p></li>
+        <li><p><span id="isomorphism" label="isomorphism"></span> <span
+        class="math inline"><em>A</em></span> represents an isomorphism <span
+        class="math inline">$L:\RR^n \to \RR^n$</span>;</p></li>
+        <li><p><span id="one-to-one" label="one-to-one"></span> <span
+        class="math inline"><em>A</em></span> represents a linear transformation
+        <span class="math inline">$L:\RR^n \to \RR^n$</span> that is
+        one-to-one;</p></li>
+        <li><p><span id="onto" label="onto"></span> <span
+        class="math inline"><em>A</em></span> represents a linear transformation
+        <span class="math inline">$L:\RR^n \to \RR^n$</span> that is
+        onto;</p></li>
+        <li><p><span id="operator-invertible"
+        label="operator-invertible"></span> <span
+        class="math inline"><em>A</em></span> represents an invertible linear
+        transformation <span
+        class="math inline"><em>L</em> : <em>V</em> → <em>W</em></span> where
+        <span
+        class="math inline">dim (<em>V</em>) = dim (<em>W</em>) = <em>n</em></span>;</p></li>
+        <li><p><span id="transf-iso" label="transf-iso"></span> <span
+        class="math inline"><em>A</em></span> represents an isomorphism <span
+        class="math inline"><em>L</em> : <em>V</em> → <em>W</em></span> where
+        <span
+        class="math inline">dim (<em>V</em>) = dim (<em>W</em>) = <em>n</em></span>;</p></li>
+        <li><p><span id="transf-onto" label="transf-onto"></span> <span
+        class="math inline"><em>A</em></span> represents an onto linear
+        transformation <span
+        class="math inline"><em>L</em> : <em>V</em> → <em>W</em></span> where
+        <span
+        class="math inline">dim (<em>V</em>) = dim (<em>W</em>) = <em>n</em></span>;</p></li>
+        <li><p><span id="transf-one-to-one" label="transf-one-to-one"></span>
+        <span class="math inline"><em>A</em></span> represents a one-to-one
+        linear transformation <span
+        class="math inline"><em>L</em> : <em>V</em> → <em>W</em></span> where
+        <span
+        class="math inline">dim (<em>V</em>) = dim (<em>W</em>) = <em>n</em></span>;</p></li>
+        <li><p><span id="eigen" label="eigen"></span> <span
+        class="math inline"><em>λ</em> = 0</span> is not an eigenvalue of <span
+        class="math inline"><em>A</em></span>.</p></li>
+        </ol>
+        <h1 id="vector-spaces">Vector Spaces</h1>
+        <h2 id="norms-and-normed-vector-spaces">Norms and normed vector
+        spaces</h2>
+        <div class="definition">
+        <p>For a vector space <span class="math inline"><em>V</em></span> over
+        field <span class="math inline"><em>F</em></span> with element <span
+        class="math inline"><em>x</em> ∈ <em>V</em></span>, a
+        <strong>norm</strong> of <span class="math inline"><em>V</em></span> is
+        a function <span class="math inline">$\norm{x}: V \rightarrow
+        [0,\infty)$</span> satisfying:</p>
+        <ol>
+        <li><p><span class="math inline">$\norm{x} = 0$</span> if and only if
+        <span class="math inline"><em>x</em> = 0</span>.</p></li>
+        <li><p>(Triangle inequality.) <span class="math inline">$\norm{x + y}
+        \leq \norm{x} + \norm{y}$</span> for every <span class="math inline">$x,
+        y \in \V$</span>.</p></li>
+        <li><p><span class="math inline">$\norm{cx} = \abs{c} \cdot
+        \norm{x}$</span> for every <span
+        class="math inline"><em>c</em> ∈ <em>F</em></span> and <span
+        class="math inline"><em>x</em> ∈ <em>V</em></span>.</p></li>
+        </ol>
+        </div>
+        <div class="definition">
+        <p>A pair <span class="math inline">$(V, \norm{\,\cdot \,})$</span>
+        where <span class="math inline"><em>V</em></span> is a vector space and
+        <span class="math inline">$\norm{\, \cdot \,}$</span> is a norm on <span
+        class="math inline"><em>V</em></span> is a <strong>normed vector
+        space</strong>.</p>
+        </div>
+        <h3 id="operator-norms">Operator Norms</h3>
+        <p>The operator norms allows us to measure the “size” of a norm in terms
+        of how much the operator is capable of “stretching" an argument.</p>
+        <div class="definition">
+        <p>For a normed vectors spaces <span class="math inline">$X =
+        (U,\norm{\, \cdot \,}_U)$</span> and <span class="math inline">$Y =
+        (V,\norm{\, \cdot \,}_V)$</span>, we set <span
+        class="math display">ℒ(<em>X</em>,<em>Y</em>) = {<em>T</em> : <em>X</em> → <em>Y</em>|<em>T</em>
+        is linear and continuous},</span> and put <span
+        class="math inline">ℒ(<em>X</em>,<em>X</em>) = ℒ(<em>X</em>)</span>. The
+        dual space of <span class="math inline">ℒ(<em>X</em>,𝔽)</span> of <span
+        class="math inline"><em>X</em></span> is denoted by <span
+        class="math inline"><em>X</em><sup>⋆</sup></span>. An element <span
+        class="math inline"><em>x</em><sup>⋆</sup> ∈ <em>X</em><sup>⋆</sup></span>
+        is called a <strong>linear functional</strong> on <span
+        class="math inline"><em>X</em></span>, and one often write <span
+        class="math inline">⟨<em>x</em>, <em>x</em><sup>⋆</sup>⟩</span> instead
+        of <span
+        class="math inline"><em>x</em><sup>⋆</sup>(<em>x</em>)</span>.</p>
+        <p>For <span
+        class="math inline"><em>T</em> ∈ ℒ(<em>X</em>,<em>Y</em>)</span> the
+        <strong>operator norm</strong> is defined as <span
+        class="math display">$$\begin{aligned}
+            \norm{T}_{\mathcal{L}(X,Y)} = \norm{T}_{op}
+            &amp;= \inf\{(c \leq 0 |\, \forall x \in X \text{ we have }
+        \norm{Tx}_Y \leq c \norm{x}_X \} &lt; \infty \\
+            &amp;= \sup\left\{ \frac{\norm{Tx}_Y}{\norm{x}_X } \, | \, x \in X
+        \right\}.
+        \end{aligned}$$</span></p>
+        </div>
+        <div class="prop">
+        <p>TO be filled</p>
+        </div>
+        <h4 id="applications">Applications</h4>
+        <h5 id="approximation-theory">Approximation Theory</h5>
+        <p>This is a very useful notion for approximation theory in the
+        situation where our approximation to the element <span
+        class="math inline"><em>f</em></span> can be described as applying an
+        operator <span class="math inline"><em>T</em></span> to <span
+        class="math inline"><em>f</em></span> to obtain the approximation <span
+        class="math inline"><em>T</em>(<em>f</em>)</span>.</p>
+        <h3 id="continuity-and-differentiablility">Continuity and
+        differentiablility</h3>
+        <div class="definition">
+        <p>Let <span class="math inline">$X = (U,\norm{\, \cdot \,}_U)$</span>
+        and <span class="math inline">$Y = (V,\norm{\, \cdot \,}_V)$</span> be
+        vector spaces. Given a <span
+        class="math inline"><em>Ω</em> ⊆ <em>X</em></span> and a function <span
+        class="math inline"><em>T</em> : <em>Ω</em> → <em>Y</em></span>, we say
+        that <span class="math inline"><em>T</em></span> is <strong>continuous
+        at a point <span
+        class="math inline"><em>x</em><sub>0</sub> ∈ <em>Ω</em></span></strong>
+        if for every <span class="math inline"><em>ε</em> &gt; 0</span> there
+        exists <span class="math inline"><em>δ</em> &gt; 0</span> such that a
+        <span class="math inline"><em>x</em> ∈ <em>Ω</em></span> with <span
+        class="math inline">$\norm{x - x_0}_U \leq \delta$</span> implies that
+        <span class="math inline">$\norm{T(x) - T(x_0)}_V \leq
+        \varepsilon$</span>. We say that <span
+        class="math inline"><em>T</em></span> is <strong>continuous</strong> if
+        it is continuous at every point of <span
+        class="math inline"><em>Ω</em></span>. We say that a function <span
+        class="math inline"><em>T</em></span> is <strong>differentiable</strong>
+        at <span class="math inline"><em>x</em> ∈ <em>Ω</em></span> if there
+        exists a linear map <span
+        class="math inline"><em>D</em>(<em>T</em>(<em>x</em>)) : <em>U</em> → <em>V</em></span>
+        such that <span class="math display">$$\lim_{x \rightarrow x_0}
+        \frac{\norm{T(x) - T(x_0) - D(T(x))(x - x_0)}_V}{\norm{x - x_0}_U} =
+        0,$$</span> and say that <span class="math inline"><em>T</em></span> is
+        differentiable if it is differentiable at every point of <span
+        class="math inline"><em>Ω</em></span> in which case <span
+        class="math inline"><em>D</em><em>T</em></span> defines a function <span
+        class="math inline"><em>D</em><em>T</em> : <em>Ω</em> → 𝕃(<em>U</em>,<em>V</em>)</span>.</p>
+        </div>
+        <div class="prop">
+        
+        </div>
+        <h1 id="linear-transformationsmaps">Linear Transformations(maps)</h1>
+        <div class="definition">
+        <p>Let <span class="math inline"><em>V</em></span> and <span
+        class="math inline"><em>W</em></span> to be vector spaces over the field
+        <span class="math inline"><em>F</em></span>. A <strong>linear
+        transformation (map) from <span class="math inline"><em>V</em></span>
+        into <span class="math inline"><em>W</em></span></strong> is a function
+        <span class="math inline"><em>T</em></span> from <span
+        class="math inline"><em>V</em></span> into <span
+        class="math inline"><em>W</em></span> such that <span
+        class="math display"><em>T</em>(<em>c</em><em>α</em>+<em>β</em>) = <em>c</em>(<em>T</em><em>α</em>) + <em>T</em><em>β</em></span>
+        for all <span class="math inline"><em>α</em></span> and <span
+        class="math inline"><em>β</em></span> in <span
+        class="math inline"><em>V</em></span> and all scalars <span
+        class="math inline"><em>c</em></span> in <span
+        class="math inline"><em>F</em></span>.</p>
+        </div>
+        <h1 id="determinants">Determinants</h1>
+        <h2 id="determinant-functions">Determinant functions</h2>
+        <h2 id="permutations-and-uniqueness-of-determinants">Permutations and
+        Uniqueness of Determinants</h2>
+        <p>A permutation of degree <span class="math inline"><em>n</em></span>,
+        which pass the sequence <span
+        class="math inline">(1,2,⋯,<em>n</em>)</span> to the sequence <span
+        class="math inline">(<em>σ</em>1,<em>σ</em>2,⋯,<em>σ</em><em>n</em>)</span>,
+        is done by succession of interchanges of pairs. The number of
+        interchanges is either always even or always odd. Then the permutation
+        is then called <strong>even</strong> or <strong>odd</strong>,
+        respectively. We assign a <strong>sign</strong> to a permutation by
+        <span class="math display">$$\sgn \sigma = \begin{cases}
+             \hphantom{-}1, &amp; \text{if } \sigma \text{ is even} \\
+            -1, &amp; \text{if } \sigma \text{ is odd}
+            \end{cases}$$</span></p>
+        <h2 id="properties-of-determinants">Properties of Determinants</h2>
+        <div class="note">
+        <p>A non-square matrix does not have determinant (find out why)</p>
+        </div>
+        <p>In this section, we list out some useful properties of the
+        determinant function on <span
+        class="math inline"><em>n</em> × <em>n</em></span> matrices.</p>
+        <p>When defining our determinant of a matrix <span
+        class="math inline"><em>A</em></span>, the rows of <span
+        class="math inline"><em>A</em></span> has played a privileged role, but
+        we can just as well define the determinant using the columns of <span
+        class="math inline"><em>A</em></span> by symmetry. So, we might expect
+        that <span class="math inline">det <em>A</em></span> is an alternating
+        (hyperlink) <span class="math inline"><em>n</em></span>-linear function
+        (hyperlink) of columns of <span class="math inline"><em>A</em></span>.
+        Indeed, we see:</p>
+        <div class="prop">
+        <p><span
+        class="math display">det (<em>A</em><sup><em>T</em></sup>) = det (<em>A</em>)</span>
+        where <span class="math inline"><em>A</em><sup><em>T</em></sup></span>
+        is the transpose of <span class="math inline"><em>A</em></span>.</p>
+        </div>
+        <div class="proof">
+        <p><em>Proof.</em> Let <span class="math inline"><em>σ</em></span> be a
+        permutation of degree <span class="math inline"><em>n</em></span>, <span
+        class="math display"><em>A</em><sup><em>T</em></sup>(<em>i</em>,<em>σ</em><em>i</em>) = <em>A</em>(<em>σ</em><em>i</em>,<em>i</em>).</span>
+        We know from <span class="citation" data-cites=""></span> that <span
+        class="math display">$$\det (A^T) = \sum_\sigma \, (\sgn \sigma)
+        A(\sigma 1, 1) \cdots A(\sigma n, n).$$</span> Since <span
+        class="math inline"><em>σ</em><em>σ</em><sup>−1</sup></span> is the
+        identity permutation, it means they are either both even or both odd:
+        <span class="math display">$$\begin{cases}
+             \sigma \sigma^{-1} = 1 \Rightarrow &amp;(\sgn \sigma)(\sgn
+        \sigma^{-1}) = 1\\
+            \text{or} &amp; \sgn (\sigma ^{-1}) = \sgn (\sigma).
+            \end{cases}$$</span> Also when <span
+        class="math inline"><em>σ</em><em>i</em> = <em>j</em> ⇒ <em>i</em> = <em>σ</em><sup>−1</sup><em>j</em></span>,
+        <span
+        class="math inline"><em>A</em>(<em>σ</em><em>i</em>,<em>i</em>) = <em>A</em>(<em>j</em>,<em>σ</em><sup>−1</sup><em>j</em>)</span>.
+        Thus, <span class="math display">$$A(\sigma 1, 1) \cdots A(\sigma n, n)
+        = A(1, \sigma^{-1}1) \cdots A(\n, \sigma^{-1} n).$$</span> Finally,
+        since <span class="math inline"><em>σ</em></span> varies over all
+        permutations of degree <span class="math inline"><em>n</em></span>, so
+        does <span class="math inline"><em>σ</em><sup>−1</sup></span>.
+        Therefore, <span class="math display">$$\begin{aligned}
+            \det (A^T) &amp;= \sum_\sigma \, (\sgn \inv{\sigma}) A(1,
+        \inv{\sigma}1) \cdots A(n, \inv{\sigma}n)\\
+            &amp;= \det A
+        \end{aligned}$$</span> proving equation <a
+        href="#determinant_of_transpose" data-reference-type="ref"
+        data-reference="determinant_of_transpose">[determinant_of_transpose]</a>. ◻</p>
+        </div>
+        <div class="example">
+        <p>Let <span class="math inline"><em>K</em></span> be the ring of
+        integers and <span class="math display">$$A =
+            \begin{bmatrix}
+                1 &amp; 2\\
+                3 &amp; 4
+            \end{bmatrix}$$</span></p>
+        </div>
+        <h2 id="modules">Modules</h2>
+        <div class="definition">
+        <p>If <span class="math inline"><em>K</em></span> is a commutative ring
+        with identity, a module over <span class="math inline"><em>K</em></span>
+        is an algebraic system which behaves like a vector space, with <span
+        class="math inline"><em>K</em></span> playing the role of the scalar
+        field. To be precise, we say that <span
+        class="math inline"><em>V</em></span> is a <strong>module over</strong>
+        <span class="math inline"><em>K</em></span> (or a <span
+        class="math inline"><em>K</em></span>-<strong>module</strong>) if</p>
+        <ol>
+        <li><p>there is an addition <span
+        class="math inline">(<em>α</em>,<em>β</em>) → <em>α</em> + <em>β</em></span>
+        on <span class="math inline"><em>V</em></span>, under which <span
+        class="math inline"><em>V</em></span> is a commutative group;</p></li>
+        <li><p>there is multiplication <span
+        class="math inline">(<em>c</em>,<em>α</em>) → <em>c</em><em>α</em></span>
+        of elements <span class="math inline"><em>α</em></span> in <span
+        class="math inline"><em>V</em></span> and <span
+        class="math inline"><em>c</em></span> in <span
+        class="math inline"><em>K</em></span> such that <span
+        class="math display">$$\begin{aligned}
+                (c_1 + c_2) \alpha &amp;= c_1 \alpha + c_2 \alpha\\
+                c(\alpha_1 + \alpha_2) &amp;= c\alpha_1 + c\alpha_2\\
+                (c_1 c_2)\alpha &amp;= c_1(c_2 \alpha)\\
+                1 \alpha &amp;= \alpha
+            
+        \end{aligned}$$</span></p></li>
+        </ol>
+        </div>
+        <h1 id="inner-product-spaces">Inner Product Spaces</h1>
+        <h2 id="inner-products">Inner Products</h2>
+        <div class="definition">
+        <p>Let <span class="math inline"><em>F</em></span> be the field of real
+        numbers or the field of complex numbers, and <span
+        class="math inline"><em>V</em></span> a vector space over <span
+        class="math inline"><em>F</em></span>. An <strong>inner product</strong>
+        on <span class="math inline"><em>V</em></span> is a function which
+        assigns to each ordered pair of vector <span
+        class="math inline"><em>α</em>, <em>β</em></span> in <span
+        class="math inline"><em>V</em></span> a scalar <span
+        class="math inline">(<em>α</em>|<em>β</em>)</span> in <span
+        class="math inline"><em>F</em></span> in such a way that for all <span
+        class="math inline"><em>α</em>, <em>β</em>, <em>γ</em></span> in <span
+        class="math inline"><em>V</em></span> and all scalars <span
+        class="math inline"><em>c</em></span>:</p>
+        <ol>
+        <li><p><span
+        class="math inline">(<em>α</em>+<em>β</em>|<em>γ</em>) = (<em>α</em>|<em>γ</em>) + (<em>β</em>|<em>γ</em>)</span>;</p></li>
+        <li><p><span
+        class="math inline">(<em>c</em><em>α</em>|<em>β</em>) = <em>c</em>(<em>α</em>|<em>β</em>)</span>;</p></li>
+        <li><p><span class="math inline">$(\beta | \alpha) = ( \Bar{\alpha} |
+        \Bar{\beta})$</span>, the bar denoting complex conjugation;</p></li>
+        <li><p><span class="math inline">(<em>α</em>|<em>α</em>) &gt; 0</span>
+        if <span class="math inline"><em>α</em> ≠ 0</span>.<br />
+        </p></li>
+        <li><p>Note that conditions (1), (2) and (3) imply that</p></li>
+        <li><p><span class="math inline">$(\alpha | c \beta + \gamma) = \Bar{c}
+        (\alpha | \beta ) + (\alpha + \gamma)$</span>.</p></li>
+        </ol>
+        </div>
+        <div class="example">
+        <p>On <span class="math inline"><em>F</em><sup><em>n</em></sup></span>
+        there is an inner product which we call the <strong>standard inner
+        product</strong>. It is defined on <span
+        class="math inline"><em>α</em> = (<em>x</em><sub>1</sub>,⋯,<em>x</em><sub><em>n</em></sub>)</span>
+        and <span
+        class="math inline"><em>β</em> = (<em>y</em><sub>1</sub>,⋯,<em>y</em><sub><em>n</em></sub>)</span>
+        by <span class="math display">$$(\alpha |\beta ) = \sum_j x_j
+        \Bar{y}_j.$$</span></p>
+        </div>
+        <div class="definition">
+        <p>We denote the positive sqaure root of <span
+        class="math inline">(<em>α</em>|<em>α</em>)</span> by ; is called the
+        <strong>norm</strong> of <span class="math inline"><em>α</em></span>
+        with respect to the inner product. We can think of it as a “length" or
+        “magnitude" of <span class="math inline"><em>α</em></span>.</p>
+        </div>
+        <div class="definition">
+        <p>We can get the <strong>quadratic form</strong> of the inner product
+        by the following: We know from the property of the inner product that
+        <span class="math display">$$\norm{\alpha \pm \beta}^2 = \norm{\alpha}^2
+        \pm 2 \Re (\alpha | \beta) + \norm{\beta}^2,$$</span> and thus if <span
+        class="math inline">(<em>α</em>|<em>β</em>)</span> is real, <span
+        class="math display">$$(\alpha | \beta) = \frac{1}{4} \norm{\alpha +
+        \beta}^2 - \frac{1}{4} \norm{\alpha - \beta}^2,$$</span> and if <span
+        class="math inline">(<em>α</em>|<em>β</em>)</span> is complex: <span
+        class="math display">$$(\alpha | \beta) = \frac{1}{4} \norm{\alpha +
+        \beta}^2 - \frac{1}{4} \norm{\alpha - \beta}^2 + \frac{i}{4}
+        \norm{\alpha + i\beta}^2 - \frac{i}{4} \norm{\alpha -
+        i\beta}^2.$$</span></p>
+        </div>
+        <div class="note">
+        <p>Note that <span class="math display">$$\begin{aligned}
+        \norm{\alpha \pm \beta}^2 &amp;= (\alpha + \beta|\alpha + \beta)\\
+        &amp;=(\alpha|\alpha) + 2(\alpha|\beta) + (\beta|\beta)\\
+        &amp; = \norm{\alpha}^2 + 2(\Re (\alpha|\beta) + \Im (\alpha | \beta)) +
+        \norm{\beta}^2,
+        \end{aligned}$$</span> but <span class="math inline">$\norm{\alpha \pm
+        \beta}^2$</span> has to be real so only the real part of the <span
+        class="math inline">(<em>α</em>|<em>β</em>)</span> is left.</p>
+        </div>
+        </div>
+</body>
+
+</html>
