@@ -21,6 +21,7 @@
     <h2> <center> Computer Science </center> </h2>
     <br / > <br / > <br / >
     <h2> <center> Electrical Engineering </center> </h2>
+    <br / > <br / > <br / ><br / > <br / > <br / >
 
 
 
@@ -32,5 +33,15 @@
         <div id = "command"></div>
     </div>
 </body>
+<script>
+    document.getElementById("btn").onclick=function(){send()};
+    function send(){
+        var g = new Date();
+        var value = document.getElementById("typing").value;
+        var p = document.createElement("p");
+        p.innerHTML = "Username: "+ value+ '<hr>' + g.toUTCString();
+        document.getElementById("command").prepend(p);
+    }
+</script>
 
 </html>
