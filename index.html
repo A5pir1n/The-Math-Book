@@ -3,43 +3,86 @@
 
 <head>
     <title> THEMATHBOOK </title>
+    <link href="site_style.css" rel="stylesheet">
     <style>
-        p{font-family:"Times New Roman", Times, serif;}
+        p {
+            font-family: "Times New Roman", Times, serif;
+        }
     </style>
 </head>
 
 <body>
-    <body style="background-image:url('background.jpeg'); ">
-    <br / > <br / > <br / > <br / > <br / >
-    <h1>  <center> THE MATH BOOK </center> </h1>
-    <h1><center> MENU </center></h1>
-    <br / > <br / >
-    <h2> <center> <a href="/The-Math-Book/Mathematics.html">Mathematics</a> </center> </h2>
-    <br / > <br / > <br / >
-    <h2> <center> Physics </center> </h2>
-    <br / > <br / > <br / >
-    <h2> <center> Computer Science </center> </h2>
-    <br / > <br / > <br / >
-    <h2> <center> Electrical Engineering </center> </h2>
-    <br / > <br / > <br / ><br / > <br / > <br / >
+    <nav>
+        <img class="image1" src="Images/logo.jpeg" alt="logo" width="190" height="77">
+        <ul class="list1" style="float: right;">
+            <li><a href="#">ABOUT US</a></li>
+            <li><a href="#">FAQs</a></li>
+            <li><a href="#">CONTACT US</a></li>
+            <li><a href="#">DONATE</a></li>
+        </ul>
+        <!-- <ul class="list2"> //for donate clicer
+            //implement later
+            
+        </ul> -->
+        <br><br><br><br><br><br><br><br>
+        <div style="float: left; margin-left: 220px;">
+        <h2>Discover topics & materials</h2>
+            <label for="search-box"></label>
+            <input type="search" id="search-box" name="query">
+            <button type="submit">Search</button>
+        </div>
 
+        <div id = "register-section">
+            <h1 style="color: white;">IGNITE YOUR POTENTIAL, </h1>
+            <h1 style="color: white;">CHANGE THE WORLD.</h1>
+            <a href="#" style="text-decoration: none; color: lavender;">Regiester Now</a>
+        </div>
 
+    </nav>
+    <div class="wrapper">
+        <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
+        <h1>Fields:</h1>
+        <div class="box"> Mathematics</div>
+        <div class="box"> Physics</div>
+        <div class="box"> Biology</div>
+        <div class="box"> Computer Science</div>
+        <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
 
-
-    <div>
-        <h1>Commenting Section</h1>
-        <textarea id = "typing">Please Enter Your Thoughts</textarea>
-        <button id = "btn">Send</button>
-        <div id = "command"></div>
+        <h2>
+            <center> <a href="/The-Math-Book/Mathematics.html">Mathematics</a> </center>
+        </h2>
+        <br> <br> <br>
+        <h2>
+            <center> Physics </center>
+        </h2>
+        <br> <br> <br>
+        <h2>
+            <center> Computer Science </center>
+        </h2>
+        <br> <br> <br>
+        <h2>
+            <center> Electrical Engineering </center>
+        </h2>
+        <br> <br> <br><br> <br> <br>
+    
+    
+        <div>
+            <h1>Commenting Section</h1>
+            <textarea id="typing">Please Enter Your Thoughts</textarea>
+            <button id="btn">Send</button>
+            <div id="command"></div>
+        </div>
     </div>
 </body>
+
+
 <script>
-    document.getElementById("btn").onclick=function(){send()};
-    function send(){
+    document.getElementById("btn").onclick = function () { send() };
+    function send() {
         var g = new Date();
         var value = document.getElementById("typing").value;
         var p = document.createElement("p");
-        p.innerHTML = "Username: "+ value+ '<hr>' + g.toUTCString();
+        p.innerHTML = "Username: " + value + '<hr>' + g.toUTCString();
         document.getElementById("command").prepend(p);
     }
 </script>
