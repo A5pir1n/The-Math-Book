@@ -1,6 +1,6 @@
 .list1{
-    margin-right: 180px;
-    margin-top: 75px;
+    margin-right: 20%;
+    margin-top: 80px;
 }
 
 .list1 li{
@@ -25,9 +25,12 @@
 .image1{
     position:absolute;
     top: 50px;
-    left: 180px;
+    left: 15%;
 }
 
+.subjects_image{
+    position: relative;
+}
 nav{
     width: 100%;
     height: 380px;
@@ -39,13 +42,29 @@ nav{
     width: 70%;
 }
 
-.box {
-    width: 22%;
+.wrapper2{
+    margin: 0 auto;
+    width: 100%;
+}
+
+.field-box {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
     height: 300px;
-    display: inline-block;
-    margin: 10px;
-    border: 5px solid black;
-    border-radius: 10px;
+    margin: 20px;
+    border: 1px solid black;
+    float: left;
+}
+
+.field-box img {
+    width: 100%;
+    height: 50%;
+}
+
+.field-box p {
+    margin: 0;
+    text-align: center;
 }
   
 #search-box {
@@ -56,6 +75,11 @@ nav{
     border-radius: 4px;
 }
 
+
+#searching-section{
+    float: left; 
+    margin-left: calc(100px + 10vw);
+}
 #register-section{
     float:right;
     width: 20%;
@@ -65,6 +89,20 @@ nav{
     border-radius: 10px;
 }
 
+@media (max-width: 800px) {
+    #register-section {
+      margin-right: 0;
+    }
+    #searching-section{
+        margin-left: 0;
+    }
+}
+
+#footer{
+    width: 100%;
+    height: 200px;
+    background-image: url('Images/background4.jpeg');
+}
 
 
 p{font-family:"Times New Roman", Times, serif;}

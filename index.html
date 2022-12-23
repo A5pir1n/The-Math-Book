@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <nav>
+    <nav class = "wrapper2">
         <img class="image1" src="Images/logo.jpeg" alt="logo" width="190" height="77">
         <ul class="list1" style="float: right;">
             <li><a href="#">ABOUT US</a></li>
@@ -25,7 +25,7 @@
             
         </ul> -->
         <br><br><br><br><br><br><br><br>
-        <div style="float: left; margin-left: 220px;">
+        <div id= "searching-section">
         <h2>Discover topics & materials</h2>
             <label for="search-box"></label>
             <input type="search" id="search-box" name="query">
@@ -42,29 +42,24 @@
     <div class="wrapper">
         <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
         <h1>Fields:</h1>
-        <div class="box"> Mathematics</div>
-        <div class="box"> Physics</div>
-        <div class="box"> Biology</div>
-        <div class="box"> Computer Science</div>
+        <div class="field-box">
+            <img src="Images/logo.jpeg" alt="math">
+            <p>Mathematics</p>
+        </div>
+        <div class="field-box">
+            <img src="Images/logo.jpeg" alt="physics">
+            <p>Physics</p>
+        </div>
+        <div class="field-box">
+            <img src="Images/logo.jpeg" alt="biology">
+            <p>Biology</p>
+        </div>
+        <div class="field-box">
+            <img src="Images/logo.jpeg" alt="computer science">
+            <p>Computer Science</p>
+        </div>
+        
         <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
-
-        <h2>
-            <center> <a href="/The-Math-Book/Mathematics.html">Mathematics</a> </center>
-        </h2>
-        <br> <br> <br>
-        <h2>
-            <center> Physics </center>
-        </h2>
-        <br> <br> <br>
-        <h2>
-            <center> Computer Science </center>
-        </h2>
-        <br> <br> <br>
-        <h2>
-            <center> Electrical Engineering </center>
-        </h2>
-        <br> <br> <br><br> <br> <br>
-    
     
         <div>
             <h1>Commenting Section</h1>
@@ -73,6 +68,15 @@
             <div id="command"></div>
         </div>
     </div>
+
+    <div id="footer">
+        <h2>For more information, contact us at <a href="mailto:themathbookedu@gmail.com">themathbookedu@gmail.com</a></h2>
+        <h2>Follow:</h2>
+        <ul>
+          <li><a href="https://www.instagram.com/themathbookedu/">Instagram</a></li>
+          <li><a href="https://www.facebook.com/themathbookedu/">Facebook</a></li>
+        </ul>
+      </div>
 </body>
 
 
@@ -85,6 +89,15 @@
         p.innerHTML = "Username: " + value + '<hr>' + g.toUTCString();
         document.getElementById("command").prepend(p);
     }
+    const button = document.getElementById("myButton");
+    button.addEventListener("mouseover", function() {
+    // Change the background of the body element
+    document.body.style.background = "red";
+    });
+    button.addEventListener("mouseout", function() {
+    // Change the background of the body element back to its original color
+    document.body.style.background = "";
+    });
 </script>
 
 </html>
