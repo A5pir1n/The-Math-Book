@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+
+<head>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+        </script>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <meta name="author" content="Haoyu" />
+    <meta name="dcterms.date" content="2022-12-24" />
+    <title>Set and Quantifiers</title>
+    <style>
+        html {
+            line-height: 1.5;
+            font-family: Georgia, serif;
+            font-size: 20px;
+            color: #1a1a1a;
+            background-color: #fdfdfd;
+        }
+
+        body {
+            margin: 0 auto;
+            max-width: 36em;
+            padding-left: 50px;
+            padding-right: 50px;
+            padding-top: 50px;
+            padding-bottom: 50px;
+            hyphens: auto;
+            overflow-wrap: break-word;
+            text-rendering: optimizeLegibility;
+            font-kerning: normal;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                font-size: 0.9em;
+                padding: 1em;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+        }
+
+        @media print {
+            body {
+                background-color: transparent;
+                color: black;
+                font-size: 12pt;
+            }
+
+            p,
+            h2,
+            h3 {
+                orphans: 3;
+                widows: 3;
+            }
+
+            h2,
+            h3,
+            h4 {
+                page-break-after: avoid;
+            }
+        }
+
+        p {
+            margin: 1em 0;
+        }
+
+        a {
+            color: #1a1a1a;
+        }
+
+        a:visited {
+            color: #1a1a1a;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            margin-top: 1.4em;
+        }
+
+        h5,
+        h6 {
+            font-size: 1em;
+            font-style: italic;
+        }
+
+        h6 {
+            font-weight: normal;
+        }
+
+        ol,
+        ul {
+            padding-left: 1.7em;
+            margin-top: 1em;
+        }
+
+        li>ol,
+        li>ul {
+            margin-top: 0;
+        }
+
+        blockquote {
+            margin: 1em 0 1em 1.7em;
+            padding-left: 1em;
+            border-left: 2px solid #e6e6e6;
+            color: #606060;
+        }
+
+        code {
+            font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+            font-size: 85%;
+            margin: 0;
+        }
+
+        pre {
+            margin: 1em 0;
+            overflow: auto;
+        }
+
+        pre code {
+            padding: 0;
+            overflow: visible;
+            overflow-wrap: normal;
+        }
+
+        .sourceCode {
+            background-color: transparent;
+            overflow: visible;
+        }
+
+        hr {
+            background-color: #1a1a1a;
+            border: none;
+            height: 1px;
+            margin: 1em 0;
+        }
+
+        table {
+            margin: 1em 0;
+            border-collapse: collapse;
+            width: 100%;
+            overflow-x: auto;
+            display: block;
+            font-variant-numeric: lining-nums tabular-nums;
+        }
+
+        table caption {
+            margin-bottom: 0.75em;
+        }
+
+        tbody {
+            margin-top: 0.5em;
+            border-top: 1px solid #1a1a1a;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        th {
+            border-top: 1px solid #1a1a1a;
+            padding: 0.25em 0.5em 0.25em 0.5em;
+        }
+
+        td {
+            padding: 0.125em 0.5em 0.25em 0.5em;
+        }
+
+        header {
+            margin-bottom: 4em;
+            text-align: center;
+        }
+
+        #TOC li {
+            list-style: none;
+        }
+
+        #TOC ul {
+            padding-left: 1.3em;
+        }
+
+        #TOC>ul {
+            padding-left: 0;
+        }
+
+        #TOC a:not(:hover) {
+            text-decoration: none;
+        }
+
+        code {
+            white-space: pre-wrap;
+        }
+
+        span.smallcaps {
+            font-variant: small-caps;
+        }
+
+        div.columns {
+            display: flex;
+            gap: min(4vw, 1.5em);
+        }
+
+        div.column {
+            flex: auto;
+            overflow-x: auto;
+        }
+
+        div.hanging-indent {
+            margin-left: 1.5em;
+            text-indent: -1.5em;
+        }
+
+        ul.task-list {
+            list-style: none;
+        }
+
+        ul.task-list li input[type="checkbox"] {
+            width: 0.8em;
+            margin: 0 0.8em 0.2em -1.6em;
+            vertical-align: middle;
+        }
+
+        .display.math {
+            display: block;
+            text-align: center;
+            margin: 0.5rem auto;
+        }
+
+        .menu {
+            width: 250px;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: #333333;
+            transform: translateX(-200px);
+        }
+
+        .nav-close {
+            background: none;
+            border: none;
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+            padding: 15px 20px;
+            color: #dddddd;
+            cursor: pointer;
+        }
+    </style>
+    <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+    <nav class="menu">
+        <button type="button" class="nav-close">
+            <ion-icon name="close-outline" size="large"></ion-icon>
+        </button>
+        <div class="nav-links-container">
+            <a href="#" class="nav-link"><span class="nav-text">sec1</span></a>
+            <a href="#" class="nav-link"><span class="nav-text">sec2</span></a>
+            <a href="#" class="nav-link"><span class="nav-text">sec3</span></a>
+            <a href="#" class="nav-link"><span class="nav-text">sec4</span></a>
+            <a href="#" class="nav-link"><span class="nav-text">sec5</span></a>
+            <a href="#" class="nav-link"><span class="nav-text">sec6</span></a>
+            <a href="#" class="nav-link"><span class="nav-text">sec7</span></a>
+        </div>
+    </nav>
+    <main>
+        <header id="title-block-header">
+            <h1 class="title">Set and Quantifiers</h1>
+            <p class="author">Haoyu</p>
+            <p class="date">2022-12-24</p>
+        </header>
+        <h1 id="basic-logical-quantifiers">Basic Logical Quantifiers</h1>
+        <div class="definition">
+            <p><strong>Definition 1</strong>. A <strong>math statement</strong> is a
+                statement that is either <strong>True</strong> or
+                <strong>False</strong>. For example:
+            </p>
+            <ul>
+                <li>
+                    <p>"An elephant is an animal" is True.</p>
+                </li>
+                <li>
+                    <p>"A dandelion is an animal" is False.</p>
+                </li>
+                <li>
+                    <p>"<span class="math inline">1 + 1 = 2</span>" is True.</p>
+                </li>
+                <li>
+                    <p>"<span class="math inline">3 ≤ 2</span>" is False.</p>
+                </li>
+            </ul>
+        </div>
+        <div class="definition">
+            <p><strong>Definition 2</strong>. "<span class="math inline">¬<em>X</em></span>" is the negation of
+                statement
+                <span class="math inline"><em>X</em></span> (namely "not <span class="math inline"><em>X</em></span>").
+                The
+                statement "<span class="math inline">¬<em>X</em></span>" is True <em>iff</em> (if and
+                only if) statement <span class="math inline"><em>X</em></span> is False.
+                For example:
+            </p>
+            <ul>
+                <li>
+                    <p>"An elephant is an animal", which is True.<br />
+                        Negation: "An elephant is not an animal", which is False.</p>
+                </li>
+                <li>
+                    <p>"A dandelion is an animal", which is False.<br />
+                        Negation: "A dandelion is not an animal", which is True.</p>
+                </li>
+            </ul>
+        </div>
+        <div class="definition">
+            <p><strong>Definition 3</strong>. <strong>Conjunction (and) &amp;
+                    Alternative (or)</strong><br />
+                The statement "<span class="math inline"><em>X</em> ∧ <em>Y</em></span>"
+                (read as "<span class="math inline"><em>X</em></span> and <span class="math inline"><em>Y</em></span>")
+                is True
+                <em>iff</em> <span class="math inline"><em>X</em></span> and <span class="math inline"><em>Y</em></span>
+                are both
+                True.<br />
+                The statement "<span class="math inline"><em>X</em> ∨ <em>Y</em></span>"
+                (read as "<span class="math inline"><em>X</em></span> or <span class="math inline"><em>Y</em></span>")
+                is True
+                <em>iff</em> at least
+                one of <span class="math inline"><em>X</em></span>, <span class="math inline"><em>Y</em></span> are
+                True
+            </p>
+        </div>
+        <div class="definition">
+            <p><strong>Definition 4</strong>. The statement "<span class="math inline"><em>X</em> ⇒
+                    <em>Y</em></span>" (read as
+                "statement
+                <span class="math inline"><em>X</em></span> <strong>implies</strong>
+                statement <span class="math inline"><em>Y</em></span>") means that "if
+                statement <span class="math inline"><em>X</em></span> is True, then
+                statement <span class="math inline"><em>Y</em></span> is also True".
+            </p>
+        </div>
+        <div class="remark">
+            <p><em>Remark 1</em>. The relationship of <span class="math inline"><em>X</em></span>, <span
+                    class="math inline"><em>Y</em></span>, and <span class="math inline"><em>X</em> ⇒
+                    <em>Y</em></span> is shown in
+                the
+                following "<strong>truth table</strong>":</p>
+            <div class="center">
+                <table>
+                    <thead>
+                        <tr class="header">
+                            <th style="text-align: center;"><span class="math inline"><em>X</em></span></th>
+                            <th style="text-align: center;"><span class="math inline"><em>Y</em></span></th>
+                            <th style="text-align: center;"><span class="math inline"><em>X</em> ⇒ <em>Y</em></span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="odd">
+                            <td style="text-align: center;">T</td>
+                            <td style="text-align: center;">T</td>
+                            <td style="text-align: center;">T</td>
+                        </tr>
+                        <tr class="even">
+                            <td style="text-align: center;">T</td>
+                            <td style="text-align: center;">F</td>
+                            <td style="text-align: center;">F</td>
+                        </tr>
+                        <tr class="odd">
+                            <td style="text-align: center;">F</td>
+                            <td style="text-align: center;">T</td>
+                            <td style="text-align: center;">T</td>
+                        </tr>
+                        <tr class="even">
+                            <td style="text-align: center;">F</td>
+                            <td style="text-align: center;">F</td>
+                            <td style="text-align: center;">T</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="remark">
+            <p><em>Remark 2</em>. Note that if <span class="math inline"><em>X</em></span> is False, then <span
+                    class="math inline"><em>X</em> ⇒ <em>Y</em></span> is always True
+                regardless of <span class="math inline"><em>Y</em></span>. Therefore,
+                when we want to prove <span class="math inline"><em>X</em> ⇒ <em>Y</em></span>, we only need to
+                assume <span class="math inline"><em>X</em></span> is True, and then
+                prove that <span class="math inline"><em>Y</em></span> is True under
+                such assumption.<br />
+            </p>
+        </div>
+        <div class="remark">
+            <p><em>Remark 3</em>. Note that <span class="math inline"><em>X</em> ⇒ <em>Y</em></span> is False only
+                when
+                <span class="math inline"><em>X</em></span> is True and <span class="math inline"><em>Y</em></span>
+                is False.
+                Therefore, the negation
+                of "<span class="math inline"><em>X</em> ⇒ <em>Y</em></span>" is "<span class="math inline"><em>X</em> ∧
+                    (¬<em>Y</em>)</span>", namely "<span class="math inline"><em>X</em></span> and
+                not <span class="math inline"><em>Y</em></span>".<br />
+            </p>
+        </div>
+        <div class="remark">
+            <p><em>Remark 4</em>. The statement "<span class="math inline"><em>X</em> ⇒ <em>Y</em></span>" is
+                equivalent to
+                "<span class="math inline">¬<em>Y</em> ⇒ ¬<em>X</em></span>". The latter
+                is called a <strong>contra-positive</strong> of "<span class="math inline"><em>X</em> ⇒
+                    <em>Y</em></span>".
+                Therefore, when we
+                want to prove <span class="math inline"><em>X</em> ⇒ <em>Y</em></span>,
+                we can instead prove its contra-positive.</p>
+            <div class="center">
+                <table>
+                    <thead>
+                        <tr class="header">
+                            <th style="text-align: center;"><span class="math inline"><em>X</em></span></th>
+                            <th style="text-align: center;"><span class="math inline"><em>Y</em></span></th>
+                            <th style="text-align: center;"><span class="math inline"><em>X</em> ⇒ <em>Y</em></span>
+                            </th>
+                            <th style="text-align: center;"><span class="math inline">¬<em>Y</em></span></th>
+                            <th style="text-align: center;"><span class="math inline">¬<em>X</em></span></th>
+                            <th style="text-align: center;"><span class="math inline">¬<em>Y</em> ⇒
+                                    ¬<em>X</em></span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="odd">
+                            <td style="text-align: center;">T</td>
+                            <td style="text-align: center;">T</td>
+                            <td style="text-align: center;">T</td>
+                            <td style="text-align: center;">F</td>
+                            <td style="text-align: center;">F</td>
+                            <td style="text-align: center;">T</td>
+                        </tr>
+                        <tr class="even">
+                            <td style="text-align: center;">T</td>
+                            <td style="text-align: center;">F</td>
+                            <td style="text-align: center;">F</td>
+                            <td style="text-align: center;">T</td>
+                            <td style="text-align: center;">F</td>
+                            <td style="text-align: center;">F</td>
+                        </tr>
+                        <tr class="odd">
+                            <td style="text-align: center;">F</td>
+                            <td style="text-align: center;">T</td>
+                            <td style="text-align: center;">T</td>
+                            <td style="text-align: center;">F</td>
+                            <td style="text-align: center;">T</td>
+                            <td style="text-align: center;">T</td>
+                        </tr>
+                        <tr class="even">
+                            <td style="text-align: center;">F</td>
+                            <td style="text-align: center;">F</td>
+                            <td style="text-align: center;">T</td>
+                            <td style="text-align: center;">T</td>
+                            <td style="text-align: center;">T</td>
+                            <td style="text-align: center;">T</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="definition">
+            <p><strong>Definition 5</strong>. The statement "<span class="math inline"><em>X</em> ⇔
+                    <em>Y</em></span>" (read as
+                "<span class="math inline"><em>X</em></span> <em>iff</em> <span class="math inline"><em>Y</em></span>"
+                or "<span class="math inline"><em>X</em></span> is
+                <strong>equivalent</strong> to
+                <span class="math inline"><em>Y</em></span>") is True <em>iff</em>
+                "<span class="math inline"><em>X</em> ⇒ <em>Y</em></span> and <span class="math inline"><em>Y</em> ⇒
+                    <em>X</em></span>" is True.
+            </p>
+        </div>
+        <div class="remark">
+            <p><em>Remark 5</em>. By definition, when we want to prove <span class="math inline"><em>X</em> ⇔
+                    <em>Y</em></span>,
+                we need to prove
+                <span class="math inline"><em>X</em> ⇒ <em>Y</em>(⇒</span>, namely
+                "forward direction"<span class="math inline">)</span> and <span class="math inline"><em>Y</em> ⇒
+                    <em>X</em>(⇐</span>, namely "backward
+                direction"<span class="math inline">)</span>.
+            </p>
+        </div>
+        <div class="definition">
+            <p><strong>Definition 6</strong>. <strong>Universal quantifier: <span
+                        class="math inline">∀</span></strong><br />
+                The statement "<span class="math inline">∀</span> (<span class="math inline"><em>x</em></span> in
+                some range <span class="math inline"><em>X</em></span>), (statement <span
+                    class="math inline"><em>Z</em></span>)" is True
+                <em>iff</em> for all
+                objects <span class="math inline"><em>x</em></span> in the specified
+                range, statement <span class="math inline"><em>Z</em></span> is True.
+                For example:
+            </p>
+            <ul>
+                <li>
+                    <p>"<span class="math inline">∀</span> natural number <span class="math inline"><em>x</em></span>,
+                        <span class="math inline"><em>x</em> ≥ 0</span>"
+                        is True because all natural
+                        numbers are greater or equal to 0.</p>
+                </li>
+            </ul>
+        </div>
+        <div class="definition">
+            <p><strong>Definition 7</strong>. <strong>Existential quantifier: <span
+                        class="math inline">∃</span></strong><br />
+                The statement "<span class="math inline">∃</span> (<span class="math inline"><em>x</em></span> in
+                some range <span class="math inline"><em>X</em></span>), such that (statement <span
+                    class="math inline"><em>Z</em></span>)" is
+                True <em>iff</em> there
+                exists at least one object <span class="math inline"><em>x</em></span>
+                in the specified range such that statement <span class="math inline"><em>Z</em></span> is True. For
+                example:</p>
+            <ul>
+                <li>
+                    <p>"<span class="math inline">∃</span> natural number <span class="math inline"><em>x</em></span>,
+                        s.t. <span class="math inline"><em>x</em> &gt;
+                            2</span>" is True because <span class="math inline"><em>x</em> = 3</span> is a natural
+                        number that makes
+                        <span class="math inline"><em>x</em> &gt; 2</span>.
+                    </p>
+                </li>
+            </ul>
+        </div>
+        <div class="remark">
+            <p><em>Remark 6</em>. <strong>Negations of universal and existential
+                    statements</strong><br />
+            </p>
+            <ul>
+                <li>
+                    <p>The negation of "<span class="math inline">∀</span> (<span class="math inline"><em>x</em></span>
+                        in range
+                        <span class="math inline"><em>X</em></span>), (statement <span
+                            class="math inline"><em>Z</em></span>)" is
+                        "<span class="math inline">∃</span> (<span class="math inline"><em>x</em></span> in range
+                        <span class="math inline"><em>X</em></span>), s.t. (<span
+                            class="math inline">¬<em>Z</em></span>)". Therefore, to
+                        prove that a
+                        universal statement is False, we need to find a counter example. For
+                        example:<br />
+                        The statement "<span class="math inline">∀</span> elephants on Mars,
+                        that elephant is purple" is True because we cannot find any counter
+                        examples since there are no elephants on Mars (at least for
+                        now).
+                    </p>
+                </li>
+                <li>
+                    <p>The negation of "<span class="math inline">∃</span> (<span class="math inline"><em>x</em></span>
+                        in range
+                        <span class="math inline"><em>X</em></span>), such that (statement <span
+                            class="math inline"><em>Z</em></span>)" is "<span class="math inline">∀</span> (<span
+                            class="math inline"><em>x</em></span> in range <span class="math inline"><em>X</em></span>),
+                        (<span class="math inline">¬<em>Z</em></span>)".
+                    </p>
+                    <p>For example, in order to prove that "<span class="math inline">∃</span> elephant on Earth,
+                        s.t. that elephant
+                        is
+                        purple" is False, we need to check that all elephants on Earth are not
+                        purple, namely to prove "<span class="math inline">∀</span> elephant on
+                        Earth, that elephant is not purple".</p>
+                </li>
+            </ul>
+        </div>
+        <h1 id="set">Set</h1>
+        <p>A set is a list of distinct objects enclosed by curly brackets "{}".
+            The set itself is usually denoted with capital letters. For example,
+            <span class="math inline"><em>A</em> = {1, 2, 3, 4}</span> is the set
+            containing 1, 2, 3, and 4.
+        </p>
+        <div class="definition">
+            <p><strong>Definition 8</strong>. If an object is in a set, then it is
+                an <strong>element</strong> of that set, denoted with the symbol "<span class="math inline">∈</span>".
+                In the
+                previous example, 2 is an element
+                of <span class="math inline"><em>A</em></span>, thus we say "<span class="math inline">2 ∈
+                    <em>A</em></span>". The
+                symbol "<span class="math inline">∉</span>" is used to denote that an object is
+                <strong>not an element of</strong> a set. In the previous example, 0 is
+                not an element of <span class="math inline"><em>A</em></span>, thus we
+                say "<span class="math inline">0 ∉ <em>A</em></span>".
+            </p>
+        </div>
+        <div class="remark">
+            <p><em>Remark 7</em>. By convention, the following set of numbers are
+                denoted with special symbols:</p>
+            <ul>
+                <li>
+                    <p><span class="math inline">ℕ</span> is the set containing all
+                        naturally numbers.</p>
+                </li>
+                <li>
+                    <p><span class="math inline">ℤ</span> is the set containing all
+                        integers.</p>
+                </li>
+                <li>
+                    <p><span class="math inline">ℚ</span> is the set containing all
+                        rational numbers.</p>
+                </li>
+                <li>
+                    <p><span class="math inline">ℝ</span> is the set containing all real
+                        numbers.</p>
+                </li>
+            </ul>
+        </div>
+        <div class="definition">
+            <p><strong>Definition 9</strong>. A set containing no elements is a
+                called a <strong>trivial set</strong> or an <strong>empty set</strong>,
+                denoted as <span class="math inline">∅ = {}</span>.</p>
+        </div>
+        <div class="definition">
+            <p><strong>Definition 10</strong>. If all elements of a set <span class="math inline"><em>X</em></span>
+                are also
+                element of another set
+                <span class="math inline"><em>Y</em></span>, then we say <span class="math inline"><em>X</em></span>
+                is a
+                <strong>subset</strong> of
+                <span class="math inline"><em>Y</em></span>, denoted as "<span class="math inline"><em>X</em> ⊆
+                    <em>Y</em></span>". If any element of
+                <span class="math inline"><em>X</em></span> is not element of <span
+                    class="math inline"><em>Y</em></span>, then
+                <span class="math inline"><em>X</em></span> is not a subset of <span
+                    class="math inline"><em>Y</em></span>,
+                denoted as <span class="math inline"><em>X</em> ⊈ <em>Y</em></span>. Namely: <span
+                    class="math display"><em>X</em> ⊆ <em>Y</em> ⇔
+                    (∀<em>x</em>∈<em>X</em>,<em>x</em>∈<em>Y</em>)</span>
+            </p>
+        </div>
+        <div class="definition">
+            <p><strong>Definition 11</strong>. <span class="math inline"><em>X</em></span> and <span
+                    class="math inline"><em>Y</em></span> represent the same set
+                <em>iff</em> <span class="math inline"><em>X</em></span> and <span class="math inline"><em>Y</em></span>
+                are
+                subset of each other. Namely,
+                <span class="math inline"><em>X</em> = <em>Y</em>⇔</span> <span class="math inline">$(X\subseteq Y
+                    \hspace{2} and
+                    \hspace{3} Y \subseteq
+                    X)$</span>.
+            </p>
+        </div>
+        <div class="definition">
+            <p><strong>Definition 12</strong>. set operators<br />
+                For any sets <span class="math inline"><em>X</em></span> and <span
+                    class="math inline"><em>Y</em></span>:</p>
+            <ul>
+                <li>
+                    <p><span class="math inline"><em>X</em> ∪ <em>Y</em></span> (read as
+                        "X union Y") is the set containing all elements that is element of <span
+                            class="math inline"><em>X</em></span>
+                        <strong>OR</strong> element of
+                        <span class="math inline"><em>Y</em></span>.
+                    </p>
+                </li>
+                <li>
+                    <p><span class="math inline"><em>X</em> ∩ <em>Y</em></span> (read as
+                        "X intersect Y") is the set containing all elements that is element of
+                        <span class="math inline"><em>X</em></span> <strong>AND</strong> element
+                        of <span class="math inline"><em>Y</em></span>.
+                    </p>
+                </li>
+                <li>
+                    <p><span class="math inline"><em>X</em> − <em>Y</em></span> (read as
+                        "X minus Y") is the set containing all elements that is element of <span
+                            class="math inline"><em>X</em></span>
+                        and <strong>NOT</strong> element
+                        of <span class="math inline"><em>Y</em></span>.</p>
+                </li>
+            </ul>
+        </div>
+        <div class="remark">
+            <p><em>Remark 8</em>. <strong>Set-building notation</strong><br />
+                The set <span class="math inline"><em>X</em> = {<em>x</em></span> in
+                some range <span class="math inline">|</span> statement about <span
+                    class="math inline"><em>x</em>}</span> ("<span class="math inline">:</span>" can be used to
+                replace "<span class="math inline">|</span>") contains all objects
+                <span class="math inline"><em>x</em></span> in the specified range that makes
+                the specified statement True.<br />
+                For example, the set <span class="math inline">$X=\{x \in \mathbb{N} :
+                    \exists k \in \mathbb{N}, \hspace{2 } s.t. \hspace{3} x=2k\}$</span> is
+                the set containing all natural numbers that are even.
+            </p>
+        </div>
+        <h1 id="functions">Functions</h1>
+        <div class="definition">
+            <p><strong>Definition 13</strong>. Intuitively, a function <span class="math inline"><em>f</em></span>
+                from a set
+                <span class="math inline"><em>A</em></span> to set <span class="math inline"><em>B</em></span>,
+                written as <span class="math inline"><em>f</em> : <em>A</em> → <em>B</em></span>, maps
+                elements <span class="math inline"><em>a</em> ∈ <em>A</em></span> to a
+                single element <span class="math inline"><em>f</em>(<em>a</em>) ∈ <em>B</em></span>. In this
+                case, <span class="math inline"><em>A</em></span> is called the
+                <strong>domain</strong> of <span class="math inline"><em>f</em></span>,
+                and <span class="math inline"><em>B</em></span> is called the
+                <strong>co-domain</strong> of <span class="math inline"><em>f</em></span>.<br />
+                The set <span class="math inline"><em>A</em> × <em>B</em></span> is the
+                set of all ordered pairs <span class="math inline">(<em>a</em>,<em>b</em>)</span>, where <span
+                    class="math inline"><em>a</em> ∈ <em>A</em></span> and <span class="math inline"><em>b</em> ∈
+                    <em>B</em></span>.
+                Formally speaking,
+                <span class="math inline"><em>f</em></span> is a subset of <span class="math inline"><em>A</em> ×
+                    <em>B</em></span>. Thus, <span class="math inline">(<em>a</em>,<em>b</em>) ∈ <em>f</em></span>
+                is
+                another way to represent <span class="math inline"><em>f</em>(<em>a</em>) = <em>b</em></span>.
+            </p>
+        </div>
+        <div class="remark">
+            <p><em>Remark 9</em>. A function <span class="math inline"><em>f</em> : <em>A</em> → <em>B</em></span>
+                is
+                <strong>well-defined</strong> <em>iff</em> it satisfies both of the
+                following:
+            </p>
+            <ul>
+                <li>
+                    <p><span class="math inline">$\forall \hspace{2} a \in A, \exists
+                            \hspace{2} b \in B \hspace{3} s.t. \hspace{3} (a, b) \in f$</span>,
+                        namely all elements of <span class="math inline"><em>A</em></span> are
+                        mapped to some elements of <span class="math inline"><em>B</em></span>
+                        by <span class="math inline"><em>f</em></span>.</p>
+                </li>
+                <li>
+                    <p><span class="math inline">$\forall \hspace{2} b' \in B, b' \ne b
+                            \Longrightarrow (a, b') \notin f$</span>, namely each element in <span
+                            class="math inline"><em>A</em></span>
+                        is mapped to <strong>exactly
+                            one</strong> element in <span class="math inline"><em>B</em></span> by
+                        <span class="math inline"><em>f</em></span>.
+                    </p>
+                </li>
+            </ul>
+            <p>All functions must be well-defined in their specific domains and
+                co-domains. Therefore, in future discussion we can assume all functions
+                are well-defined, and when we want to defined a new function, we need to
+                make sure the it is well-defined.</p>
+        </div>
+        <div class="definition">
+            <p><strong>Definition 14</strong>. A function <span class="math inline"><em>f</em> : <em>A</em> →
+                    <em>B</em></span>
+                is an
+                <strong>injection</strong> (injective/one-to-one) <em>iff</em> <span class="math inline">$\forall
+                    \hspace{2} a, a'
+                    \in A, a \ne a'
+                    \Longrightarrow f(a) \ne f(a')$</span>, namely each element in <span
+                    class="math inline"><em>A</em></span> is
+                mapped to a
+                <strong>unique</strong> element in <span class="math inline"><em>B</em></span> by <span
+                    class="math inline"><em>f</em></span>.
+            </p>
+        </div>
+        <div class="definition">
+            <p><strong>Definition 15</strong>. A function <span class="math inline"><em>f</em> : <em>A</em> →
+                    <em>B</em></span>
+                is a
+                <strong>surjection</strong> (surjective/onto) <em>iff</em> <span class="math inline">$\forall
+                    \hspace{2} b \in B,
+                    \exists \hspace{2} a
+                    \in A \hspace{3} s.t. \hspace{3} f(a) = b$</span>, namely all elements
+                in <span class="math inline"><em>B</em></span> are mapped to by <span
+                    class="math inline"><em>f</em></span>.
+            </p>
+        </div>
+        <div class="definition">
+            <p><strong>Definition 16</strong>. A function <span class="math inline"><em>f</em> : <em>A</em> →
+                    <em>B</em></span>
+                is a
+                <strong>bijection</strong> <em>iff</em> it is both injective and
+                surjective.
+            </p>
+        </div>
+    </main>
+
+</body>
+
+</html>
