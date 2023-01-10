@@ -1,0 +1,46 @@
+\documentclass[main.tex]{subfiles}
+
+\begin{document}
+\maketitle
+\chapter{Time Independent Schr\"{o}dinger Equation}
+\section{Basis}
+Hello
+
+\chapter{Three Dimensional Quantum Mechanics}
+\section{The Schr\"{o}dinger Equation}
+Schrödinger's equation says
+$$
+i \hbar \frac{\partial \Psi}{\partial t}=H \Psi
+$$
+the Hamiltonian operator $\hat{H}$ is obtained from the classical energy
+$$
+\hat{H}=\hat{T}+\hat{V} = \frac{\hat{p}^2}{2 m}+\hat{V}=-\frac{\hbar^2}{2 m} \nabla^2+\hat{V},
+$$
+where $$\hat{V}=V=V(\mathbf{r}, t),$$ is the potential energy operator and
+$$\hat{T}=\frac{\hat{p}^2}{2 m}
+$$ is the kinetic energy operator, where 
+$$ \hat{p}^2 = \left(\hat{p}_x^2+\hat{p}_y^2+\hat{p}_z^2\right)=\left(\left(\frac{\hbar}{i} \frac{\partial}{\partial x}\right)^2+\left(\frac{\hbar}{i} \frac{\partial}{\partial y}\right)^2+\left(\frac{\hbar}{i} \frac{\partial}{\partial z}\right)^2\right)  = - \hbar^2 \nabla^2$$
+is the momentum operator. We finally have our familiar form of the Schrödinger's equation 
+$$i \hbar \frac{\partial \Psi}{\partial t}=-\frac{\hbar^2}{2 m} \nabla^2 \Psi+V \Psi.$$
+
+The potential energy $V$ and the wave function $\Psi$ are now functions of $\mathbf{r}=$ $(x, y, z)$ and $t$. The probability of finding the particle in the infinitesimal volume $d^3 \mathbf{r}=d x d y d z$ is $|\Psi(\mathbf{r}, t)|^2 d^3 \mathbf{r}$, hence the normalization condition reads
+$$
+\int|\Psi|^2 d^3 \mathbf{r}=1,
+$$
+with the integral taken over all space. If the potential is independent of time, there will be a complete set of stationary states.
+$$
+\Psi_n(\mathbf{r}, t)=\psi_n(\mathbf{r}) e^{-i E_n t / \hbar} .
+$$
+where the spatial wave function $\psi_n$ satisfies the time-independent Schrödinger equation:
+$$
+-\frac{\hbar^2}{2 m} \nabla^2 \psi+V \psi=E \psi
+$$
+
+The general solution to the (time-clependent) Schrödinger equation is
+$$
+\Psi(\mathbf{r}, t)=\sum c_n \psi_n(\mathbf{r}) e^{-i E_n t / \hbar} .
+$$
+with the constants $c_n$ determined by the initial wave function, $\Psi(\mathbf{r}, 0)$, in the usual way. (If the potential admits continuum states, then the sum in Equation $4.9$ becomes an integral.)
+
+\subfile{../Quantum_Mechanics/Approximation_Methods/The_WKB_Approximation/WKB_approximation}
+\end{document}
