@@ -1,0 +1,65 @@
+\documentclass[main.tex]{subfiles}
+\begin{document}
+\section{Linear Functionals}
+\begin{definition}
+If $V$ is a vector space over the field $F$, we can have a linear transformation $f$ from $V$ into the scalar field $F$. We call $f$ a \textbf{linear functional} on $V$. Since $f$ is a linear transformation, it means that $f$ is a function from $V$ into $F$ such that
+$$
+f(c \alpha+\beta)=c f(\alpha)+f(\beta)
+$$
+for all vectors $\alpha$ and $\beta$ in $V$ and all scalars $c$ in $F$. 
+\end{definition}
+The concept of linear functional is important in the study of finite-dimensional spaces because it helps to organize and clarify the discussion of subspaces, linear equations, and coordinates.
+
+\begin{example}
+\textbf{Linear functional on the n-tuple space $F^n$}. Let $F$ be a field and $\alpha = (x_1, \cdots, x_n)$ a vector in $F^n$. Let $f$ be a linear functional on $F^n$. If we use $\{ \epsilon_1, \cdots \epsilon_n\}$ as standard ordered basis for $\alpha \in F^n$, we can define $a_1, \ldots, a_n$ as scalars in $F$, such that $a_j = f(\epsilon_j), j=1, \ldots, n .$ Then  
+$$
+\begin{aligned}
+f(\alpha)
+& =f\left(x_1, \ldots, x_n\right) \\
+& =f\left(\sum_j x_j \epsilon_j\right) \\
+& =\sum_j x_j f\left(\epsilon_j\right) \\
+& =\sum_j a_j x_j \\
+& =a_1 x_1+\cdots+a_n x_n.
+\end{aligned}
+$$
+It is the linear functional which is represented by the matrix $\left[a_1 \cdots a_n\right]$ relative to the standard ordered basis for $F^n$ and the basis $\{1\}$ for $F$.
+\end{example}
+
+
+\begin{example}
+\textbf{Trace of an $n \times n$ matrix}. Let $n$ be a positive integer and $F$ a field. If $A$ is an $n \times n$ matrix with entries in $F$, the trace of $A$ is the scalar
+$$
+\operatorname{tr} A=A_{11}+A_{22}+\cdots+A_{n n} .
+$$
+The trace function is a linear functional on the matrix space $F^{n \times n}$ because
+$$
+\begin{aligned}
+\operatorname{tr}(c A+B) & =\sum_{i=1}^n\left(c A_{i i}+B_{i i}\right) \\
+& =c \sum_{i=1}^n A_{i i}+\sum_{i=1}^n B_{i i} \\
+& =c \operatorname{tr} A+\operatorname{tr} B .
+\end{aligned}
+$$
+\end{example}
+
+\begin{example}
+\textbf{Linear functional on the space of polynomial functions.} Let $V$ be the space of all polynomial functions from the field $F$ into itself. Let $t$ be an element of $F$. If we define
+$$
+L_t(p)=p(t)
+$$
+then $L_t$ is a linear functional on $V$. One usually describes this by saying that, for each $t$, 'evaluation at $t$ ' is a linear functional on the space of polynomial functions. 
+
+In fact, all we can define linear functionals on the space of all functions this way: let $U$ be the space of all functions from the field $F$ into itself. Evaluation at $t$ is a linear functional on the space of all functions from $F$ into $F$:
+$$
+L_t(f)=f(t).
+$$
+\end{example}
+
+
+\begin{example}
+\textbf{Linear functionals of integral function evaluated on a closed interval}. Let $[a, b]$ be a closed interval on the real line and let $C([a, b])$ be the space of continuous real-valued functions on $[a, b]$, in which $g(t)$ lives. Then
+$$
+L(g)=\int_a^b g(t) d t
+$$
+defines a linear functional $L$ on $C([a, b])$.
+\end{example}
+\end{document}
