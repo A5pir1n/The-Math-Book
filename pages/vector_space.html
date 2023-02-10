@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+
+<head>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <title>vector space</title>
+    <style>
+        html {
+            line-height: 1.5;
+            font-family: Georgia, serif;
+            font-size: 20px;
+            color: #1a1a1a;
+            background-color: #fdfdfd;
+        }
+
+        body {
+            margin: 0 auto;
+            max-width: 36em;
+            padding-left: 50px;
+            padding-right: 50px;
+            padding-top: 50px;
+            padding-bottom: 50px;
+            hyphens: auto;
+            overflow-wrap: break-word;
+            text-rendering: optimizeLegibility;
+            font-kerning: normal;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                font-size: 0.9em;
+                padding: 1em;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+        }
+
+        @media print {
+            body {
+                background-color: transparent;
+                color: black;
+                font-size: 12pt;
+            }
+
+            p,
+            h2,
+            h3 {
+                orphans: 3;
+                widows: 3;
+            }
+
+            h2,
+            h3,
+            h4 {
+                page-break-after: avoid;
+            }
+        }
+
+        p {
+            margin: 1em 0;
+        }
+
+        a {
+            color: #1a1a1a;
+        }
+
+        a:visited {
+            color: #1a1a1a;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            margin-top: 1.4em;
+        }
+
+        h5,
+        h6 {
+            font-size: 1em;
+            font-style: italic;
+        }
+
+        h6 {
+            font-weight: normal;
+        }
+
+        ol,
+        ul {
+            padding-left: 1.7em;
+            margin-top: 1em;
+        }
+
+        li>ol,
+        li>ul {
+            margin-top: 0;
+        }
+
+        blockquote {
+            margin: 1em 0 1em 1.7em;
+            padding-left: 1em;
+            border-left: 2px solid #e6e6e6;
+            color: #606060;
+        }
+
+        code {
+            font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+            font-size: 85%;
+            margin: 0;
+        }
+
+        pre {
+            margin: 1em 0;
+            overflow: auto;
+        }
+
+        pre code {
+            padding: 0;
+            overflow: visible;
+            overflow-wrap: normal;
+        }
+
+        .sourceCode {
+            background-color: transparent;
+            overflow: visible;
+        }
+
+        hr {
+            background-color: #1a1a1a;
+            border: none;
+            height: 1px;
+            margin: 1em 0;
+        }
+
+        table {
+            margin: 1em 0;
+            border-collapse: collapse;
+            width: 100%;
+            overflow-x: auto;
+            display: block;
+            font-variant-numeric: lining-nums tabular-nums;
+        }
+
+        table caption {
+            margin-bottom: 0.75em;
+        }
+
+        tbody {
+            margin-top: 0.5em;
+            border-top: 1px solid #1a1a1a;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        th {
+            border-top: 1px solid #1a1a1a;
+            padding: 0.25em 0.5em 0.25em 0.5em;
+        }
+
+        td {
+            padding: 0.125em 0.5em 0.25em 0.5em;
+        }
+
+        header {
+            margin-bottom: 4em;
+            text-align: center;
+        }
+
+        #TOC li {
+            list-style: none;
+        }
+
+        #TOC ul {
+            padding-left: 1.3em;
+        }
+
+        #TOC>ul {
+            padding-left: 0;
+        }
+
+        #TOC a:not(:hover) {
+            text-decoration: none;
+        }
+
+        code {
+            white-space: pre-wrap;
+        }
+
+        span.smallcaps {
+            font-variant: small-caps;
+        }
+
+        div.columns {
+            display: flex;
+            gap: min(4vw, 1.5em);
+        }
+
+        div.column {
+            flex: auto;
+            overflow-x: auto;
+        }
+
+        div.hanging-indent {
+            margin-left: 1.5em;
+            text-indent: -1.5em;
+        }
+
+        ul.task-list {
+            list-style: none;
+        }
+
+        ul.task-list li input[type="checkbox"] {
+            width: 0.8em;
+            margin: 0 0.8em 0.2em -1.6em;
+            vertical-align: middle;
+        }
+
+        .display.math {
+            display: block;
+            text-align: center;
+            margin: 0.5rem auto;
+        }
+    </style>
+    <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+    <h1 id="vector-spaces">Vector Spaces</h1>
+    <p>Loosely speaking, linear algebra is a branch of mathematics which
+        studies common properties of a algebraic system. This system consists of
+        a set and some notion of an operation, that is the “linear combination"
+        of the elements in the set.</p>
+    <p>So called vector space turned out to one of the most useful
+        abstraction of this type of algebraic system.</p>
+    <div class="definition">
+        <p>A vector space (or linear space) consists of the following:</p>
+        <ol>
+            <li>
+                <p>a field <span class="math inline"><em>F</em></span> of
+                    scalars;</p>
+            </li>
+            <li>
+                <p>a set <span class="math inline"><em>V</em></span> of objects,
+                    called vectors;</p>
+            </li>
+            <li>
+                <p>a rule (or operation), called vector addition, which associates
+                    with each pair of vectors <span class="math inline"><em>α</em>, <em>β</em></span> in <span
+                        class="math inline"><em>V</em></span> a vector <span
+                        class="math inline"><em>α</em> + <em>β</em></span> in <span
+                        class="math inline"><em>V</em></span>, called the sum of <span
+                        class="math inline"><em>α</em></span> and <span class="math inline"><em>β</em></span>, with the
+                    following properties</p>
+                <ol type="a">
+                    <li>
+                        <p>Commutativity, <span
+                                class="math inline"><em>α</em> + <em>β</em> = <em>β</em> + <em>α</em></span>;</p>
+                    </li>
+                    <li>
+                        <p>Associativity, <span
+                                class="math inline"><em>α</em> + (<em>β</em>+<em>γ</em>) = (<em>α</em>+<em>β</em>) + <em>γ</em></span>;
+                        </p>
+                    </li>
+                    <li>
+                        <p>Existence of a unique vector 0 in <span class="math inline"><em>V</em></span>, called the
+                            zero vector, such that
+                            <span class="math inline"><em>α</em> + 0 = <em>α</em></span> for all
+                            <span class="math inline"><em>α</em></span> in <span class="math inline"><em>V</em></span>;
+                        </p>
+                    </li>
+                    <li>
+                        <p>Existence of a unique addtive inverse <span class="math inline"> − <em>α</em></span> in <span
+                                class="math inline"><em>V</em></span> for each vector <span
+                                class="math inline"><em>α</em></span> in <span class="math inline"><em>V</em></span>
+                            such that <span class="math inline"><em>α</em> + (−<em>α</em>) = 0</span>;</p>
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <p>a rule (or operation), called scalar multiplication, which
+                    associates with each scalar <span class="math inline"><em>c</em></span>
+                    in <span class="math inline">F</span> and vector <span class="math inline"><em>α</em></span> in
+                    <span class="math inline"><em>V</em></span> a vector <span
+                        class="math inline"><em>c</em><em>α</em></span> in <span class="math inline"><em>V</em></span>,
+                    called the product of <span class="math inline"><em>c</em></span> and <span
+                        class="math inline"><em>α</em></span>, in such a way that</p>
+                <ol type="a">
+                    <li>
+                        <p><span class="math inline">1<em>α</em> = <em>α</em></span> for
+                            every <span class="math inline"><em>α</em></span> in <span
+                                class="math inline"><em>V</em></span>;</p>
+                    </li>
+                    <li>
+                        <p><span
+                                class="math inline">(<em>c</em><sub>1</sub><em>c</em><sub>2</sub>)<em>α</em> = <em>c</em><sub>1</sub>(<em>c</em><sub>2</sub><em>α</em>)</span>;
+                        </p>
+                    </li>
+                    <li>
+                        <p><span
+                                class="math inline"><em>c</em>(<em>α</em>+<em>β</em>) = <em>c</em><em>α</em> + <em>c</em><em>β</em></span>;
+                        </p>
+                    </li>
+                    <li>
+                        <p><span
+                                class="math inline">(<em>c</em><sub>1</sub>+<em>c</em><sub>2</sub>)<em>α</em> = <em>c</em><sub>1</sub><em>α</em> + <em>c</em><sub>2</sub><em>α</em></span>.
+                        </p>
+                    </li>
+                </ol>
+            </li>
+        </ol>
+    </div>
+    <p>When we associate a vector space <span class="math inline"><em>V</em></span> with a field <span
+            class="math inline"><em>F</em></span>, we say <span class="math inline"><em>V</em></span> is a
+        <strong>vector space over the
+            field</strong> <span class="math inline"><em>F</em></span>. It is
+        important note that the vectors in a vector space is much more general
+        than the vectors we encounter in elementary algebra, which is just a
+        special case in our more general vector space. We call it the
+        <strong><span class="math inline"><em>n</em></span>-tuple space</strong>
+        and we show more examples of other vector spaces below.
+    </p>
+    <div class="example">
+        <p><strong>The space of <span class="math inline"><em>m</em> × <em>n</em></span> matrices</strong>,
+            <span class="math inline"><em>F</em><sup><em>m</em> × <em>n</em></sup></span>.
+            Let <span class="math inline"><em>F</em></span> be any field and let
+            <span class="math inline"><em>m</em></span> and <span class="math inline"><em>n</em></span> be positive
+            integers. Let <span class="math inline"><em>F</em><sup><em>m</em> × <em>n</em></sup></span>
+            be the set of all <span class="math inline"><em>m</em> × <em>n</em></span> matrices over the
+            field <span class="math inline"><em>F</em></span>. The sum of two
+            vectors <span class="math inline"><em>A</em></span> and <span class="math inline"><em>B</em></span> in <span
+                class="math inline"><em>F</em><sup><em>m</em> × <em>n</em></sup></span>
+            is defined by <span
+                class="math display">(<em>A</em>+<em>B</em>)<sub><em>i</em><em>j</em></sub> = <em>A</em><sub><em>i</em><em>j</em></sub> + <em>B</em><sub><em>i</em><em>j</em></sub>.</span>
+            The product of a scalar <span class="math inline"><em>c</em></span> and
+            the matrix <span class="math inline"><em>A</em></span> is defined by
+            <span class="math inline">(2−4)</span> <span
+                class="math display">(<em>c</em><em>A</em>)<sub><em>i</em><em>j</em></sub> = <em>c</em><em>A</em><sub><em>i</em><em>j</em></sub>.</span>
+        </p>
+    </div>
+    <div class="example">
+        <p><span id="space_of_functions_from_set_to_field" label="space_of_functions_from_set_to_field"></span>
+            <strong>The space
+                of functions from a set to a field</strong>. Let <span class="math inline"><em>F</em></span> be any
+            field and let <span class="math inline"><em>S</em></span> be any non-empty set. Let <span
+                class="math inline"><em>V</em></span> be the set of all functions from
+            the set <span class="math inline"><em>S</em></span> into <span class="math inline"><em>F</em></span>. The
+            sum of two vectors <span class="math inline"><em>f</em></span> and <span
+                class="math inline"><em>g</em></span> in <span class="math inline"><em>V</em></span> is the vector <span
+                class="math inline"><em>f</em> + <em>g</em></span>, i.e., the function
+            from <span class="math inline"><em>S</em></span> into <span class="math inline"><em>F</em></span>, defined
+            by <span
+                class="math display">  (<em>f</em>+<em>g</em>)(<em>s</em>) = <em>f</em>(<em>s</em>) + <em>g</em>(<em>s</em>).</span>
+            The product of the scalar <span class="math inline"><em>c</em></span>
+            and the function <span class="math inline"><em>f</em></span> is the
+            function <span class="math inline"><em>c</em><em>f</em></span> defined
+            by <span class="math display">(<em>c</em><em>f</em>)(<em>s</em>) = <em>c</em><em>f</em>(<em>s</em>).</span>
+            The preceding examples are special cases of this one. For an <span
+                class="math inline"><em>n</em></span>-tuple of elements of <span class="math inline"><em>F</em></span>
+            may be regarded as a function from
+            the set <span class="math inline"><em>S</em></span> of integers <span
+                class="math inline">1, …, <em>n</em></span> into <span class="math inline"><em>F</em></span>. Similarly,
+            an <span class="math inline"><em>m</em> × <em>n</em></span> matrix over the field
+            <span class="math inline"><em>F</em></span> is a function from the set
+            <span class="math inline"><em>S</em></span> of pairs of integers, <span
+                class="math inline">(<em>i</em>,<em>j</em>), 1 ≤ <em>i</em> ≤ <em>m</em>, 1 ≤ <em>j</em> ≤ <em>n</em></span>,
+            into the field <span class="math inline"><em>F</em></span>.
+            Verification:
+        </p>
+        <p>Note in this case for condition 1 and 2, our field <span class="math inline"><em>F</em></span> would be the
+            same field <span class="math inline"><em>F</em></span> where we are taking our set <span
+                class="math inline"><em>S</em></span> to and the vector <span class="math inline"><em>V</em></span> will
+            be the functions. For
+            condition 3, vector addition:</p>
+        <ol>
+            <li>
+                <p>Since addition in <span class="math inline"><em>F</em></span> is
+                    commutative, <span
+                        class="math display"><em>f</em>(<em>s</em>) + <em>g</em>(<em>s</em>) = <em>g</em>(<em>s</em>) + <em>f</em>(<em>s</em>)</span>
+                    for each <span class="math inline"><em>s</em></span> in <span class="math inline"><em>S</em></span>,
+                    so the functions <span class="math inline"><em>f</em> + <em>g</em></span> and <span
+                        class="math inline"><em>g</em> + <em>f</em></span> are
+                    identical.</p>
+            </li>
+            <li>
+                <p>Since addition in <span class="math inline"><em>F</em></span> is
+                    associative, <span
+                        class="math display"><em>f</em>(<em>s</em>) + [<em>g</em>(<em>s</em>)+<em>h</em>(<em>s</em>)] = [<em>f</em>(<em>s</em>)+<em>g</em>(<em>s</em>)] + <em>h</em>(<em>s</em>)</span>
+                    for each <span class="math inline"><em>s</em></span>, so <span
+                        class="math inline"><em>f</em> + (<em>g</em>+<em>h</em>)</span> is the
+                    same function as <span class="math inline">(<em>f</em>+<em>g</em>) + <em>h</em></span>.</p>
+            </li>
+            <li>
+                <p>The unique zero vector is the zero function which assigns to each
+                    element of <span class="math inline"><em>S</em></span> the scalar 0 in
+                    <span class="math inline"><em>F</em></span>.
+                </p>
+            </li>
+            <li>
+                <p>For each <span class="math inline"><em>f</em></span> in <span
+                        class="math inline"><em>V</em>, (−<em>f</em>)</span> is the function
+                    which is given by <span
+                        class="math display">(−<em>f</em>)(<em>s</em>) =  − <em>f</em>(<em>s</em>)</span></p>
+            </li>
+        </ol>
+        <p>Now for condition 4, vector multiplication:</p>
+        <ol>
+            <li>
+                <p>Since 1 exists for field <span class="math inline"><em>F</em></span>, we have <span
+                        class="math display">(1<em>f</em>)(<em>s</em>) = 1<em>f</em>(<em>s</em>) = <em>f</em>(<em>s</em>)</span>
+                </p>
+            </li>
+            <li>
+                <p>Since multiplication in <span class="math inline"><em>F</em></span> is associative, <span
+                        class="math display">(<em>c</em><sub>1</sub><em>c</em><sub>2</sub>)<em>f</em>(<em>s</em>) = <em>c</em><sub>1</sub>(<em>c</em><sub>2</sub><em>f</em>(<em>s</em>))</span>
+                    for each <span class="math inline"><em>s</em></span>.</p>
+            </li>
+            <li>
+                <p>Since multiplication distributive over addition in <span class="math inline"><em>F</em></span>, <span
+                        class="math display"><em>c</em>(<em>f</em>+<em>g</em>)(<em>s</em>) = <em>c</em>(<em>f</em>(<em>s</em>)+<em>g</em>(<em>s</em>)) = <em>c</em><em>f</em>(<em>s</em>) + <em>c</em><em>g</em>(<em>s</em>)</span>
+                    for each <span class="math inline"><em>s</em></span>. So <span
+                        class="math inline"><em>c</em>(<em>f</em>+<em>g</em>)</span> is
+                    equivalent to <span class="math inline"><em>c</em><em>f</em> + <em>c</em><em>g</em></span>.</p>
+            </li>
+            <li>
+                <p>Similarly, <span
+                        class="math display">(<em>c</em><sub>1</sub>+<em>c</em><sub>2</sub>)<em>f</em>(<em>s</em>) = <em>c</em><sub>1</sub><em>f</em>(<em>s</em>) + <em>c</em><sub>2</sub><em>f</em>(<em>s</em>)</span>
+                    for every <span class="math inline"><em>s</em></span>, so <span
+                        class="math inline">(<em>c</em><sub>1</sub>+<em>c</em><sub>2</sub>)<em>f</em></span>
+                    is equivalent to <span
+                        class="math inline"><em>c</em><sub>1</sub><em>f</em> + <em>c</em><sub>2</sub><em>f</em></span>.
+                </p>
+            </li>
+        </ol>
+    </div>
+    <div class="example">
+        <p><span id="example_4" label="example_4"></span> <strong>The space of
+                polynomial functions over a field <span class="math inline"><em>F</em></span></strong>. Let <span
+                class="math inline"><em>F</em></span> be a field and let <span class="math inline"><em>V</em></span> be
+            the set of all functions <span class="math inline"><em>f</em></span> from <span
+                class="math inline"><em>F</em></span> into <span class="math inline"><em>F</em></span> which have a rule
+            of the form
+            <span
+                class="math display"><em>f</em>(<em>x</em>) = <em>c</em><sub>0</sub> + <em>c</em><sub>1</sub><em>x</em> + ⋯ + <em>c</em><sub><em>n</em></sub><em>x</em><sup><em>n</em></sup></span>
+            where <span
+                class="math inline"><em>c</em><sub>0</sub>, <em>c</em><sub>1</sub>, …, <em>c</em><sub><em>n</em></sub></span>
+            are fixed scalars in <span class="math inline"><em>F</em></span>
+            (independent of <span class="math inline"><em>x</em></span> ). A
+            function of this type is called a polynomial function on <span class="math inline"><em>F</em></span>. Let
+            addition and scalar
+            multiplication be defined as in Example <a href="#space_of_functions_from_set_to_field"
+                data-reference-type="ref"
+                data-reference="space_of_functions_from_set_to_field">[space_of_functions_from_set_to_field]</a>.
+            The sum of two vectors <span class="math inline"><em>f</em></span> and
+            <span class="math inline"><em>g</em></span> in <span class="math inline"><em>V</em></span> is defined by
+            <span
+                class="math display">  (<em>f</em>+<em>g</em>)(<em>s</em>) = <em>f</em>(<em>s</em>) + <em>g</em>(<em>s</em>).</span>
+            The product of the scalar <span class="math inline"><em>c</em></span>
+            and the function <span class="math inline"><em>f</em></span> is the
+            function <span class="math inline"><em>c</em><em>f</em></span> defined
+            by <span class="math display">(<em>c</em><em>f</em>)(<em>s</em>) = <em>c</em><em>f</em>(<em>s</em>).</span>
+            One must observe here that if <span class="math inline"><em>f</em></span> and <span
+                class="math inline"><em>g</em></span> are polynomial functions and <span
+                class="math inline"><em>c</em></span> is in <span class="math inline"><em>F</em></span>, then <span
+                class="math inline"><em>f</em> + <em>g</em></span> and <span
+                class="math inline"><em>c</em><em>f</em></span> are again polynomial
+            functions.
+        </p>
+    </div>
+    <div class="example">
+        <p>The field <span class="math inline">ℂ</span> of complex numbers may
+            be regarded as a vector space over the field <span class="math inline"><em>R</em></span> of real numbers.
+            More generally,
+            let <span class="math inline"><em>F</em></span> be the field of real
+            numbers and let <span class="math inline"><em>V</em></span> be the set
+            of <span class="math inline"><em>n</em></span>-tuples <span
+                class="math inline"><em>α</em> = (<em>x</em><sub>1</sub>,…,<em>x</em><sub><em>n</em></sub>)</span>
+            where <span class="math inline"><em>x</em><sub>1</sub>, …, <em>x</em><sub><em>n</em></sub></span>
+            are complex numbers. Define addition of vectors and scalar
+            multiplication as in Example <a href="#n-tuple_space" data-reference-type="ref"
+                data-reference="n-tuple_space">[n-tuple_space]</a>. If <span class="math inline"><em>β</em>=</span>
+            <span
+                class="math inline">(<em>y</em><sub>1</sub>,<em>y</em><sub>2</sub>,…,<em>y</em><sub><em>n</em></sub>)</span>
+            with <span class="math inline"><em>y</em><sub><em>i</em></sub></span> in
+            <span class="math inline"><em>F</em></span>, the sum of <span class="math inline"><em>α</em></span> and
+            <span class="math inline"><em>β</em></span> is defined by <span
+                class="math display">  <em>α</em> + <em>β</em> = (<em>x</em><sub>1</sub>+<em>y</em><sub>1</sub>,<em>x</em><sub>2</sub>+<em>y</em><sub>2</sub>,…,<em>x</em><sub><em>n</em></sub>+<em>y</em><sub><em>n</em></sub>).</span>
+            The product of a scalar <span class="math inline"><em>c</em></span> and
+            vector <span class="math inline"><em>α</em></span> is defined by <span
+                class="math display">  <em>c</em><em>α</em> = (<em>c</em><em>x</em><sub>1</sub>,<em>c</em><em>x</em><sub>2</sub>,…,<em>c</em><em>x</em><sub><em>n</em></sub>).</span>
+            In this way we obtain a vector space over the field <span class="math inline"><em>R</em></span> which is
+            quite different from the
+            space <span class="math inline">ℂ<sup><em>n</em></sup></span> and the
+            space <span class="math inline">ℝ<sup><em>n</em></sup></span>. Can you
+            verify this?
+        </p>
+    </div>
+    <h2 class="unnumbered" id="properties-of-vector-spaces">Properties of
+        vector spaces</h2>
+    <p>There are a few simple facts which follow almost immediately from the
+        definition of a vector space, and we proceed to derive these.</p>
+    <ol>
+        <li>
+            <p>If <span class="math inline"><em>c</em></span> is a scalar and 0
+                is the zero vector, then by <span class="math inline">3(c)</span> and
+                <span class="math inline">4(c)</span> <span
+                    class="math display"><em>c</em>0 = <em>c</em>(0+0) = <em>c</em>0 + <em>c</em>0.</span>
+                Adding <span class="math inline"> − (<em>c</em>0)</span> and using <span
+                    class="math inline">3( d)</span>, we obtain <span class="math display"><em>c</em>0 = 0.</span>
+            </p>
+        </li>
+        <li>
+            <p>Similarly, for the scalar 0 and any vector <span class="math inline"><em>α</em></span> we find that <span
+                    class="math display">  0<em>α</em> = 0.</span></p>
+        </li>
+        <li>
+            <p>If <span class="math inline"><em>c</em></span> is a non-zero
+                scalar and <span class="math inline"><em>α</em></span> is a vector such
+                that <span class="math inline"><em>c</em><em>α</em> = 0</span>, then by
+                <a href="#property:zero_vector" data-reference-type="ref"
+                    data-reference="property:zero_vector">[property:zero_vector]</a>, <span
+                    class="math inline"><em>c</em><sup>−1</sup>(<em>c</em><em>α</em>) = 0</span>.
+                But <span
+                    class="math display"><em>c</em><sup>−1</sup>(<em>c</em><em>α</em>) = (<em>c</em><sup>−1</sup><em>c</em>)<em>α</em> = 1<em>α</em> = <em>α</em></span>
+                hence, <span class="math inline"><em>α</em> = 0</span>. Thus we see that
+                if <span class="math inline"><em>c</em></span> is a scalar and <span
+                    class="math inline"><em>α</em></span> a vector such that <span
+                    class="math inline"><em>c</em><em>α</em> = 0</span>, then either <span
+                    class="math inline"><em>c</em></span> is the zero scalar or <span
+                    class="math inline"><em>α</em></span> is the zero vector.
+            </p>
+        </li>
+        <li>
+            <p>If <span class="math inline"><em>α</em></span> is any vector in
+                <span class="math inline"><em>V</em></span>, then <span
+                    class="math display">0 = 0<em>α</em> = (1−1)<em>α</em> = 1<em>α</em> + (−1)<em>α</em> = <em>α</em> + (−1)<em>α</em></span>
+                from which it follows that <span class="math display">  (−1)<em>α</em> =  − <em>α</em>. </span>
+            </p>
+        </li>
+        <li>
+            <p>Finally, the associative and commutative properties of vector
+                addition imply that a sum involving a number of vectors is independent
+                of the way in which these vectors are combined and associated. For
+                example, if <span
+                    class="math inline"><em>α</em><sub>1</sub>, <em>α</em><sub>2</sub>, <em>α</em><sub>3</sub>, <em>α</em><sub>4</sub></span>
+                are vectors in <span class="math inline"><em>V</em></span>, then <span
+                    class="math display">(<em>α</em><sub>1</sub>+<em>α</em><sub>2</sub>) + (<em>α</em><sub>3</sub>+<em>α</em><sub>4</sub>) = [<em>α</em><sub>2</sub>+(<em>α</em><sub>1</sub>+<em>α</em><sub>3</sub>)] + <em>α</em><sub>4</sub></span>
+                and such a sum may be written without confusion as <span
+                    class="math display"><em>α</em><sub>1</sub> + <em>α</em><sub>2</sub> + <em>α</em><sub>3</sub> + <em>α</em><sub>4</sub>.</span>
+            </p>
+        </li>
+    </ol>
+    <figure>
+        <img src="../img/vector_test.png" id="fig:textfigure" alt="Test Figure For Web Dev" />
+        <figcaption aria-hidden="true">Test Figure For Web Dev</figcaption>
+    </figure>
+    <figure>
+        <img src="../svg/vector_test.svg" id="fig:textfigure" alt="Test Figure For Web Dev" />
+        <figcaption aria-hidden="true">Test Figure For Web Dev</figcaption>
+    </figure>
+    <h1 id="linear-combination">Linear Combination</h1>
+    <div class="definition">
+        <p>A vector <span class="math inline"><em>β</em></span> in <span class="math inline">V</span> is said to be a
+            <strong>linear
+                combination</strong> of the vectors <span
+                class="math inline"><em>α</em><sub>1</sub>, …, <em>α</em><sub><em>n</em></sub></span>
+            in <span class="math inline">V</span> provided there exist scalars <span
+                class="math inline">c<sub>1</sub>, …, c<sub>n</sub></span> in <span class="math inline">F</span> such
+            that <span class="math display">$$\begin{aligned}
+                \beta &amp; =\mathrm{c}_1 \alpha_1+\cdots+\mathrm{c}_{\mathrm{n}}
+                \alpha_{\mathrm{n}} \\
+                &amp; =\sum_{\mathrm{i}=1}^{\mathrm{n}} \mathrm{c}_{\mathrm{i}}
+                \alpha_{\mathrm{i}} .
+                \end{aligned}$$</span></p>
+    </div>
+    <p>Other extensions of the associative property of vector addition and
+        the distributive properties 4(c) and 4(d) of scalar multiplication apply
+        to linear combinations: <span class="math display">$$\begin{aligned}
+            \sum_{i=1}^n c_i \alpha_i+\sum_{i=1}^n d_i \alpha_i &amp;
+            =\sum_{i=1}^n\left(c_i+d_i\right) \alpha_i \\
+            c \sum_{i=1}^n c_i \alpha_i &amp; =\sum_{i=1}^n\left(c c_i\right)
+            \alpha_{i \cdot}
+            \end{aligned}$$</span></p>
+</body>
+
+</html>
