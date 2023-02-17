@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Donate for the Math Book</title>
+    <link href="css/donate.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">
+      <!-- Nav -->
+      <nav class="main-nav">
+        <div class="our-project">
+          <label for="checkbox"> OUR PROJECT  </label>
+          <input type="checkbox" id="checkbox" />
+          <ul>
+            <li><a href="#">DONATE</a></li>
+            <li><a href="#">ABOUT US</a></li>
+            <li><a href="#">HELP & FAQs</a></li>
+            <li><a href="#">CONTACT US</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <div class="content_container">  
+      <h1 id="page-header">Donate for the Math Book</h1>
+      <div id="donation-container">
+        <input type="range" min="5" max="25" step="5" id="donation-amount">
+        <div id="donation-amount-labels">
+          <span>$5</span>
+          <span>$10</span>
+          <span>$15</span>
+          <span>$20</span>
+          <span>$25</span>
+        </div>
+        <div id="donation-amount-container">
+          <input type="text" id="donation-amount-text">
+          <button id="donate-btn">Donate</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/donate.js"></script>
+  </body>
+</html>
