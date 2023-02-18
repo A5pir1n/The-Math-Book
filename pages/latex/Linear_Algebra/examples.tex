@@ -1,0 +1,118 @@
+\documentclass{book}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amsthm, amsfonts}
+\usepackage{physics} %This gives the option to use \norm{}
+\usepackage{multirow} %allows merging rows
+
+%This gives and option to combine \textbf{\textsc{...}}
+\usepackage[T1]{fontenc}
+
+\usepackage[shortlabels]{enumitem}
+% This command get rid of the first figure of the section number coming from the chapter. For example, changes chapter2 section 1 from 2.1 to 1. 
+\renewcommand{\thesection}{\arabic{section}}
+
+% \renewcommand{\thesubsection}{\arabic{subsection}}
+
+\usepackage{minted}
+\usemintedstyle{autumn}
+
+
+\usepackage{subfiles}
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}{Lemma}[theorem]
+
+
+
+\theoremstyle{remark}
+\newtheorem*{note}{Note}
+\newtheorem{remark}{Remark}[section]
+\newtheorem{example}{Example}[section]
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\newcommand{\sgn}{\text{sgn\,}}
+\newcommand{\inv}[1]{{#1}^{-1}}
+
+\begin{document}
+
+\begin{example}\label{n-tuple_space}
+\textbf{The $n$-tuple space, $F^n$}. Let $F$ be any field, and let $V$ be the set of all $n$-tuples $\alpha=\left(x_1, x_2, \ldots, x_n\right)$ of scalars $x_i$ in $F$. If $\beta=$ $\left(y_1, y_2, \ldots, y_n\right)$ with $y_i$ in $F$, the sum of $\alpha$ and $\beta$ is defined by
+$$\quad \alpha+\beta=\left(x_1+y_1, x_2+y_2, \ldots, x_n+y_n\right).$$
+The product of a scalar $c$ and vector $\alpha$ is defined by
+$$\quad c \alpha=\left(c x_1, c x_2, \ldots, c x_n\right).$$
+The fact that this vector addition and scalar multiplication satisfy conditions (3) and (4) is easy to verify, using the similar properties of addition and multiplication of elements of $F$.
+\end{example}
+\begin{example}
+\textbf{The space of $m \times n$ matrices}, $F^{m \times n}$. Let $F$ be any field and let $m$ and $n$ be positive integers. Let $F^{m \times n}$ be the set of all $m \times n$ matrices over the field $F$. The sum of two vectors $A$ and $B$ in $F^{m \times n}$ is defined by
+$$
+(A+B)_{i j}=A_{i j}+B_{i j} .
+$$
+The product of a scalar $c$ and the matrix $A$ is defined by $(2-4)$
+$$
+(c A)_{i j}=c A_{i j} .
+$$
+\end{example}
+
+\begin{example}\label{space_of_functions_from_set_to_field}
+\textbf{The space of functions from a set to a field}. Let $F$ be any field and let $S$ be any non-empty set. Let $V$ be the set of all functions from the set $S$ into $F$. The sum of two vectors $f$ and $g$ in $V$ is the vector $f+g$, i.e., the function from $S$ into $F$, defined by
+$$\quad(f+g)(s)=f(s)+g(s).$$
+The product of the scalar $c$ and the function $f$ is the function $c f$ defined by
+$$
+(c f)(s)=c f(s) .
+$$
+The preceding examples are special cases of this one. For an $n$-tuple of elements of $F$ may be regarded as a function from the set $S$ of integers $1, \ldots, n$ into $F$. Similarly, an $m \times n$ matrix over the field $F$ is a function from the set $S$ of pairs of integers, $(i, j), 1 \leq i \leq m, 1 \leq j \leq n$, into the field $F$. Verification:
+
+Note in this case for condition 1 and 2, our field $F$ would be the same field $F$ where we are taking our set $S$ to and the vector $V$ will be the functions. For condition 3, vector addition:
+\begin{enumerate}
+    \item Since addition in $F$ is commutative,
+    $$
+    f(s)+g(s)=g(s)+f(s)
+    $$
+    for each $s$ in $S$, so the functions $f+g$ and $g+f$ are identical.
+    \item Since addition in $F$ is associative,
+    $$
+    f(s)+[g(s)+h(s)]=[f(s)+g(s)]+h(s)
+    $$
+    for each $s$, so $f+(g+h)$ is the same function as $(f+g)+h$.
+    \item The unique zero vector is the zero function which assigns to each element of $S$ the scalar 0 in $F$.
+    \item For each $f$ in $V,(-f)$ is the function which is given by
+    $$
+    (-f)(s)=-f(s)
+    $$
+\end{enumerate}
+Now for condition 4, vector multiplication:
+\begin{enumerate}
+    \item Since 1 exists for field $F$, we have $$
+    (1f)(s) = 1f(s) = f(s)$$
+    \item Since multiplication in $F$ is associative, $$(c_1c_2)f(s) = c_1(c_2f(s))$$ for each $s$. 
+    \item Since multiplication distributive over addition in $F$, $$c(f + g)(s) = c(f(s) + g(s)) = cf(s) + cg(s)$$ for each $s$. So $c(f + g)$ is equivalent to $cf + cg$. 
+    \item Similarly, $$(c_1 + c_2) f(s) = c_1f(s) + c_2f(s)$$ for every $s$, so $(c_1 + c_2)f$ is equivalent to $c_1f + c_2f$. 
+\end{enumerate}
+\end{example}
+
+\begin{example}\label{example_4}
+\textbf{The space of polynomial functions over a field $F$}. Let $F$ be a field and let $V$ be the set of all functions $f$ from $F$ into $F$ which have a rule of the form
+$$
+f(x)=c_0+c_1 x+\cdots+c_n x^n
+$$
+where $c_0, c_1, \ldots, c_n$ are fixed scalars in $F$ (independent of $x$ ). A function of this type is called a polynomial function on $F$. Let addition and scalar multiplication be defined as in Example \ref{space_of_functions_from_set_to_field}. The sum of two vectors $f$ and $g$ in $V$ is defined by
+$$\quad(f+g)(s)=f(s)+g(s).$$
+The product of the scalar $c$ and the function $f$ is the function $c f$ defined by
+$$
+(c f)(s)=c f(s) .
+$$
+One must observe here that if $f$ and $g$ are polynomial functions and $c$ is in $F$, then $f+g$ and $c f$ are again polynomial functions.
+\end{example}
+
+\begin{example}
+The field $\mathbb{C}$ of complex numbers may be regarded as a vector space over the field $R$ of real numbers. More generally, let $F$ be the field of real numbers and let $V$ be the set of $n$-tuples $\alpha=\left(x_1, \ldots, x_n\right)$ where $x_1, \ldots, x_n$ are complex numbers. Define addition of vectors and scalar multiplication as in Example \ref{n-tuple_space}. If $\beta=$ $\left(y_1, y_2, \ldots, y_n\right)$ with $y_i$ in $F$, the sum of $\alpha$ and $\beta$ is defined by
+$$\quad \alpha+\beta=\left(x_1+y_1, x_2+y_2, \ldots, x_n+y_n\right).$$
+The product of a scalar $c$ and vector $\alpha$ is defined by
+$$\quad c \alpha=\left(c x_1, c x_2, \ldots, c x_n\right).$$ In this way we obtain a vector space over the field $R$ which is quite different from the space $\mathbf{C}^n$ and the space $\mathbf{R}^n$.
+\end{example}
+
+\end{document}
