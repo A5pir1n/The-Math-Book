@@ -1,0 +1,33 @@
+#z
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Autoplay Video on Hover</title>
+  <style>
+    #my-video {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <video id="my-video" width="640" height="360" poster="video-poster.jpg">
+    <source src="video.mp4" type="video/mp4">
+    <source src="video.webm" type="video/webm">
+    Your browser does not support the video tag.
+  </video>
+
+  <script>
+    function autoPlayOnHover(videoElementId) {
+      var videoElement = document.getElementById(videoElementId);
+      videoElement.addEventListener("mouseover", function() {
+        videoElement.play();
+      });
+      videoElement.addEventListener("mouseout", function() {
+        videoElement.pause();
+      });
+    }
+
+    autoPlayOnHover("my-video");
+  </script>
+</body>
+</html>
