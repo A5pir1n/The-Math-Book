@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Mathematics </title>
+    <style>
+        p{font-family:"Times New Roman", Times, serif;}
+    </style>
+</head>
+
+<body>
+    <body style="background-image:url('background.jpeg'); "></body>
+    <h1 id="permutation">Permutation</h1>
+    <div class="definition">
+    <p>A sequence <span
+    class="math inline">(<em>k</em><sub>1</sub>,<em>k</em><sub>2</sub>,⋯<em>k</em><sub><em>n</em></sub>)</span>
+    of positive integers not exceeding <span
+    class="math inline"><em>n</em></span>, with the property that no two of
+    the <span class="math inline"><em>k</em><sub><em>i</em></sub></span> are
+    equal, is called a <strong>permutation of degree n</strong>.</p>
+    <p>Since a finite sequence, or <strong><em>n</em>-tuple</strong>, is a
+    function defined on the first <span
+    class="math inline"><em>n</em></span> positive integers, a permutation
+    of degree <span class="math inline"><em>n</em></span> may be defined as
+    a one-to-one function from the set <span
+    class="math inline">{1, 2, ⋯<em>n</em>}</span> onto it self. Such a
+    function <span class="math inline"><em>σ</em></span> corresponds to the
+    <span class="math inline"><em>n</em></span>-tuple <span
+    class="math inline">(<em>σ</em>1,<em>σ</em>2,⋯,<em>σ</em><em>n</em>)</span>
+    ad is thus simply a rule for ordering <span
+    class="math inline">1, 2, ⋯, <em>n</em></span> in some well-defined
+    way.</p>
+    </div>
+    <p>All possible number of permutation of degree <span
+    class="math inline"><em>n</em></span> is <span
+    class="math inline"><em>n</em>!</span>.</p>
+    <h1 id="elementary-combinatorics">Elementary combinatorics</h1>
+    <div class="definition">
+    <p>If we only consider rearrangements of <span
+    class="math inline"><em>k</em></span> elements taken a given set of size
+    <span class="math inline"><em>n</em></span>, we call them <strong><span
+    class="math inline"><em>k</em></span>-permutations of <span
+    class="math inline"><em>n</em></span></strong>, which are different
+    ordered arrangements of a <span
+    class="math inline"><em>k</em></span>-element subset of an <span
+    class="math inline"><em>n</em></span>-set. They are also known as
+    <strong>partial permutations</strong> or as <strong>sequences without
+    repetition</strong>.</p>
+    </div>
+    <div class="definition">
+    <p>Another closely related concept is combination, the element of which
+    is not ordered.</p>
+    </div>
+    <p>The formulae for the number of <span
+    class="math inline"><em>k</em></span>-permutation of <span
+    class="math inline"><em>n</em></span> and <span
+    class="math inline"><em>k</em></span> combination of <span
+    class="math inline"><em>n</em></span> can be summarized as:</p>
+    <div id="tab:my_label">
+    <table>
+    <caption>Caption</caption>
+    <thead>
+    <tr class="header">
+    <th style="text-align: center;"></th>
+    <th style="text-align: center;"></th>
+    <th colspan="2" style="text-align: center;">Consider repetition</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: center;"><span>3-4</span></td>
+    <td style="text-align: center;"></td>
+    <td style="text-align: center;">No</td>
+    <td style="text-align: center;">Yes</td>
+    </tr>
+    <tr class="even">
+    <td rowspan="2" style="text-align: center;">Consider ordering</td>
+    <td style="text-align: center;">No</td>
+    <td style="text-align: center;"><span class="math inline">$\frac{n!}{(n
+    - r)!r!}$</span></td>
+    <td style="text-align: center;"><span class="math inline">$\frac{(n + r
+    - 1)!}{(n-1)!r!}$</span></td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: center;">Yes</td>
+    <td style="text-align: center;"><span class="math inline">$\frac{n!}{(n
+    - r)!}$</span></td>
+    <td style="text-align: center;"><span
+    class="math inline"><em>n</em><sup><em>r</em></sup></span></td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+</body>
+
+
+</html>
