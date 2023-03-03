@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Full Screen Image and Video on Click</title>
+  <style>
+    /* 样式可根据需求自行更改 */
+    img, video {
+      cursor: pointer;
+      max-width: 100%;
+    }
+    .fullscreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 9999;
+      background: #000;
+    }
+    .fullscreen img, .fullscreen video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  </style>
+</head>
+<body>
+  <img src="example.jpg" alt="Example Image">
+  <video src="example.mp4" controls></video>
+
+  <script>
+    function toggleFullscreen(elem) {
+      elem = elem || document.documentElement;
+      if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
+        if (elem.requestFullscreen) {
+          elem.requestFullscreen();
+        } else if (elem.msRequestFullscreen) {
+          elem.msRequestFullscreen();
+        } else if (elem.mozRequestFullScreen) {
+          elem.mozRequestFullScreen();
+        } else if (elem.webkitRequestFullscreen) {
+          elem.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+        }
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        } else if (document.msExitFullscreen) {
+          document.msExitFullscreen();
+        } else if (document.mozCancelFullScreen) {
+          document.mozCancelFullScreen();
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+        }
+      }
+    }
+
+    var images = document.getElementsByTagName("img");
+    var videos = document.getElementsByTagName("video");
+
+    for (var i = 0; i < images.length; i++) {
+      images[i].addEventListener("click", function() {
+        toggleFullscreen(this);
+      });
+    }
+
+    for (var i = 0; i < videos.length; i++) {
+      videos[i].addEventListener("click", function() {
+        toggleFullscreen(this);
+      });
+    }
+
+    document.addEventListener("keydown", function(event) {
+      if (event.key === "Escape") {
+        toggleFullscreen();
+      }
+    });
+  </script>
+</body>
+</html>
