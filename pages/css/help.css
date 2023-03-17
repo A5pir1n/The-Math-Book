@@ -118,3 +118,37 @@ body {
   font-weight: 300;
   margin: 2em 0;
 }
+
+/* menu bar */
+
+.vertical {
+  width: 200px;
+  background-color: #57A0D4;
+}
+
+.vertical a.nav {
+  color: #FFF;
+  text-decoration: none;
+  font-size: 20px;
+  padding: 14px 16px;
+  background-color: #57A0D4;
+  display: inline-block;
+  width: 200px;
+  text-align: center;
+}
+
+.vertical a.active {
+  color: #FFF;
+  background-color: #5282BF;
+  text-decoration: none;
+  font-size: 20px;
+  padding: 14px 16px;
+  display: inline-block;
+  width: 200px;
+  text-align: center;
+}
+
+.vertical a:hover {
+  background-color: #FFF;
+  color: #57A0D4;
+}
