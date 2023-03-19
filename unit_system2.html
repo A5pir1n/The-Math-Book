@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script type="text/x-mathjax-config">
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ["\\(", "\\)"]],
+        processEscapes: true,
+      }
+    }
+    window.MathJax = {
+      tex: {
+        tags: 'ams'
+      }
+    };
+  </script>
+  
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>unit_system2</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<p>This article comes form Professor ALAN L. MYERS at <a
+href="https://www.seas.upenn.edu/~amyers/NaturalUnits.pdf"
+class="uri">https://www.seas.upenn.edu/~amyers/NaturalUnits.pdf</a></p>
+<div class="Abstract">
+<div class="changemargin">
+<p><span>1cm</span><span>1cm</span> The international system (SI) of
+units based on the kilogram, meter, and second is inconvenient for
+computations involving the masses of stars or the size of a galaxy.
+Papers about quantum gravity express mass, length, and time in terms of
+energy, usually powers of <span class="math inline">GeV</span>.
+Geometrized units, in which all units are expressed in terms of powers
+of length are also prevalent in the literature of general relativity.
+Here equations are provided for conversions from geometrized or natural
+units to SI units in order to make numerical calculations.</p>
+</div>
+</div>
+<h1 id="international-system-of-units">International System of
+Units</h1>
+<p>The International System of Units (SI) is based on the
+meter-kilogram-second (MKS) system of units. A first course in any field
+of science or engineering usually begins with a discussion of SI units.
+Given an equation, students learn to check instinctively the units of
+the various terms for consistency. For example, in SI units for Newton’s
+law of universal gravitation <span
+class="math display">$$ \label{eq:Newton's_law_of_gravitation}
+F=\frac{G m M}{r^2}$$</span> <span class="math inline"><em>m</em></span>
+and <span class="math inline"><em>M</em></span> are the masses of the
+two bodies in kilograms, <span class="math inline"><em>r</em></span> is
+the distance between their centers in meters, <span
+class="math inline"><em>F</em></span> is the force of attraction in
+newtons <span class="math inline">(1 N=1 kg m s<sup>−2</sup>)</span>,
+and <span class="math inline"><em>G</em>=</span> Newton’s constant <span
+class="math inline"> = 6.6743 × 10<sup>−11</sup> m<sup>3</sup> kg<sup>−1</sup> s<sup>−2</sup></span>.
+This equation satisfies the consistency test because the terms on both
+sides of the equation have the same units <span
+class="math inline">(kgms<sup>−2</sup>)</span>.</p>
+<p>Cosmologists toss the SI system of units out the window so that every
+variable is expressed in powers of energy. The equations are simplified
+by the absence of constants including Newton’s constant <span
+class="math inline">(<em>G</em>)</span> and the speed of light <span
+class="math inline">(<em>c</em>)</span>. However, for a person educated
+in the SI system of units, the lingo of "natural units" used by
+cosmologists is confusing and seems (incorrectly) to display a casual
+disregard of the importance of units in calculations. First let us
+examine units term-by-term in the Einstein equation of general
+relativity <span class="math inline">(1)</span> <span
+class="math display">$$ \label{eq:Einstein_equation_of_general_relativity} R_{\mu \nu}-\frac{1}{2} R g_{\mu \nu}+\Lambda
+g_{\mu \nu}=\frac{8 \pi G}{c^4} T_{\mu \nu}$$</span></p>
+<p>written in SI units. Popular articles and most textbooks on general
+relativity introduce this equation without discussing its units. The
+energy-momentum tensor <span
+class="math inline"><em>T</em><sub><em>μ</em><em>ν</em></sub></span> has
+units of energy density <span
+class="math inline">(Jm<sup>−3</sup>)</span> or, equivalently, momentum
+flux density <span
+class="math inline">(kgm<sup>−1</sup> s<sup>−2</sup>)</span>.
+Multiplication of the units of <span
+class="math inline"><em>T</em><sub><em>μ</em><em>ν</em></sub>(kgm<sup>−1</sup> s<sup>−2</sup>)</span>
+by the units of <span
+class="math inline"><em>G</em>/<em>c</em><sup>4</sup>( s<sup>2</sup> kg<sup>−1</sup> m<sup>−1</sup>)</span>
+yields units of <span class="math inline">m<sup>−2</sup></span> for the
+RHS of the equation. The terms on the LHS must have the same units <span
+class="math inline">(m<sup>−2</sup>)</span>. The metric tensor <span
+class="math inline">(<em>g</em><sub><em>μ</em><em>ν</em></sub>)</span>
+is dimensionless. The Riemann tensor <span
+class="math inline">(<em>R</em>)</span> is the second derivative with
+respect to distance of the metric tensor and therefore has units of
+<span class="math inline">m<sup>−2</sup></span>. The index-lowered forms
+of the Riemann tensor, <span
+class="math inline"><em>R</em><sub><em>μ</em><em>ν</em></sub></span> and
+<span class="math inline"><em>R</em></span>, have units of <span
+class="math inline">m<sup>−2</sup></span> so the units are the same on
+both sides of the equation, as required.</p>
+<h1 id="natural-units">Natural Units</h1>
+<p>So-called natural units are used almost exclusively in cosmology and
+general relativity. In order to read the literature, it is necessary to
+learn how to write equations and perform calculations in natural units.
+In the version of natural units used in cosmology, four fundamental
+constants are set to unity: <span
+class="math display"><em>c</em> = ℏ = <em>ϵ</em><sub>∘</sub> = <em>k</em><sub><em>B</em></sub> = 1</span></p>
+<p>where <span class="math display">$$\begin{aligned}
+c &amp; =\text { speed of light }=2.9979 \times 10^8 \mathrm{~m} /
+\mathrm{s} \\
+\hbar &amp; =\text { reduced Planck constant }=1.0546 \times 10^{-34}
+\mathrm{~J} \mathrm{~s}^{-1} \\
+\epsilon_{\circ} &amp; =\text { electric constant }=8.8542 \times
+10^{-12} \mathrm{~A}^2 \mathrm{~s}^4 \mathrm{~kg}^{-1} \mathrm{~m}^{-3}
+\\
+k_B &amp; =\text { Boltzmann constant }=1.3806 \times 10^{-23}
+\mathrm{~J} \mathrm{~K}^{-1}
+\end{aligned}$$</span> As a consequence of these definitions, <span
+class="math inline">1 s = 2.9979 × 10<sup>8</sup> m</span> and <span
+class="math inline">1 s<sup>−1</sup> = 1.0546 × 10<sup>−34</sup> J</span>.
+Length and time acquire the units of reciprocal energy; energy and mass
+have the same units. Any kinematical variable with SI units of <span
+class="math inline">(kg<sup><em>α</em></sup>m<sup><em>β</em></sup>s<sup><em>γ</em></sup>)</span>
+may be expressed in SI units: <span
+class="math display">(<em>E</em>)<sup><em>α</em> − <em>β</em> − <em>γ</em></sup>ℏ<sup><em>β</em> + <em>γ</em></sup><em>c</em><sup><em>β</em> − 2<em>α</em></sup></span>
+where <span class="math inline"><em>E</em></span> in an arbitrarily
+chosen energy unit.</p>
+<p>To see the unit conversion more easily, it is often easier to
+remember the fundamental physics for mule tint involve these fundamental
+constant For example, we know <span
+class="math inline"><em>E</em> = <em>m</em><em>c</em><sup>2</sup></span>
+so <span
+class="math inline">[<em>E</em>] = [<em>m</em>][<em>c</em>]<sup>2</sup> = kg [<em>c</em>]<sup>2</sup></span>
+and then <span class="math inline">$\mathrm{kg}=\frac{[E]}{[c]^2}
+\Rightarrow \mathrm{kg}^\alpha=\frac{[E]^\gamma}{[C]^{2 n}}$</span>.
+Next, we use <span class="math inline"><em>E</em> = ℏ<em>ω</em></span>
+to get <span
+class="math inline">[<em>E</em>] = [ℏ][<em>ω</em>] = [ℏ]<em>s</em><sup>−1</sup></span>
+(treating radian unitless) <span class="math inline">$\Rightarrow
+S=\frac{[\hbar]}{[E]}$</span> or <span
+class="math inline">$S^\gamma=\frac{[\hbar]^r}{[E]^\gamma}$</span>. The
+last one is easy <span class="math inline">$v=\frac{d s}{d t}
+\Rightarrow[V]=\frac{[s]}{[t]}$</span> <span
+class="math inline">$\Rightarrow[c]=\frac{m}{s}$</span>. so <span
+class="math inline">$m=s \cdot[c]=\frac{[\hbar]}{[E]}[c]$</span>. <span
+class="math inline">$\Rightarrow
+m^\beta=\frac{[\hbar]^\beta}{[E]^\beta}[c]^\beta$</span>. Combining all
+the units: <span class="math inline">$\mathrm{kg}^\alpha
+\mathrm{m}^\beta \mathrm{s}^\gamma = \frac{[E]^\alpha}{[c]^{2 \alpha}}
+\frac{[\hbar]^\beta}{[E]^\beta}[c]^\beta \cdot
+\frac{[\hbar]^\gamma}{[E]^\gamma} = [E]^{\alpha-\beta-\gamma}
+\hbar^{\beta+\gamma} c^{\beta-2 \alpha}$</span></p>
+<p>A popular choice is <span
+class="math inline">GeV(1GeV=1.6022×10<sup>−10</sup> J)</span>. Setting
+the constants <span class="math inline">ℏ</span> and <span
+class="math inline"><em>c</em></span> equal to unity gives natural units
+of <span
+class="math inline">GeV<sup><em>α</em> − <em>β</em> − <em>γ</em></sup></span>.
+Given natural units of <span
+class="math inline">GeV<sup><em>α</em> − <em>β</em> − <em>γ</em></sup></span>,
+the desired SI unit can always be recovered by multiplying by the
+conversion factor <span
+class="math inline">(ℏ<sup><em>β</em> + <em>γ</em></sup><em>c</em><sup><em>β</em> − 2<em>α</em></sup>)</span></p>
+<p>Consider, for example, momentum with SI units of <span
+class="math inline">(kgms<sup>−1</sup>)</span>. For <span
+class="math inline"><em>α</em> = 1, <em>β</em> = 1</span>, and <span
+class="math inline"><em>γ</em> =  − 1</span>, the natural unit is <span
+class="math inline">GeV<sup><em>α</em> − <em>β</em> − <em>γ</em></sup> = Gev<sup>1</sup></span>
+and the conversion factor is <span
+class="math inline">c<sup>−1</sup></span>. Conversion from natural to SI
+units gives: <span class="math display">$$1
+\mathrm{GeV}=\frac{E}{c}=\frac{1.6022 \times 10^{-10}
+\mathrm{~J}}{2.9979 \times 10^8 \mathrm{~m} \mathrm{~s}^{-1}}=5.3444
+\times 10^{-19} \mathrm{~kg} \mathrm{~m} \mathrm{~s}$$</span> Table 1
+provides conversion factors for some of the variables encountered in
+cosmology. Energy, mass, and momentum have the same natural units.
+Velocity, angular momentum, and charge are dimensionless. Note that
+pressure (force per unit area) has the same units as energy density in
+both systems of units, as it must.</p>
+<p>In the system of natural units, the factors in Table 1 are unity by
+definition. To make conversions, cosmologists multiply or divide by the
+factors <span class="math inline">ℏ</span> and <span
+class="math inline"><em>c</em></span> with appropriate exponents to
+obtain the units desired. This seems like a trial-and-error procedure!
+Rules for converting units for SI to natural units, and for the reverse
+conversion, are given in Table 1 .</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><span
+class="math inline">$\begin{array}{l}\text { Variable } \\
+\text { mass }\end{array}$</span></th>
+<th style="text-align: center;"><span
+class="math inline">$\begin{array}{l}\text { SI Unit } \\
+\mathrm{kg}\end{array}$</span></th>
+<th style="text-align: center;"><span
+class="math inline">$\begin{array}{l}\text { Natural Unit } \\
+\mathrm{E}\end{array}$</span></th>
+<th style="text-align: center;"><span class="math inline">$\frac{\text {
+Factor }}{c^{-2}}$</span></th>
+<th colspan="2" style="text-align: center;">Natural unit <span
+class="math inline">→</span> SI unit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span
+class="math inline">1GeV</span></td>
+<td style="text-align: center;"><span
+class="math inline"> → 1.7827 × 10<sup>−27</sup> kg</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">length</td>
+<td style="text-align: center;"><span class="math inline">m</span></td>
+<td style="text-align: center;"><span
+class="math inline">E<sup>−1</sup></span></td>
+<td style="text-align: center;"><span
+class="math inline">ℏ<em>c</em></span></td>
+<td style="text-align: center;"><span
+class="math inline">1GeV<sup>−1</sup></span></td>
+<td style="text-align: center;"><span
+class="math inline"> → 1.9733 × 10<sup>−16</sup> m</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">time</td>
+<td style="text-align: center;"><span class="math inline">s</span></td>
+<td style="text-align: center;"><span
+class="math inline">E<sup>−1</sup></span></td>
+<td style="text-align: center;"><span class="math inline">ℏ</span></td>
+<td style="text-align: center;"><span
+class="math inline">1GeV<sup>−1</sup></span></td>
+<td style="text-align: center;"><span
+class="math inline"> → 6.5823 × 10<sup>−25</sup> s</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">energy</td>
+<td style="text-align: center;"><span
+class="math inline">kgm<sup>2</sup> s<sup>−2</sup></span></td>
+<td style="text-align: center;"><span class="math inline">E</span></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;"><span
+class="math inline">1GeV</span></td>
+<td style="text-align: center;"><span
+class="math inline"> → 1.6022 × 10<sup>−10</sup> J</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">momentum</td>
+<td style="text-align: center;"><span
+class="math inline">kgmsm<sup>−1</sup></span></td>
+<td style="text-align: center;"><span class="math inline">E</span></td>
+<td style="text-align: center;"><span
+class="math inline"><em>c</em><sup>−1</sup></span></td>
+<td style="text-align: center;"><span
+class="math inline">1GeV</span></td>
+<td style="text-align: center;"><span
+class="math inline"> → 5.3444 × 10<sup>−19</sup> kg m s s<sup>−1</sup></span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">velocity</td>
+<td style="text-align: center;"><span
+class="math inline">ms<sup>−1</sup></span></td>
+<td style="text-align: center;">dimensionless</td>
+<td style="text-align: center;"><span
+class="math inline"><em>c</em></span></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;"><span
+class="math inline"> → 2.9979 × 10<sup>8</sup> m s<sup>−1</sup></span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">angular momentum</td>
+<td style="text-align: center;"><span
+class="math inline">kgm<sup>2</sup> s<sup>−1</sup></span></td>
+<td style="text-align: center;">dimensionless</td>
+<td style="text-align: center;"><span class="math inline">ℏ</span></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;"><span
+class="math inline"> → 1.0546 × 10<sup>−34</sup> J s</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">area</td>
+<td style="text-align: center;"><span
+class="math inline">m<sup>2</sup></span></td>
+<td style="text-align: center;"><span
+class="math inline">E<sup>−2</sup></span></td>
+<td style="text-align: center;"><span
+class="math inline">(ℏ<em>c</em>)<sup>2</sup></span></td>
+<td style="text-align: center;"><span
+class="math inline">1GeV<sup>−2</sup></span></td>
+<td style="text-align: center;"><span
+class="math inline"> → 3.8938 × 10<sup>−32</sup> m<sup>2</sup></span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">force</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span
+class="math inline">E<sup>2</sup></span></td>
+<td style="text-align: center;"><span
+class="math inline">(ℏ<em>c</em>)<sup>−1</sup></span></td>
+<td style="text-align: center;"><span
+class="math inline">1GeV<sup>2</sup></span></td>
+<td style="text-align: center;"><span
+class="math inline"> → 8.1194 × 10<sup>5</sup> N</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">energy density</td>
+<td style="text-align: center;"><span
+class="math inline">kgm<sup>−1</sup> s<sup>−2</sup></span></td>
+<td style="text-align: center;"><span
+class="math inline">E<sup>4</sup></span></td>
+<td style="text-align: center;"><span
+class="math inline">(ℏ<em>c</em>)<sup>−3</sup></span></td>
+<td style="text-align: center;"><span
+class="math inline">1GeV<sup>4</sup></span></td>
+<td style="text-align: center;"><span
+class="math inline"> → 2.0852 × 10<sup>37</sup> J m<sup>−3</sup></span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">charce</td>
+<td style="text-align: center;"><span
+class="math inline">C = A ⋅ s</span></td>
+<td style="text-align: center;">dimensionless</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;"><span
+class="math inline"> → 52909 × 10<sup>−19</sup>C</span></td>
+</tr>
+</tbody>
+</table>
+<p>The entry in Table 1 for charge requires an explanation. The
+dimensionless fine-structure constant <span
+class="math inline">(<em>α</em>)</span> is: <span
+class="math display">$$\alpha=\frac{e^2}{4 \pi \epsilon_{\circ} \hbar
+c}=0.0072974$$</span></p>
+<p>The elementary charge <span
+class="math inline"><em>e</em> = 1.6022 × 10<sup>−19</sup>C</span> and
+the value of <span class="math inline"><em>α</em></span> is calculated
+from the set of constants <span
+class="math inline">{<em>e</em>,<em>ϵ</em><sub>∘</sub>,ℏ,<em>c</em>}</span>.
+In natural units, <span
+class="math inline"><em>ϵ</em><sub>∘</sub> = ℏ = <em>c</em> = 1</span>
+and the dimensionless elementary charge <span
+class="math inline"><em>e</em></span> is: <span
+class="math display">$$e=\sqrt{4 \pi \alpha}=0.30282$$</span> so that
+<span
+class="math display">0.30282 = 1.6022 × 10<sup>−19</sup>C  ⇒  1 = 5.2909 × 10<sup>−19</sup>C</span></p>
+<p>Remark: Notice that the fine structure is the constant here whereas
+the elementary charge is defined using the fine structure constant <span
+class="math inline"><em>α</em></span>.</p>
+<p>In natural units, Eq. (1) becomes: <span
+class="math display">$$R_{\mu \nu}-\frac{1}{2} R g_{\mu \nu}+\Lambda
+g_{\mu \nu}=8 \pi G T_{\mu \nu}$$</span> The Planck mass is <span
+class="math display">$$m_p=\sqrt{\frac{\hbar c}{G}}=2.1764 \times
+10^{-8} \mathrm{~kg}$$</span> In natural units <span
+class="math inline"><em>m</em><sub><em>p</em></sub> = 1.2209 × 10<sup>19</sup>GeV</span>.
+Replacement of Newton’s gravitational constant <span
+class="math inline"><em>G</em></span> in Einstein’s equation with the
+Planck mass gives <span class="math display">$$R_{\mu \nu}-\frac{1}{2} R
+g_{\mu \nu}+\Lambda g_{\mu \nu}=\frac{8 \pi}{m_p^2} T_{\mu \nu}$$</span>
+Continuing with natural units, the energy-momentum tensor has units of
+energy density or <span class="math inline">GeV<sup>4</sup></span> and
+the Planck mass has units of <span class="math inline">GeV</span>. The
+RHS of the equation therefore has units of <span
+class="math inline">GeV<sup>2</sup></span>. <span
+class="math inline">On<sup>2</sup></span> the LHS of the equation, the
+metric tensor <span
+class="math inline"><em>g</em><sub><em>μ</em><em>ν</em></sub></span> is
+dimensionless so the Ricci tensor <span
+class="math inline"><em>R</em><sub><em>μ</em><em>ν</em></sub></span>,
+Ricci scalar <span class="math inline"><em>R</em></span>, and the
+cosmological constant <span class="math inline"><em>Λ</em></span> all
+have natural units of <span class="math inline">GeV<sup>2</sup></span>,
+or mass squared since energy and mass are equivalent.</p>
+<p>As an exercise in the manipulation of natural units, consider the
+cosmological constant <span class="math inline">(<em>Λ</em>)</span>
+which is frequently characterized with the same units as the
+energy-momentum tensor <span
+class="math inline"><em>G</em><sub><em>μ</em><em>ν</em></sub></span> and
+called the energy density of a vacuum <span
+class="math inline">(<em>ρ</em><sub><em>v</em><em>a</em><em>c</em></sub>)</span>
+: <span
+class="math display"><em>ρ</em><sub><em>v</em><em>a</em><em>c</em></sub> ≈ 3 × 10<sup>−47</sup>GeV<sup>4</sup></span>
+Transfer of the quantity from the RHS to the LHS of Eq. (3) requires
+multiplication by the factor of <span
+class="math inline">8<em>π</em>/<em>m</em><sub><em>p</em></sub><sup>2</sup></span>
+: <span class="math display">$$\Lambda=\rho_{v a c}\left(\frac{8
+\pi}{m_p^2}\right)=\frac{(8 \pi)\left(3 \times 10^{-47}
+\mathrm{GeV}^4\right)}{\left(1.2209 \times 10^{19}
+\mathrm{GeV}\right)^2}=5.06 \times 10^{-84} \mathrm{GeV}^2$$</span>
+These natural units for <span class="math inline"><em>Λ</em></span> may
+be converted to the SI unit of <span
+class="math inline">m<sup>−2</sup></span> using the conversion factor in
+Table 1 <span class="math display">$$\Lambda=5.06 \times 10^{-84}
+\mathrm{GeV}^2\left(\frac{1 \mathrm{GeV}^{-2}}{3.8938 \times 10^{-32}
+\mathrm{~m}^2}\right)=1.3 \times 10^{-52} \mathrm{~m}^{-2}$$</span>
+Conversion of the vacuum energy density from natural to SI units gives:
+<span class="math display">$$\rho_{v a c}=3 \times 10^{-47}
+\mathrm{GeV}^4\left(\frac{2.0852 \times 10^{37} \mathrm{~J}
+\mathrm{~m}^{-3}}{1 \mathrm{GeV}^4}\right)=6.3 \times 10^{-10}
+\mathrm{~J} \mathrm{~m}^{-3}$$</span> In terms of the the <span
+class="math inline"><em>m</em><em>c</em><sup>2</sup></span> energy of
+mass, <span
+class="math inline"><em>ρ</em><sub><em>v</em><em>a</em><em>c</em></sub> ≈ 4</span>
+hydrogen atoms per cubic meter.</p>
+</body>
+</html>

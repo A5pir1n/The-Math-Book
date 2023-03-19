@@ -1,0 +1,42 @@
+break level_one
+break level_two
+break level_three
+break level_four
+run
+stepi
+stepi
+stepi
+stepi
+stepi
+stepi
+set *(int*)($rbp-4) = 1
+continue 
+stepi
+stepi
+stepi
+stepi
+stepi
+stepi
+stepi
+set *(int*)($rbp-4) = 0
+continue
+stepi
+stepi
+stepi
+stepi
+stepi
+stepi
+stepi
+set $eax = 3
+stepi 5
+set $eax = 3
+continue
+stepi 7
+set $eax = 4
+stepi
+stepi
+stepi
+set $eax = 4
+stepi 5
+set $eax = 4
+continue
