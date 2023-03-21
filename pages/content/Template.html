@@ -5,35 +5,64 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" >
 	<title>Template</title>
 	<link rel = "icon" href="../../img/icon.ico" type = "image/x-icon">
-	<link type="text/css" rel="stylesheet" href="../css/template.css">
+	<link type="text/css" id="stylesheet" rel="stylesheet" href="../css/template.css">
+	<script type="text/javascript">
+		function setStyleSheet(url){
+       		var stylesheet = document.getElementById("stylesheet");
+       		stylesheet.setAttribute('href', url);
+    	}
+    	function autoset() {
+    		var hour = (new Date).getHours();
+    		if (hour > 21 || hour < 8) {
+    			setStyleSheet('../css/template_dark.css');
+    		}
+    	}
+	</script>
 </head>
-<body>
+<body onload="autoset()">
 	<div class="row">
-		<div class="column" style="width: 25vw;">
-		<ul>
-			<li style="float: left;">
-				<a href="../../index.html">
-					<img src="Home.png" alt="Home button" style="width: 58px; height: 58px;" 
-				         onmouseover="this.src='Home_hover.png';"
-				         onmouseout="this.src='Home.png';">
-     			</a>
-     		</li>
-     		
-		</ul>
+		<div class="home" style="width: 25vw;">
+			<a class="link" href="../../index.html">
+				<p class="main">The<br>Math<br>Book</p>
+				<!-- Until I can find stuff that makes white background transparent
+				<img src="Home.png" alt="Home button" style="width: 58px; height: 58px;" 
+			         onmouseover="this.src='Home_hover.png';"
+			         onmouseout="this.src='Home.png';">
+				-->
+ 			</a>
+     			<a onclick="setStyleSheet('../css/template.css')">
+     				<img src="lightmode.png" alt="light mode" class="image"></a>
+     			<a onclick="setStyleSheet('../css/template_dark.css')">
+     				<img src="darkmode.png" alt="dark mode" class="image"></a>
+     			<a onclick="setStyleSheet('../css/softpink.css')">
+     				<img src="softpink.png" alt="pink mode" class="image"></a>
+     			<a><p>random too show theres a scroll bar</p>
 		</div>
 		<div class="column" style="width: 74.1vw; margin-right: -30px;">
-		<h2 class="header">Title Here</h2>
+		<h1 class="header">Title Here</h1>
 		</div>
 	</div>
 	<div class="row">
 		<div class="column2" style="width: 25vw;">
-			
-				<a href="#contents" class="back">Back</a>
-				<h1>Table of Contents</h1>
-				<div class="content" style="margin-left: -90px;">
-					<a href="#section"><p>content goes here</p></a>
-					<a href="#section"><p>content goes here</p></a>
-				</div>
+				<a href="#contents" class="back">Back</a> <br>
+				<h1 style="font-size: 25px;">Table of Contents</h1>
+		<div class="sections" style="padding-top: 0px;">
+			<a href="#basis-and-dimension"><p>content goes here</p></a>
+			<a href="#section"><p>content goes here</p></a>
+			<a href="#section"><p>content goes here</p></a>
+			<a href="#section"><p>content goes here</p></a>
+			<a href="#section"><p>content goes here</p></a>
+			<a href="#section"><p>content goes here</p></a>
+			<a href="#section"><p>content goes here</p></a>
+			<a href="#section"><p>content goes here</p></a>
+			<a href="#section"><p>content goes here</p></a>
+			<a href="#section"><p>content goes here</p></a>
+			<a href="#section"><p>content goes here</p></a>
+			<a href="#section"><p>content goes here</p></a>
+			<a href="#section"><p>content goes here</p></a>
+			<a href="#section"><p>content goes here</p></a>
+			<a href="#section"><p>content goes here</p></a>
+		</div>
 				
 
 			

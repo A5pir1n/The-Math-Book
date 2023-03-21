@@ -4,7 +4,7 @@ html {
    font-family: Georgia, serif;
    font-size: 18px;
    color: #1a1a1a;
-   background-color: #fafafa;
+   background-color: #363636;
          }
 
 body {
@@ -15,10 +15,10 @@ body {
     overflow-y: hidden;
  }
  p {
-   color: black;
+   color: #e0e0e0;
  }
  h1 {
-   color: black;
+   color: #e0e0e0;
  }
  .header {
    font-size: 40px; 
@@ -71,7 +71,7 @@ text-align: left;
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #e0e0e0;
 }
 
 /* Handle */
@@ -91,7 +91,7 @@ text-align: left;
        float: left;
        margin: auto;
        text-align: center;
-       border: 3px solid #57A0D4;
+       border: 3px solid #778899;
        height: 77px;
        top: 1px;
        }
@@ -99,8 +99,8 @@ text-align: left;
    float: left;
        margin: auto;
        text-align: center;
-       border: 3px solid #57A0D4;
-       height: 86.8vh;
+       border: 3px solid #778899;
+       height: 87.2vh;
 }
 .divider {
    float: left;
@@ -120,7 +120,7 @@ text-align: left;
    padding-left: 10px;
    padding-top: 10px;
    text-decoration: none;
-   color: black; /*change color here*/
+   color: #e0e0e0; /*change color here*/
 }
 .sections {
    display: inline-block;
@@ -138,7 +138,7 @@ text-align: left;
 }
 
 .sections a:hover {
-   background-color: #cfcfcf;
+   background-color: #4d4b4b;
 }
 
 .home {
@@ -148,7 +148,7 @@ text-align: left;
    position: relative;
    float: left;
    margin: auto;
-   border: 3px solid #57A0D4;
+   border: 3px solid #778899;
    height: 77px;
    top: 1px;
 }
