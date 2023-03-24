@@ -85,7 +85,7 @@ text-align: left;
 }
 
 /* Main dividers */
-.column {
+.column3 {
        position: relative;
        display:inline-block;
        float: left;
@@ -159,4 +159,9 @@ text-align: left;
 .image {
    width: 58px; 
    height: 58px;
+}
+
+.content a{
+    text-decoration: none;
+    color: #02569B;
 }

@@ -1,28 +1,26 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Donate for the Math Book</title>
-    <link href="css/donate.css" rel="stylesheet">
+    <title>Support Us</title>
+    <link href="../css/donate.css" rel="stylesheet">
+    <link href="../css/aboutus.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="../css/index_page.css">
+    <link rel = "icon" href="../img/icon.ico" type = "image/x-icon">
   </head>
   <body>
-    <div class="container">
-      <!-- Nav -->
-      <nav class="main-nav">
-        <div class="our-project">
-          <label for="checkbox"> OUR PROJECT  </label>
-          <input type="checkbox" id="checkbox" />
-          <ul>
-            <li><a href="#">DONATE</a></li>
-            <li><a href="#">ABOUT US</a></li>
-            <li><a href="#">HELP & FAQs</a></li>
-            <li><a href="#">CONTACT US</a></li>
-          </ul>
-        </div>
-      </nav>
-    </div>
+    <ul class="nav">
+      <li style="float: left;"><a href="../../index.html"><img src="../../img/logo.png" alt="Logo image" class="logo"></a></li>
+      <li style="float: left;"><a class="nav" href="../../index.html">Home</a> </li>
+      <li><a class="nav" href="help.html">Help & Faqs</a></li>
 
+      <li><a class="nav" href="aboutus.html">About us</a></li>
+      <li><a class="nav" href="Contact_Us.html">Contact us</a></li>
+      <li><a class="active" href="#donate"><b>Support us</b></a></li>
+
+    </ul>
+    <div style="height: 150px;"></div>
     <div class="content_container">  
-      <h1 id="page-header">Donate for the Math Book</h1>
+      <h1 id="page-header">Donate</h1>
       <div id="donation-container">
         <input type="range" min="5" max="25" step="5" id="donation-amount">
         <div id="donation-amount-labels">
@@ -39,6 +37,23 @@
       </div>
     </div>
 
-    <script src="js/donate.js"></script>
+    <script src="../js/donate.js"></script>
+    <div style="height: 250px;"></div>
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-inner">
+        <div><i class="fas fa-globe fa-2x"></i> English (United States)</div>
+        <ul>
+          <li><a href="#">Sitemap</a></li>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">Privacy & cookies</a></li>
+        <li><a href="#">Terms of use</a></li>
+        <li><a href="#">Trademarks</a></li>
+        <li><a href="#">Donate</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">&copy; The Mathbook 2022</a></li>
+        </ul>
+      </div>
+    </footer>
   </body>
 </html>
