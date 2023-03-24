@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+
+<head>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <title>n tuples space</title>
+    <style>
+        html {
+            line-height: 1.5;
+            font-family: Georgia, serif;
+            font-size: 20px;
+            color: #1a1a1a;
+            background-color: #fdfdfd;
+        }
+
+        body {
+            margin: 0 auto;
+            max-width: 36em;
+            padding-left: 50px;
+            padding-right: 50px;
+            padding-top: 50px;
+            padding-bottom: 50px;
+            hyphens: auto;
+            overflow-wrap: break-word;
+            text-rendering: optimizeLegibility;
+            font-kerning: normal;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                font-size: 0.9em;
+                padding: 1em;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+        }
+
+        @media print {
+            body {
+                background-color: transparent;
+                color: black;
+                font-size: 12pt;
+            }
+
+            p,
+            h2,
+            h3 {
+                orphans: 3;
+                widows: 3;
+            }
+
+            h2,
+            h3,
+            h4 {
+                page-break-after: avoid;
+            }
+        }
+
+        p {
+            margin: 1em 0;
+        }
+
+        a {
+            color: #1a1a1a;
+        }
+
+        a:visited {
+            color: #1a1a1a;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            margin-top: 1.4em;
+        }
+
+        h5,
+        h6 {
+            font-size: 1em;
+            font-style: italic;
+        }
+
+        h6 {
+            font-weight: normal;
+        }
+
+        ol,
+        ul {
+            padding-left: 1.7em;
+            margin-top: 1em;
+        }
+
+        li>ol,
+        li>ul {
+            margin-top: 0;
+        }
+
+        blockquote {
+            margin: 1em 0 1em 1.7em;
+            padding-left: 1em;
+            border-left: 2px solid #e6e6e6;
+            color: #606060;
+        }
+
+        code {
+            font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+            font-size: 85%;
+            margin: 0;
+        }
+
+        pre {
+            margin: 1em 0;
+            overflow: auto;
+        }
+
+        pre code {
+            padding: 0;
+            overflow: visible;
+            overflow-wrap: normal;
+        }
+
+        .sourceCode {
+            background-color: transparent;
+            overflow: visible;
+        }
+
+        hr {
+            background-color: #1a1a1a;
+            border: none;
+            height: 1px;
+            margin: 1em 0;
+        }
+
+        table {
+            margin: 1em 0;
+            border-collapse: collapse;
+            width: 100%;
+            overflow-x: auto;
+            display: block;
+            font-variant-numeric: lining-nums tabular-nums;
+        }
+
+        table caption {
+            margin-bottom: 0.75em;
+        }
+
+        tbody {
+            margin-top: 0.5em;
+            border-top: 1px solid #1a1a1a;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        th {
+            border-top: 1px solid #1a1a1a;
+            padding: 0.25em 0.5em 0.25em 0.5em;
+        }
+
+        td {
+            padding: 0.125em 0.5em 0.25em 0.5em;
+        }
+
+        header {
+            margin-bottom: 4em;
+            text-align: center;
+        }
+
+        #TOC li {
+            list-style: none;
+        }
+
+        #TOC ul {
+            padding-left: 1.3em;
+        }
+
+        #TOC>ul {
+            padding-left: 0;
+        }
+
+        #TOC a:not(:hover) {
+            text-decoration: none;
+        }
+
+        code {
+            white-space: pre-wrap;
+        }
+
+        span.smallcaps {
+            font-variant: small-caps;
+        }
+
+        div.columns {
+            display: flex;
+            gap: min(4vw, 1.5em);
+        }
+
+        div.column {
+            flex: auto;
+            overflow-x: auto;
+        }
+
+        div.hanging-indent {
+            margin-left: 1.5em;
+            text-indent: -1.5em;
+        }
+
+        ul.task-list {
+            list-style: none;
+        }
+
+        ul.task-list li input[type="checkbox"] {
+            width: 0.8em;
+            margin: 0 0.8em 0.2em -1.6em;
+            vertical-align: middle;
+        }
+
+        .display.math {
+            display: block;
+            text-align: center;
+            margin: 0.5rem auto;
+        }
+    </style>
+    <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+    <div class="example">
+        <p><span id="n-tuple_space" label="n-tuple_space"></span> <strong>The
+                <span class="math inline"><em>n</em></span>-tuple space, <span
+                    class="math inline"><em>F</em><sup><em>n</em></sup></span></strong>. Let
+            <span class="math inline"><em>F</em></span> be any field, and let <span
+                class="math inline"><em>V</em></span> be the set of all <span
+                class="math inline"><em>n</em></span>-tuples <span
+                class="math inline"><em>α</em> = (<em>x</em><sub>1</sub>,<em>x</em><sub>2</sub>,…,<em>x</em><sub><em>n</em></sub>)</span>
+            of scalars <span class="math inline"><em>x</em><sub><em>i</em></sub></span> in <span
+                class="math inline"><em>F</em></span>. If <span class="math inline"><em>β</em>=</span> <span
+                class="math inline">(<em>y</em><sub>1</sub>,<em>y</em><sub>2</sub>,…,<em>y</em><sub><em>n</em></sub>)</span>
+            with <span class="math inline"><em>y</em><sub><em>i</em></sub></span> in
+            <span class="math inline"><em>F</em></span>, the sum of <span class="math inline"><em>α</em></span> and
+            <span class="math inline"><em>β</em></span> is defined by <span
+                class="math display">  <em>α</em> + <em>β</em> = (<em>x</em><sub>1</sub>+<em>y</em><sub>1</sub>,<em>x</em><sub>2</sub>+<em>y</em><sub>2</sub>,…,<em>x</em><sub><em>n</em></sub>+<em>y</em><sub><em>n</em></sub>).</span>
+            The product of a scalar <span class="math inline"><em>c</em></span> and
+            vector <span class="math inline"><em>α</em></span> is defined by <span
+                class="math display">  <em>c</em><em>α</em> = (<em>c</em><em>x</em><sub>1</sub>,<em>c</em><em>x</em><sub>2</sub>,…,<em>c</em><em>x</em><sub><em>n</em></sub>).</span>
+            The fact that this vector addition and scalar multiplication satisfy
+            conditions (3) and (4) is easy to verify, using the similar properties
+            of addition and multiplication of elements of <span class="math inline"><em>F</em></span>.
+        </p>
+    </div>
+    <div class="verification">
+        <p>We only need to verify 3 and 4 of the definition of the vector space
+            when we already have a field <span class="math inline"><em>F</em></span>
+            and a set <span class="math inline"><em>F</em><sup><em>n</em></sup></span> of vector
+            objects. Firstly, let <span
+                class="math inline"><em>γ</em> = (<em>z</em><sub>1</sub>,<em>z</em><sub>2</sub>,⋯,<em>z</em><sub><em>n</em></sub>)</span>.
+            For addition, we have</p>
+        <ol type="a">
+            <li>
+                <p>Since addition in <span class="math inline"><em>F</em></span> is
+                    commutative: <span class="math display">$$\begin{aligned}
+                        \alpha+\beta &amp;=\left(x_1+y_1, x_2+y_2, \ldots, x_n+y_n\right)\\
+                        &amp;=\left(y_1+x_1,y_2+x_2, \ldots, y_n+x_n\right)\\
+                        &amp;=\beta + \alpha.
+                        \end{aligned}$$</span></p>
+            </li>
+            <li>
+                <p>Since addition in <span class="math inline"><em>F</em></span> is
+                    associative: <span class="math display">$$\begin{aligned}
+                        \alpha+(\beta+\gamma) &amp;=\left(x_1+(y_1+z_1), x_2+(y_2+z_2), \ldots,
+                        x_n+(y_n+z_n)\right)\\
+                        &amp;=\left((x_1+y_1)+z_1, (x_2+y_2)+z_2, \ldots,
+                        (x_n+y_n)+z_n\right)\\
+                        &amp;=(\alpha+\beta)+\gamma.
+                        \end{aligned}$$</span></p>
+            </li>
+            <li>
+                <p>We must show there is a unique vector <span class="math inline"><strong>0</strong></span> in <span
+                        class="math inline"><em>V</em></span> such that <span
+                        class="math inline"><em>α</em> + 0 = <em>α</em></span> for all <span
+                        class="math inline"><em>α</em></span> in <span class="math inline"><em>V</em></span>. Consider
+                    <span class="math inline">(0,…,0)</span> the vector of all 0 ’s of length
+                    <span class="math inline"><em>n</em></span>. Then we have <span
+                        class="math display">(0,…,0) + (<em>x</em><sub>1</sub>,…,<em>x</em><sub><em>n</em></sub>) = (0<sub><em>F</em></sub>+<em>x</em><sub>1</sub>,…,0<sub><em>F</em></sub>+<em>x</em><sub><em>n</em></sub>) = (<em>x</em><sub>1</sub>,…,<em>x</em><sub><em>n</em></sub>)</span>
+                    since <span class="math inline">0 + <em>x</em> = <em>x</em></span> for
+                    all <span class="math inline"><em>x</em> ∈ <em>F</em></span>. Thus we
+                    can have <span
+                        class="math inline"><strong>0</strong> = (0,…,0) + (<em>x</em><sub>1</sub>,…,<em>x</em><sub><em>n</em></sub>)</span>.
+                    To show this vector is unique with respect to this property, suppose
+                    <span
+                        class="math inline"><strong>0</strong>′ = (<em>x</em><sub>1</sub>,…,<em>x</em><sub><em>n</em></sub>)</span>
+                    also satisfies the property that <span
+                        class="math inline"><strong>0</strong>′ + <em>α</em> = <em>α</em></span>
+                    for all <span class="math inline"><em>α</em></span> in <span class="math inline"><em>V</em></span>.
+                    Notice <span
+                        class="math display">(<em>x</em><sub>1</sub>,…,<em>x</em><sub><em>n</em></sub>) = (<em>x</em><sub>1</sub>+0,…,<em>x</em><sub><em>n</em></sub>+0) = (<em>x</em><sub>1</sub>,…,<em>x</em><sub><em>n</em></sub>) + (0,…,0)</span>
+                    but by definition of <span class="math inline"><strong>0</strong>′</span>, if we let <span
+                        class="math inline"><em>α</em> = (0,…,0)</span>, this equals <span
+                        class="math inline">(0,…,0)</span>. Thus <span
+                        class="math inline">(<em>x</em><sub>1</sub>,…,<em>x</em><sub><em>n</em></sub>) = (0,…,0) = <strong>0</strong></span>.
+                    Thus <span class="math inline"><strong>0</strong> = <strong>0</strong>′</span> and
+                    the zero element is unique.
+                </p>
+            </li>
+        </ol>
+    </div>
+</body>
+
+</html>
