@@ -19,3 +19,5 @@ Route::get('/', function () {
 
 Route::get('/html-links', 'HtmlLinksController@index');
 Route::get('/links', 'LinkController@index');
+Route::get('/search', 'LinkController@search');
+

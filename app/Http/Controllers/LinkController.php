@@ -11,6 +11,17 @@ class LinkController extends Controller
         $links = Link::getAllLinks();
         return response()->json(['links' => $links]);
     }
+
+    public function search(Request $request){
+        $query = $request->input('q');
+
+        $links = Link::where('title', 'like', "%$query%")
+            ->orWhere('url', 'like', "%$query%")
+            ->get();
+
+        return response()->json(['links' => $links]);
+    }
+
 }
 
 /*TO USE IT:
