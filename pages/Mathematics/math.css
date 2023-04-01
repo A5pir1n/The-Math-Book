@@ -11,39 +11,32 @@ body {
     font-size: 15px;
     line-height: 1.5;
 }
-
+ul.course-list {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  ul.course-list li {
+    display: block;
+  }
 header {
-    background: #333;
+    background: #fff;
     padding: 1rem 0;
     text-align: center;
 }
-
+.filter-item {
+    padding-left: 1em;
+  }
 header h1 {
-    color: #fff;
+    margin-top: 20px;
+    color: #000000;
 }
 
-nav ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
+section h2{
+    margin-bottom: 25px;
 }
-
-nav ul li {
-    margin: 0 0.5rem;
-}
-
-nav ul li a {
-    color: #fff;
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-    border: 1px solid transparent;
-    transition: all 0.3s ease;
-}
-
-nav ul li a:hover {
-    background: #fff;
-    color: #333;
-    border: 1px solid #fff;
+aside h2{
+    margin-bottom: 70px;
 }
 
 main {
@@ -58,19 +51,22 @@ section {
 .course-list,
 .resource-list {
     list-style: none;
+    
 }
 
 .course-list li,
 .resource-list li {
     margin-bottom: 1rem;
-    border: 1px solid #333;
+    border: 1px solid #91b4d9;;
     padding: 1rem;
-    background: #f4f4f4;
+    background: #91b4d9;
+    display: inline-flexboxS;
+    border-radius: 10px;
 }
 
 .course-list li h3,
 .resource-list li a {
-    color: #333;
+    color: #ffffff;
     text-decoration: none;
     font-size: 1.2rem;
     margin-bottom: 0.5rem;
@@ -78,6 +74,7 @@ section {
 
 .course-list li p {
     font-size: 1rem;
+    color: #fff;
 }
 
 .resource-list li a {
@@ -91,34 +88,10 @@ section {
     text-decoration: underline;
 }
 
-footer {
-    background: #333;
-    color: #fff;
-    text-align: center;
-    padding: 1rem;
-}
+
 
 aside {
     width: 25%;
     padding-right: 2rem;
-}
-
-.filter-item {
-    margin-bottom: 0.5rem;
-}
-
-.filter-item input[type="checkbox"] {
-    margin-right: 0
-
-
-    5rem;
-}
-
-.filter-item label {
-font-size: 1rem;
-}
-
-
-footer p {
-    margin-bottom: 0;
+    
 }
