@@ -1,7 +1,12 @@
 tree = {
     'Math':{
         'Algebra':{
+            'Abstract_Algebra':{
 
+            },
+            'Linear_Algebra':{      
+
+            },
         },
         'Analysis':{
 
