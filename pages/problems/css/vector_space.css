@@ -4,6 +4,7 @@ body {
     color: #000;
     font-size: 15px;
     line-height: 1.5;
+    display: block;
 }
 
 h1 {
@@ -103,6 +104,7 @@ h1 {
 button {
     position: relative;
     float: right;
+    
 }
 
 .button a {
@@ -111,15 +113,18 @@ button {
 }
 
 #container {
+    width: fit-content;
     width: 50%;
     margin: auto;
     padding: 0 25px 40px 10px;
-    background-color: #1E90FF;
+    background-color: #57A0D4;
     border: 4px solid #B0E0E6;
     border-radius: 5px;
     color: #FFFFFF;
     font-weight: bold;
     box-shadow: 5px 5px 5px #888;
+    margin-top: 15%;
+    margin-bottom: 25%;
 }
 
 ul {
