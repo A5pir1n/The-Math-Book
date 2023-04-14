@@ -1,50 +1,60 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Support Us</title>
-    <link href="../css/donate.css" rel="stylesheet">
-    <link href="../css/aboutus.css" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="../css/index_page.css">
-    <link rel = "icon" href="../img/icon.ico" type = "image/x-icon">
-  </head>
-  <body>
-    <ul class="nav">
-      <li style="float: left;"><a href="../../index.html"><img src="../../img/logo.png" alt="Logo image" class="logo"></a></li>
-      <li style="float: left;"><a class="nav" href="../../index.html">Home</a> </li>
-      <li><a class="nav" href="help.html">Help & Faqs</a></li>
 
-      <li><a class="nav" href="aboutus.html">About us</a></li>
-      <li><a class="nav" href="Contact_Us.html">Contact us</a></li>
-      <li><a class="active" href="#donate"><b>Support us</b></a></li>
+<head>
+  <title>Support Us</title>
+  <link href="../css/donate.css" rel="stylesheet">
+  <link href="../css/aboutus.css" rel="stylesheet">
+  <link type="text/css" rel="stylesheet" href="../css/index_page.css">
+  <link rel="icon" href="../img/icon.ico" type="image/x-icon">
+</head>
 
-    </ul>
-    <div style="height: 150px;"></div>
-    <div class="content_container">  
-      <h1 id="page-header">Donate</h1>
-      <div id="donation-container">
-        <input type="range" min="5" max="25" step="5" id="donation-amount">
-        <div id="donation-amount-labels">
-          <span>$5</span>
-          <span>$10</span>
-          <span>$15</span>
-          <span>$20</span>
-          <span>$25</span>
-        </div>
-        <div id="donation-amount-container">
-          <input type="text" id="donation-amount-text">
-          <button id="donate-btn">Donate</button>
-        </div>
+<body>
+  <ul class="nav">
+    <li style="float: left;"><a href="../../index.html"><img src="../../img/logo.png" alt="Logo image" class="logo"></a>
+    </li>
+    <li style="float: left;"><a class="nav" href="../../index.html">Home</a> </li>
+    <li><a class="nav" href="help.html">Help & Faqs</a></li>
+
+    <li><a class="nav" href="aboutus.html">About us</a></li>
+    <li><a class="nav" href="Contact_Us.html">Contact us</a></li>
+    <li><a class="active" href="#donate"><b>Support us</b></a></li>
+
+  </ul>
+  <div style="height: 150px;"></div>
+  <div class="content_container">
+    <h1 id="page-header">Donate</h1>
+    <div id="donation-container">
+      <input type="range" min="5" max="25" step="5" id="donation-amount">
+      <div id="donation-amount-labels">
+        <span>$5</span>
+        <span>$10</span>
+        <span>$15</span>
+        <span>$20</span>
+        <span>$25</span>
+      </div>
+      <div id="donation-amount-container">
+        <input type="text" id="donation-amount-text">
+        <form action="https://www.paypal.com/donate" method="post" target="_top">
+          <input type="hidden" name="business" value="P5XH3F6TRYE2J" />
+          <input type="hidden" name="no_recurring" value="0" />
+          <input type="hidden" name="currency_code" value="USD" />
+          <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit"
+            title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+          <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
+        </form>
       </div>
     </div>
+  </div>
 
-    <script src="../js/donate.js"></script>
-    <div style="height: 250px;"></div>
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="footer-inner">
-        <div><i class="fas fa-globe fa-2x"></i> English (United States)</div>
-        <ul>
-          <li><a href="#">Sitemap</a></li>
+  <script src="../js/donate.js"></script>
+  <div style="height: 250px;"></div>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div><i class="fas fa-globe fa-2x"></i> English (United States)</div>
+      <ul>
+        <li><a href="#">Sitemap</a></li>
         <li><a href="#">Contact Us</a></li>
         <li><a href="#">Privacy & cookies</a></li>
         <li><a href="#">Terms of use</a></li>
@@ -52,8 +62,9 @@
         <li><a href="#">Donate</a></li>
         <li><a href="#">About Us</a></li>
         <li><a href="#">&copy; The Mathbook 2022</a></li>
-        </ul>
-      </div>
-    </footer>
-  </body>
+      </ul>
+    </div>
+  </footer>
+</body>
+
 </html>
