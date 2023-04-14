@@ -231,6 +231,19 @@
             text-align: center;
             margin: 0.5rem auto;
         }
+
+        .highlighted {
+            background-color: yellow;
+        }
+
+        .comment-box {
+            display: none;
+            position: absolute;
+            padding: 10px;
+            background-color: white;
+            border: 1px solid black;
+            z-index: 10;
+        }
     </style>
     <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
@@ -270,6 +283,11 @@
                 class="math inline"><em>F</em><sup><em>n</em></sup></span>.
         </p>
     </div>
+    <div class="comments-section">
+        <h2>Comments</h2>
+        <div class="comments"></div>
+    </div>
+
 </body>
 
 </html>
