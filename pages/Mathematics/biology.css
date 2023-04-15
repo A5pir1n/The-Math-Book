@@ -57,9 +57,9 @@ section {
 .course-list li,
 .resource-list li {
     margin-bottom: 1rem;
-    border: 1px solid #91b4d9;;
+    border: 1px solid #143a62;;
     padding: 1rem;
-    background: #91b4d9;
+    background: #143a62;
     display: inline-flexboxS;
     border-radius: 10px;
 }
