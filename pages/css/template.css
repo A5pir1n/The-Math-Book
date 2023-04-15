@@ -8,9 +8,10 @@ html {
          }
 
 body {
+    height: 100%;
+    width: 100%;
     padding: 0;
     margin: 0;
-    max-width: 100%;
     overflow-x: hidden;
     overflow-y: hidden;
  }
@@ -96,13 +97,14 @@ text-align: left;
        height: 77px;
        top: 1px;
        }
+
 .column2 {
    float: left;
-       margin: auto;
-       text-align: center;
-       border: 3px solid #57A0D4;
-       height: 86.8vh;
+   margin: auto;
+   text-align: center;
+   border: 3px solid #57A0D4;
 }
+
 .divider {
    float: left;
    margin: auto;
@@ -112,7 +114,7 @@ text-align: left;
     content: "";
     display: table;
     clear: both;
-    width: 100vw;
+    width: 99vw;
     }
 
 .back {
@@ -165,4 +167,11 @@ text-align: left;
 .content a{
     text-decoration: none;
     color: #02569B;
+}
+
+.menu {
+    width: 58px; 
+    height: 58px;
+    float: left;
+    padding: 10px;
 }
