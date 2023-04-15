@@ -71,9 +71,9 @@ div.resize {
 div.align {
   margin: auto;
   display: block;
-  width: 450px;
+  width: 800px;
   align-items: center;
-  height: 300px;
+  height: 5px;
   text-align: center;
 }
 
@@ -85,17 +85,16 @@ div.align {
 }
 
 
-.search {
-  background-color: #57A0D4;
-  width: 300px;
-  height: 44px;
-  border-radius: 3px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  text-align: center;
-  margin: auto;
-}
+  .search {
+    background-color: #57A0D4;
+    width: 800px;
+    height: 88px;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: cneter;
+  }
 
 .input {
   all: unset;
