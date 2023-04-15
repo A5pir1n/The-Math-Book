@@ -1,0 +1,174 @@
+/*Text fonts and stuff*/
+html {
+   line-height: 1.5;
+   font-family: Georgia, serif;
+   font-size: 18px;
+   color: #1a1a1a;
+   background-color: #363636;
+         }
+
+body {
+    padding: 0;
+    margin: 0;
+    max-width: 100%;
+    overflow-x: hidden;
+    overflow-y: hidden;
+ }
+ p {
+   color: #e0e0e0;
+ }
+ h1 {
+   color: #e0e0e0;
+ }
+ .header {
+   font-size: 40px; 
+   position:relative; 
+   top:-16px
+ }
+ .main {
+   font-size: 23px; 
+   line-height:20px;
+   margin-left: 10px;
+ }
+ .link {
+   text-decoration: none;
+ }
+ .content {
+   position: relative;
+   margin: 0 auto;
+   max-width: 43em;
+   padding-top: 50px;
+   padding-left: 30px;
+   padding-right: 30px;
+   hyphens: auto;
+   height: 90%;
+   overflow-y: scroll;
+   overflow-wrap: break-word;
+   text-rendering: optimizeLegibility;
+   font-kerning: normal;
+}
+.content p {
+text-align: left;
+}
+/* scroll bar */
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.content::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.content {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #e0e0e0;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Main dividers */
+.column3 {
+       position: relative;
+       display:inline-block;
+       float: left;
+       margin: auto;
+       text-align: center;
+       border: 3px solid #778899;
+       height: 77px;
+       top: 1px;
+       }
+.column2 {
+   float: left;
+       margin: auto;
+       text-align: center;
+       border: 3px solid #778899;
+       height: 87.2vh;
+}
+.divider {
+   float: left;
+   margin: auto;
+   text-align: center;
+}
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+    width: 100vw;
+    }
+
+.back {
+   float: left;
+   display: inline-block;
+   padding-left: 10px;
+   padding-top: 10px;
+   text-decoration: none;
+   color: #e0e0e0; /*change color here*/
+}
+.sections {
+   display: inline-block;
+   overflow-y: scroll;
+   height: 72vh;
+   float: left;
+   width: 100%;
+   text-align: center;
+}
+.sections a{
+   text-decoration: none;
+   text-rendering: optimizeLegibility;
+   font-kerning: normal;
+   display: block;
+}
+
+.sections a:hover {
+   background-color: #4d4b4b;
+}
+
+.home {
+   overflow-x: scroll;
+   overflow-y: hidden;
+   white-space: nowrap;
+   position: relative;
+   float: left;
+   margin: auto;
+   border: 3px solid #778899;
+   height: 77px;
+   top: 1px;
+}
+.home a{
+  display: inline-block;
+  margin-top: -18px;
+}
+.image {
+   width: 58px; 
+   height: 58px;
+}
+
+.content a{
+    text-decoration: none;
+    color: #02569B;
+}
+
+.menu {
+    width: 58px; 
+    height: 58px;
+    float: left;
+    padding: 10px;
+}

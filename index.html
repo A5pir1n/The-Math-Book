@@ -1,242 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <title>The Mathbook</title>
-  <link href="pages/css/index_page.css" rel="stylesheet">
-  <link rel="icon" href="img/icon.ico" type="image/x-icon">
-  <link href="pages/css/headings.css" rel="stylesheet">
+  
+  <title>The Math Book</title>
+  <link rel = "icon" href="http://themathbook.org/pages/img/logo.png" type = "image/x-icon">
+  <link type="text/css" rel="stylesheet" href="pages/css/index.css">
+  <script src="https://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    
+    function showImages(el) {
+  var windowHeight = jQuery( window ).height();
+
+  $(el).each(function(){
+    var thisPos = $(this).offset().top;
+
+    var topOfWindow = $(window).scrollTop();
+    if (topOfWindow + windowHeight - 200 > thisPos ) {
+        $(this).addClass("fadeIn");
+    }
+  });
+}
+// if the image in the window of browser when the page is loaded, show that image
+$(document).ready(function(){
+    showImages('.star');
+});
+
+// if the image in the window of browser when scrolling the page, show that image
+$(window).scroll(function() {
+    showImages('.star');
+});
+  </script>
+  <meta charset = "utf-8">
 </head>
-<div class="menu-btn">
-  <i class="fas fa-bars fa-2x"></i>
-</div>
-
 <body>
-
-  <ul class="nav">
-      <li style="float: left;"><a href="index.html"><img src="img/logo.png" alt="Logo image" class="logo"></a></li>
+  <div class="full" style="background-color: #FFF;">
+    <ul class="nav">
+      <li style="float: left;"><a href="index.html"><img src="img/logo.png" alt="Logo image" class="logo2"></a></li>
       <li style="float: left;"><a class="active" href="index.html"><b>Home</b></a> </li>
       <li><a class="nav" href="pages/homepage/help.html">Help & Faqs</a></li>
       <li><a class="nav" href="pages/homepage/aboutus.html">About us</a></li>
       <li><a class="nav" href="pages/homepage/Contact_Us.html">Contact us</a></li>
       <li><a class="nav" href="pages/homepage/donate.html">Support us</a></li>
-
     </ul>
-
-  <div class="container">
-
-
-  <!-- Showcase -->
-  <header class="Search-place">
-    <img src="img/logo.jpeg" alt="The Mathbook" class="logo">
-    <div class="form">
-      <form>
-        <input type="text" id="form-search" placeholder="Search Topics">
+    <div class="resize">
+      <div class="r2">
+        <img src="pages/img/logo.jpeg" alt="The Mathbook" class="logo">
+      </div>
+    </div>
+    <div class="align">
+      <form id="form" class="search" role="search">
+        <input class="input" type="search" id="query" name="q"
+           placeholder="1 + 1 = "
+           aria-label="Search through site content">
+        <button>
+          <svg viewBox="0 0 1024 1024"><path class="path1" d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z"></path></svg>
+        </button>
       </form>
     </div>
-  </header>
-
-  <!-- Home cards 1 -->
-  <h1 style="margin-bottom: 15;">Featured Fields: </h1>
-  <section class="home-cards">
-    <div>
-      <img src="img/math/general/representation_of_lie_group.jpg" alt="">
-      <h3>Mathematics</h3>
-      <p>
-        Explore vector space, linear transformation, and others
-      </p>
-      <a href="#">Learn More <i class="fas fa-chevron-right"></i></a>
-    </div>
-    <div>
-      <img src="img/physics/general/CMS_experiment.jpeg" alt="" />
-      <h3>Physics</h3>
-      <p>
-      </p>
-      <a href="#">Learn More <i class="fas fa-chevron-right"></i></a>
-    </div>
-    <div>
-      <img src="img/background4.jpeg" alt="" />
-      <h3>Biology</h3>
-      <p>
-      </p>
-      <a href="#">Learn More <i class="fas fa-chevron-right"></i></a>
-    </div>
-    <div>
-      <img src="img/background4.jpeg" alt="" />
-      <h3>Computer Science</h3>
-      <p>
-      </p>
-      <a href="#">Learn More <i class="fas fa-chevron-right"></i></a>
-    </div>
-  </section>
-
-
-  <!-- Home cards 2 -->
-  <h1 style="margin-bottom: 15;">Featured Fields: </h1>
-  <section class="home-cards">
-    <div>
-      <img src="img/math/general/representation_of_lie_group.jpg" alt="">
-      <h3>Mathematics</h3>
-      <p>
-        Explore vector space
-      </p>
-      <a href="pages/vector_space.html">Learn More <i class="fas fa-chevron-right"></i></a>
-    </div>
-    <div>
-      <img src="img/math/general/representation_of_lie_group.jpg" alt="" />
-      <h3>Bases And Dimention</h3>
-      <p>
-      </p>
-      <a href="pages/bases_and_dimention.html">Learn More <i class="fas fa-chevron-right"></i></a>
-    </div>
-    <div>
-      <img src="img/math/general/representation_of_lie_group.jpg" alt="" />
-      <h3>Bases For N-tuple Space</h3>
-      <p>
-      </p>
-      <a href="pages/bases_for_n_tuple_space.html">Learn More <i class="fas fa-chevron-right"></i></a>
-    </div>
-    <div>
-      <img src="img/math/general/representation_of_lie_group.jpg" alt="" />
-      <h3>N-tuple Space</h3>
-      <p>
-      </p>
-      <a href="pages/n_tuples_space.html">Learn More <i class="fas fa-chevron-right"></i></a>
-    </div>
-  </section>
-
-  <!-- Xbox -->
-  <section class="demo">
-    <div class="content">
-      <h2>Try building your own math book</h2>
-      <p>The mathbook will give you all the prerequisites you need
-        exactly for any topic entered in.
-      </p>
-      <a href="#" class="btn">
-        Try now <i class="fas fa-chevron-right"></i>
-      </a>
-    </div>
-  </section>
-
-  <!-- Home cards 2
+  </div>
+  <div class="full2">
+    <img src="pages/img/index-discover.png" class="discover star" />
+    <p class="p1">Discover</p>
+    <p class="p2">linear transformation</p>
+    <p class="p2">vector spaces</p>
+    <p class="p2">n-tuple space basis</p>     
+    <p class="p2">matrices and linear equations</p>
+  </div>
+  <div class="full displaymid container2">
+    <div style="width: 80vw; height: 70px;"></div>
+    <h1 style="margin-bottom: 15;">Featured Fields: </h1>
     <section class="home-cards">
       <div>
-        <img src="https://i.ibb.co/zVqhWn2/card5.png" alt="" />
-        <h3>Microsoft Teams</h3>
+        <img src="pages/img/math/general/representation_of_lie_group.jpg" alt="">
+        <h3>Mathematics</h3>
         <p>
-          Unleash the power of your team.
+          Explore vector space, linear transformation, and others
         </p>
-        <a href="#">Shop Now <i class="fas fa-chevron-right"></i></a>
+        <a href="#">Learn More <i class="fas fa-chevron-right"></i></a>
       </div>
       <div>
-        <img src="https://i.ibb.co/mGZcxcn/card6.jpg" alt="" />
-        <h3>Unlock the power of learning</h3>
+        <img src="pages/img/physics/general/CMS_experiment.jpeg" alt="" />
+        <h3>Physics</h3>
         <p>
-          Get students future-ready with Windows 10 devices. Starting at $219.
         </p>
-        <a href="#">Shop Now <i class="fas fa-chevron-right"></i></a>
+        <a href="#">Learn More <i class="fas fa-chevron-right"></i></a>
       </div>
       <div>
-        <img src="https://i.ibb.co/NpPvVHj/card7.png" alt="" />
-        <h3>Windows 10 Enterprise</h3>
+        <img src="pages/img/background4.jpeg" alt="" />
+        <h3>Biology</h3>
         <p>
-          Download the free 90-day evaluation for IT professionals.
         </p>
-        <a href="#">Download Now <i class="fas fa-chevron-right"></i></a>
+        <a href="#">Learn More <i class="fas fa-chevron-right"></i></a>
       </div>
       <div>
-        <img src="https://i.ibb.co/LkP4L5T/card8.png" alt="" />
-        <h3>Explore Kubernetes</h3>
+        <img src="pages/img/background4.jpeg" alt="" />
+        <h3>Computer Science</h3>
         <p>
-          Learn how Kubernetes works and get started with cloud native app
-          development today.
         </p>
-        <a href="#">Get Started <i class="fas fa-chevron-right"></i></a>
+        <a href="#">Learn More <i class="fas fa-chevron-right"></i></a>
       </div>
     </section>
-    
-    <section class="carbon dark">
-      <div class="content">
-        <h2>Commiting To Carbon Negative</h2>
-        <p>Microsoft will be carbon negative by 2030 and by 2050 we will remove
-          all carbon the company has emitted since it was founded in 1975</p>
-          <a href="#" class="btn">
-            Learn More <i class="fas fa-chevron-right"></i>
-          </a>
-      </div>
-    </section> -->
-
-  <!-- Follow -->
-  <section class="follow">
-    <p>Follow Us Through:</p>
-    <a href="https://facebook.com">
-      <img src="https://i.ibb.co/LrVMXNR/social-fb.png" alt="Facebook">
-    </a>
-    <a href="https://twitter.com">
-      <img src="https://i.ibb.co/vJvbLwm/social-twitter.png" alt="Twitter">
-    </a>
-    <a href="https://linkedin.com">
-      <img src="https://i.ibb.co/b30HMhR/social-linkedin.png" alt="Linkedin">
-    </a>
-  </section>
   </div>
-  <!-- Links -->
-  <!-- <section class="links">
-      <div class="links-inner">
-        <ul>
-          <li><h3>What's New</h3></li>
-          <li><a href="#">Surface Pro X</a></li>
-          <li><a href="#">Surface Laptop 3</a></li>
-          <li><a href="#">Surface Pro 7</a></li>
-          <li><a href="#">Windows 10 apps</a></li>
-          <li><a href="#">Office apps</a></li>
-        </ul>
-        <ul>
-          <li><h3>Microsoft Store</h3></li>
-          <li><a href="#">Account Profile</a></li>
-          <li><a href="#">Download Center</a></li>
-          <li><a href="#">Microsoft Store support</a></li>
-          <li><a href="#">Returns</a></li>
-          <li><a href="#">Older tracking</a></li>
-        </ul>
-        <ul>
-          <li><h3>Education</h3></li>
-          <li><a href="#">Microsfot in education</a></li>
-          <li><a href="#">Office for students</a></li>
-          <li><a href="#">Office 365 for schools</a></li>
-          <li><a href="#">Deals for studentss</a></li>
-          <li><a href="#">Microsfot Azure</a></li>
-        </ul>
-        <ul>
-          <li><h3>Enterprise</h3></li>
-          <li><a href="#">Azure</a></li>
-          <li><a href="#">AppSource</a></li>
-          <li><a href="#">Automotive</a></li>
-          <li><a href="#">Government</a></li>
-          <li><a href="#">Healthcare</a></li>
-        </ul>
-        <ul>
-          <li><h3>Developer</h3></li>
-          <li><a href="#">Visual Studio</a></li>
-          <li><a href="#">Windowszs Dev Center</a></li>
-          <li><a href="#">Developer Network</a></li>
-          <li><a href="#">TechNet</a></li>
-          <li><a href="#">Microsoft Developer</a></li>
-        </ul>
-        <ul>
-          <li><h3>Company</h3></li>
-          <li><a href="#">Careers</a></li>
-          <li><a href="#">About Microsoft</a></li>
-          <li><a href="#">Company news</a></li>
-          <li><a href="#">Privacy at Microsoft</a></li>
-          <li><a href="#">Inverstors</a></li>
-        </ul>
-      </div>
-    </section> -->
+  <div class="full2">
+    <div class="try">
+      <section class="demo">
+        <div class="content">
+          <h2>Try building your own math book</h2>
+          <p>The mathbook will give you all the prerequisites you need
+            exactly for any topic entered in.
+          </p>
+          <a href="https://github.com/A5pir1n/The-Math-Book" class="btn">
+            Try now <i class="fas fa-chevron-right"></i>
+          </a>
+        </div>
+      </section>
+    </div>
+  </div>
 
   <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-inner">
-      <div><i class="fas fa-globe fa-2x"></i> English (United States)</div>
-      <ul>
-        <li><a href="#">Sitemap</a></li>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div><i class="fas fa-globe fa-2x"></i> English (United States)</div>
+        <ul>
+          <li><a href="#">Sitemap</a></li>
         <li><a href="#">Contact Us</a></li>
         <li><a href="#">Privacy & cookies</a></li>
         <li><a href="#">Terms of use</a></li>
@@ -244,8 +130,7 @@
         <li><a href="#">Donate</a></li>
         <li><a href="#">About Us</a></li>
         <li><a href="#">&copy; The Mathbook 2022</a></li>
-      </ul>
-    </div>
-  </footer>
-
+        </ul>
+      </div>
+    </footer>
 </body>
