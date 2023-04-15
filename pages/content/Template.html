@@ -10,18 +10,7 @@
 	<link type="text/css" id="stylesheet2" rel="stylesheet" href="../css/math.css">
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-	<script>
-		function setStyleSheet(url){
-       		var stylesheet = document.getElementById("stylesheet");
-       		stylesheet.setAttribute('href', url);
-    	}
-    	function autoset() {
-    		var hour = (new Date).getHours();
-    		if (hour > 21 || hour < 8) {
-    			setStyleSheet('../css/template_dark.css');
-    		}
-    	}
-	</script>
+	<script type="text/javascript" src="../js/template.js"></script>
 </head>
 <body onload="autoset()">
 	<div class="row">
@@ -42,7 +31,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="column2" style="width: 25vw;">
+		<div class="column2" style="width: 25vw;" id="menu" style="visibility: visible; display: block;">
 				<a href="#contents" class="back">Back</a> <br>
 				<h1 style="font-size: 25px;">Table of Contents</h1>
 		<div class="sections" style="padding-top: 0px;">
@@ -55,9 +44,12 @@
 
 			
 		</div>
-		<div class="column2" style="width: 74.1vw; margin-right: -30px;">
-		<div class="content" style="text-align: center;">
-		
+		<div class="column2" id="content1" style="height: 86.8vh; width: 74.1vw;">
+			<a onclick="menu()">
+				<img src="menu.png" alt="menu" class="menu" id="image">
+			</a>
+		<div class="content" style="text-align: center; padding-left: 0px;">
+
 			<!-- Contents goes here-->
 			<h1 id="basis-and-dimension">Basis and Dimension</h1>
 						<p>Dimensions comes naturally when speaking of “vectors" as arrows that

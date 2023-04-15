@@ -165,3 +165,10 @@ text-align: left;
     text-decoration: none;
     color: #02569B;
 }
+
+.menu {
+    width: 58px; 
+    height: 58px;
+    float: left;
+    padding: 10px;
+}
