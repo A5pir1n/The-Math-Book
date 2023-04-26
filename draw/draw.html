@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>画图系统</title>
+	<style>
+		#canvas {
+			border: 1px solid #ddd;
+		}
+	</style>
+</head>
+<body>
+	<form>
+		<label for="name">name：</label>
+		<input type="text" id="name">
+		<br>
+		<label for="parent">parent：</label>
+		<input type="text" id="parent">
+		<br>
+		<label for="children">Child：</label>
+		<input type="text" id="children">
+		<br>
+		<button type="button" id="draw">Draw</button>
+	</form>
+	<canvas id="canvas" width="800" height="600"></canvas>
+	<script>
+		const canvas = document.getElementById('canvas');
+		const ctx = canvas.getContext('2d');
+		const nameInput = document.getElementById('name');
+		const parentInput = document.getElementById('parent');
+		const childrenInput = document.getElementById('children');
+		const drawButton = document.getElementById('draw');
+
+		drawButton.addEventListener('click', () => {
+			const name = nameInput.value;
+			const parent = parentInput.value;
+			const children = childrenInput.value;
+
+			// 清空画布
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+			// 画图
+			drawNode(name, canvas.width / 2, 100);
+			drawLine(canvas.width / 2, 100, canvas.width / 2, 200);
+			if (parent) {
+				drawNode(parent, canvas.width / 2, 200);
+				drawLine(canvas.width / 2, 200, canvas.width / 4, 300);
+				drawNode(parent + '-child', canvas.width / 4, 300);
+				drawLine(canvas.width / 4, 300, canvas.width / 4, 400);
+				drawNode(parent + '-child-2', canvas.width / 4, 400);
+			}
+			if (children) {
+				drawNode(children, canvas.width / 2, 200);
+				drawLine(canvas.width / 2, 200, canvas.width * 3 / 4, 300);
+				drawNode(children + '-child', canvas.width * 3 / 4, 300);
+				drawLine(canvas.width * 3 / 4, 300, canvas.width * 3 / 4, 400);
+				drawNode(children + '-child-2', canvas.width * 3 / 4, 400);
+			}
+		});
+
+		function drawNode(text, x, y) {
+			ctx.beginPath();
+			ctx.arc(x, y, 40, 0, Math.PI * 2);
+			ctx.fillStyle = '#eee';
+			ctx.fill();
+			ctx.lineWidth = 2;
+			ctx.strokeStyle = '#333';
+			ctx.stroke();
+			ctx.font = '16px sans-serif';
+			ctx.fillStyle = '#333';
+			ctx.textAlign = 'center';
+			ctx.fillText(text, x, y);
+		}
+
+		function drawLine(x1, y1, x2, y2) {
+			ctx.beginPath();
+			ctx.moveTo(x1, y1);
+			ctx.lineTo(x2, y2);
+			ctx.lineWidth = 2;
+			ctx.strokeStyle = '#333';
+			ctx.stroke();
+		}
+	</script>
+</body>
+</html>
