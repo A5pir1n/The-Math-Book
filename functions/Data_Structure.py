@@ -5,12 +5,10 @@ tree = {
 
             },
             'Linear_Algebra':{      
-
             },
         },
         'Analysis':{
             
-
         },
         'Differential Equations':{
 
