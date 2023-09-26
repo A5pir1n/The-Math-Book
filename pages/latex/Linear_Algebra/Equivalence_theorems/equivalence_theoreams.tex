@@ -1,0 +1,55 @@
+\documentclass[main.tex]{subfiles}
+\begin{document}
+\chapter{Equivalence Theorems}
+\section{Basis}
+The following statements are equivalent:
+\begin{itemize}
+    \item A set $\mathcal{B}$ is a basis for a vector space $V$
+    \item The spanning set of the vector space $V$     does not have strict subset that is also a spanning set
+    \item The set $B$ does not have any strict superset that is also linearly independent. 
+\end{itemize}
+\subsection{Finite dimensional vector space}
+\begin{enumerate}
+    \item A set $\mathcal{B} = \{\alpha_1, \alpha_2 \cdots \alpha_n \}$ of $n$ elements is a basis for a $n$ dimensional vector space $V$. 
+    \item \label{span} The set $\mathcal{B} = \{\alpha_1, \alpha_2 \cdots \alpha_n \}$ of $n$ elements spans the $n$ dimensional vector space $V$. 
+\end{enumerate}
+
+
+\section{Square matrices}
+
+\noindent For all $A \in M_{n\times n}$, the following statements are equivalent:
+\begin{enumerate}
+\item\label{nonsing} $A$ is nonsingular;
+\item\label{identity} RREF$(A) = I_n$
+\item\label{unique solution} for all $\mathbf{b} \in M_{n\times 1}$, the linear system $A \mathbf{x} = \mathbf{b}$ has a unique solution;
+\item\label{homogeneous} the homogeneous linear system $A \mathbf{x} = \mathbf{0}$ has only the trivial solution $\mathbf{x} = \mathbf{0}$;
+\item\label{elementary} $A$ is a product of elementary matrices;
+\item\label{no zero row} $A$ is not row equivalent to a matrix with a row (or column) of zeros;
+\item\label{det nonzero} $\det(A) \not = 0$;
+\item\label{null_space} $\mathrm{nullspace}(A) = \{\mathbf{0}\}$;
+\item\label{cols_rows_independent} the columns (or rows) of $A$ are linearly independent;
+\item\label{cols_rows_span} the columns (or rows) of $A$ spans the n-tuple space and therefore is the basis of the n-tuple space;
+\item\label{nullity A} $\nullity(A) = 0$;
+\item\label{rank A} $\rank(A) = n$;
+\item\label{row rank} $\rrank(A) = n$;
+\item\label{col rank} $\crank(A) = n$;
+\item\label{isomorphism} $A$ represents an isomorphism $L:\RR^n \to \RR^n$;
+\item\label{one-to-one} $A$ represents a linear transformation $L:\RR^n \to \RR^n$ that is one-to-one;
+\item\label{onto} $A$ represents a linear transformation $L:\RR^n \to \RR^n$ that is onto;
+\item \label{operator-invertible} $A$ represents an invertible linear transformation $L: V \to W$ where $\dim(V) = \dim(W) = n$; it is equivalently an invertible matrix;
+\item \label{transf-iso} $A$ represents an isomorphism $L:V \to W$ where $\dim(V) = \dim(W) = n$;
+\item \label{transf-onto} $A$ represents an onto linear transformation $L: V \to W$ where $\dim(V) = \dim(W) = n$;
+\item \label{transf-one-to-one} $A$ represents a one-to-one linear transformation $L: V \to W$ where $\dim(V) = \dim(W) = n$;
+\item \label{eigen} $\lambda = 0$ is not an eigenvalue of $A$.
+\item The matrix $A$ can be brought to diagonal form by a change of basis, which is same as saying that the matrix is diagonalizable. 
+\item The eigenvectors of the matrix span the space.  
+\end{enumerate}
+
+\section{General Matrices}
+For $A \in M_{m\times n}$, the following statements are equivalent: 
+\begin{enumerate}
+%TODO: somehow link this to the equivalence theorem above. 
+    \item \label{thm:non_trivial_solution} If $\mathrm{m}<\mathrm{n}$, then the homogeneous system of linear equations $\mathbf{A X}=0$ has a non-trivial solution.
+\end{enumerate}
+
+\end{document}

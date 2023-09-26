@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+
+<head>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <title>equivalence_theoreams</title>
+    <style>
+        html {
+            color: #1a1a1a;
+            background-color: #fdfdfd;
+        }
+
+        body {
+            margin: 0 auto;
+            max-width: 36em;
+            padding-left: 50px;
+            padding-right: 50px;
+            padding-top: 50px;
+            padding-bottom: 50px;
+            hyphens: auto;
+            overflow-wrap: break-word;
+            text-rendering: optimizeLegibility;
+            font-kerning: normal;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                font-size: 0.9em;
+                padding: 12px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+        }
+
+        @media print {
+            html {
+                background-color: white;
+            }
+
+            body {
+                background-color: transparent;
+                color: black;
+                font-size: 12pt;
+            }
+
+            p,
+            h2,
+            h3 {
+                orphans: 3;
+                widows: 3;
+            }
+
+            h2,
+            h3,
+            h4 {
+                page-break-after: avoid;
+            }
+        }
+
+        p {
+            margin: 1em 0;
+        }
+
+        a {
+            color: #1a1a1a;
+        }
+
+        a:visited {
+            color: #1a1a1a;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        svg {
+            height: auto;
+            max-width: 100%;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            margin-top: 1.4em;
+        }
+
+        h5,
+        h6 {
+            font-size: 1em;
+            font-style: italic;
+        }
+
+        h6 {
+            font-weight: normal;
+        }
+
+        ol,
+        ul {
+            padding-left: 1.7em;
+            margin-top: 1em;
+        }
+
+        li>ol,
+        li>ul {
+            margin-top: 0;
+        }
+
+        blockquote {
+            margin: 1em 0 1em 1.7em;
+            padding-left: 1em;
+            border-left: 2px solid #e6e6e6;
+            color: #606060;
+        }
+
+        code {
+            font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+            font-size: 85%;
+            margin: 0;
+            hyphens: manual;
+        }
+
+        pre {
+            margin: 1em 0;
+            overflow: auto;
+        }
+
+        pre code {
+            padding: 0;
+            overflow: visible;
+            overflow-wrap: normal;
+        }
+
+        .sourceCode {
+            background-color: transparent;
+            overflow: visible;
+        }
+
+        hr {
+            background-color: #1a1a1a;
+            border: none;
+            height: 1px;
+            margin: 1em 0;
+        }
+
+        table {
+            margin: 1em 0;
+            border-collapse: collapse;
+            width: 100%;
+            overflow-x: auto;
+            display: block;
+            font-variant-numeric: lining-nums tabular-nums;
+        }
+
+        table caption {
+            margin-bottom: 0.75em;
+        }
+
+        tbody {
+            margin-top: 0.5em;
+            border-top: 1px solid #1a1a1a;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        th {
+            border-top: 1px solid #1a1a1a;
+            padding: 0.25em 0.5em 0.25em 0.5em;
+        }
+
+        td {
+            padding: 0.125em 0.5em 0.25em 0.5em;
+        }
+
+        header {
+            margin-bottom: 4em;
+            text-align: center;
+        }
+
+        #TOC li {
+            list-style: none;
+        }
+
+        #TOC ul {
+            padding-left: 1.3em;
+        }
+
+        #TOC>ul {
+            padding-left: 0;
+        }
+
+        #TOC a:not(:hover) {
+            text-decoration: none;
+        }
+
+        code {
+            white-space: pre-wrap;
+        }
+
+        span.smallcaps {
+            font-variant: small-caps;
+        }
+
+        div.columns {
+            display: flex;
+            gap: min(4vw, 1.5em);
+        }
+
+        div.column {
+            flex: auto;
+            overflow-x: auto;
+        }
+
+        div.hanging-indent {
+            margin-left: 1.5em;
+            text-indent: -1.5em;
+        }
+
+        /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+        ul.task-list[class] {
+            list-style: none;
+        }
+
+        ul.task-list li input[type="checkbox"] {
+            font-size: inherit;
+            width: 0.8em;
+            margin: 0 0.8em 0.2em -1.6em;
+            vertical-align: middle;
+        }
+
+        .display.math {
+            display: block;
+            text-align: center;
+            margin: 0.5rem auto;
+        }
+    </style>
+    <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+    <h1 id="equivalence-theorems">Equivalence Theorems</h1>
+    <h2 id="basis">Basis</h2>
+    <p>The following statements are equivalent:</p>
+    <ul>
+        <li>
+            <p>A set <span class="math inline">ℬ</span> is a basis for a vector
+                space <span class="math inline"><em>V</em></span></p>
+        </li>
+        <li>
+            <p>The spanning set of the vector space <span class="math inline"><em>V</em></span> does not have strict
+                subset that
+                is also a spanning set</p>
+        </li>
+        <li>
+            <p>The set <span class="math inline"><em>B</em></span> does not have
+                any strict superset that is also linearly independent.</p>
+        </li>
+    </ul>
+    <h3 id="finite-dimensional-vector-space">Finite dimensional vector
+        space</h3>
+    <ol>
+        <li>
+            <p>A set <span
+                    class="math inline">ℬ = {<em>α</em><sub>1</sub>, <em>α</em><sub>2</sub>⋯<em>α</em><sub><em>n</em></sub>}</span>
+                of <span class="math inline"><em>n</em></span> elements is a basis for a
+                <span class="math inline"><em>n</em></span> dimensional vector space
+                <span class="math inline"><em>V</em></span>.
+            </p>
+        </li>
+        <li>
+            <p><span id="span" label="span"></span> The set <span
+                    class="math inline">ℬ = {<em>α</em><sub>1</sub>, <em>α</em><sub>2</sub>⋯<em>α</em><sub><em>n</em></sub>}</span>
+                of <span class="math inline"><em>n</em></span> elements spans the <span
+                    class="math inline"><em>n</em></span> dimensional vector space <span
+                    class="math inline"><em>V</em></span>.</p>
+        </li>
+    </ol>
+    <h2 id="square-matrices">Square matrices</h2>
+    <p>For all <span class="math inline"><em>A</em> ∈ <em>M</em><sub><em>n</em> × <em>n</em></sub></span>,
+        the following statements are equivalent:</p>
+    <ol>
+        <li>
+            <p><span id="nonsing" label="nonsing"></span> <span class="math inline"><em>A</em></span> is nonsingular;
+            </p>
+        </li>
+        <li>
+            <p><span id="identity" label="identity"></span> RREF<span
+                    class="math inline">(<em>A</em>) = <em>I</em><sub><em>n</em></sub></span></p>
+        </li>
+        <li>
+            <p><span id="unique solution" label="unique solution"></span> for
+                all <span class="math inline"><strong>b</strong> ∈ <em>M</em><sub><em>n</em> × 1</sub></span>,
+                the linear system <span class="math inline"><em>A</em><strong>x</strong> = <strong>b</strong></span>
+                has a unique solution;</p>
+        </li>
+        <li>
+            <p><span id="homogeneous" label="homogeneous"></span> the
+                homogeneous linear system <span
+                    class="math inline"><em>A</em><strong>x</strong> = <strong>0</strong></span>
+                has only the trivial solution <span class="math inline"><strong>x</strong> = <strong>0</strong></span>;
+            </p>
+        </li>
+        <li>
+            <p><span id="elementary" label="elementary"></span> <span class="math inline"><em>A</em></span> is a product
+                of elementary
+                matrices;</p>
+        </li>
+        <li>
+            <p><span id="no zero row" label="no zero row"></span> <span class="math inline"><em>A</em></span> is not row
+                equivalent to a matrix
+                with a row (or column) of zeros;</p>
+        </li>
+        <li>
+            <p><span id="det nonzero" label="det nonzero"></span> <span class="math inline">det (<em>A</em>) ≠ 0</span>;
+            </p>
+        </li>
+        <li>
+            <p><span id="null_space" label="null_space"></span> <span
+                    class="math inline">nullspace(<em>A</em>) = {<strong>0</strong>}</span>;</p>
+        </li>
+        <li>
+            <p><span id="cols_rows_independent" label="cols_rows_independent"></span> the columns (or rows) of <span
+                    class="math inline"><em>A</em></span> are linearly independent;</p>
+        </li>
+        <li>
+            <p><span id="cols_rows_span" label="cols_rows_span"></span> the
+                columns (or rows) of <span class="math inline"><em>A</em></span> spans
+                the n-tuple space and therefore is the basis of the n-tuple
+                space;</p>
+        </li>
+        <li>
+            <p><span id="nullity A" label="nullity A"></span> <span class="math inline">$\nullity(A) = 0$</span>;</p>
+        </li>
+        <li>
+            <p><span id="rank A" label="rank A"></span> <span class="math inline">$\rank(A) = n$</span>;</p>
+        </li>
+        <li>
+            <p><span id="row rank" label="row rank"></span> <span class="math inline">$\rrank(A) = n$</span>;</p>
+        </li>
+        <li>
+            <p><span id="col rank" label="col rank"></span> <span class="math inline">$\crank(A) = n$</span>;</p>
+        </li>
+        <li>
+            <p><span id="isomorphism" label="isomorphism"></span> <span class="math inline"><em>A</em></span> represents
+                an isomorphism <span class="math inline">$L:\RR^n \to \RR^n$</span>;</p>
+        </li>
+        <li>
+            <p><span id="one-to-one" label="one-to-one"></span> <span class="math inline"><em>A</em></span> represents a
+                linear transformation
+                <span class="math inline">$L:\RR^n \to \RR^n$</span> that is
+                one-to-one;
+            </p>
+        </li>
+        <li>
+            <p><span id="onto" label="onto"></span> <span class="math inline"><em>A</em></span> represents a linear
+                transformation
+                <span class="math inline">$L:\RR^n \to \RR^n$</span> that is
+                onto;
+            </p>
+        </li>
+        <li>
+            <p><span id="operator-invertible" label="operator-invertible"></span> <span
+                    class="math inline"><em>A</em></span> represents an invertible linear
+                transformation <span class="math inline"><em>L</em> : <em>V</em> → <em>W</em></span> where
+                <span class="math inline">dim (<em>V</em>) = dim (<em>W</em>) = <em>n</em></span>;
+                it is equivalently an invertible matrix;
+            </p>
+        </li>
+        <li>
+            <p><span id="transf-iso" label="transf-iso"></span> <span class="math inline"><em>A</em></span> represents
+                an isomorphism <span class="math inline"><em>L</em> : <em>V</em> → <em>W</em></span> where
+                <span class="math inline">dim (<em>V</em>) = dim (<em>W</em>) = <em>n</em></span>;
+            </p>
+        </li>
+        <li>
+            <p><span id="transf-onto" label="transf-onto"></span> <span class="math inline"><em>A</em></span> represents
+                an onto linear
+                transformation <span class="math inline"><em>L</em> : <em>V</em> → <em>W</em></span> where
+                <span class="math inline">dim (<em>V</em>) = dim (<em>W</em>) = <em>n</em></span>;
+            </p>
+        </li>
+        <li>
+            <p><span id="transf-one-to-one" label="transf-one-to-one"></span>
+                <span class="math inline"><em>A</em></span> represents a one-to-one
+                linear transformation <span class="math inline"><em>L</em> : <em>V</em> → <em>W</em></span> where
+                <span class="math inline">dim (<em>V</em>) = dim (<em>W</em>) = <em>n</em></span>;
+            </p>
+        </li>
+        <li>
+            <p><span id="eigen" label="eigen"></span> <span class="math inline"><em>λ</em> = 0</span> is not an
+                eigenvalue of <span class="math inline"><em>A</em></span>.</p>
+        </li>
+        <li>
+            <p>The matrix <span class="math inline"><em>A</em></span> can be
+                brought to diagonal form by a change of basis, which is same as saying
+                that the matrix is diagonalizable.</p>
+        </li>
+        <li>
+            <p>The eigenvectors of the matrix span the space.</p>
+        </li>
+    </ol>
+    <h2 id="general-matrices">General Matrices</h2>
+    <p>For <span class="math inline"><em>A</em> ∈ <em>M</em><sub><em>m</em> × <em>n</em></sub></span>,
+        the following statements are equivalent:</p>
+    <ol>
+        <li>
+            <p><span id="thm:non_trivial_solution" label="thm:non_trivial_solution"></span> If <span
+                    class="math inline">m &lt; n</span>, then the homogeneous system of
+                linear equations <span class="math inline"><strong>A</strong><strong>X</strong> = 0</span> has
+                a non-trivial solution.</p>
+        </li>
+    </ol>
+</body>
+
+</html>
