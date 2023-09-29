@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ask page</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  text-align: center;
+  margin: 50px;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  color: #333;
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 10px;
+}
+
+input {
+  width: 90%;
+  padding: 10px;
+  margin-bottom: 20px;
+  margin-right: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+#answer {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+</style>
+<body>
+  <div class="container">
+    <h1>Ask your current question</h1>
+    <label for="question">what is your question：</label>
+    <input type="text" id="question" placeholder="">
+    <button onclick="generateAnswer()">Get answer</button>
+    <div id="answer"></div>
+  </div>
+  <script src="script.js"></script>
+</body>
+<script>
+function generateAnswer() {
+  const question = document.getElementById('question').value;
+  const answerElement = document.getElementById('answer');
+  
+  // Use regular expression to match various mathematical operations
+  const regex = /([0-9.]+)\s*([\+\-\*\/\^]|sqrt)\s*([0-9.]+)/;
+  const match = question.match(regex);
+
+  if (match) {
+    const operand1 = parseFloat(match[1]);
+    const operator = match[2];
+    const operand2 = parseFloat(match[3]);
+    let result;
+
+    switch (operator) {
+      case '+':
+        result = operand1 + operand2;
+        break;
+      case '-':
+        result = operand1 - operand2;
+        break;
+      case '*':
+        result = operand1 * operand2;
+        break;
+      case '/':
+        if (operand2 !== 0) {
+          result = operand1 / operand2;
+        } else {
+          result = 'Cannot divide by zero';
+        }
+        break;
+      case '^':
+        result = Math.pow(operand1, operand2);
+        break;
+      case 'sqrt':
+        result = Math.sqrt(operand1);
+        break;
+      default:
+        result = 'Invalid operator';
+    }
+
+    answerElement.innerText = `Result: ${result}`;
+  } else {
+    answerElement.innerText = 'Invalid math expression';
+  }
+}
+
+
+
+  </script>
+</html>
