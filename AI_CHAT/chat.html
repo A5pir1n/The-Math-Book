@@ -3,122 +3,254 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ask page</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<style>
+  <title>Calculator</title>
+  <style>
+    h1 {
+      color: #333;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
     body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
-  text-align: center;
-  margin: 50px;
-}
-
-.container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-  color: #333;
-}
-
-label {
-  font-weight: bold;
-  display: block;
-  margin-bottom: 10px;
-}
-
-input {
-  width: 90%;
-  padding: 10px;
-  margin-bottom: 20px;
-  margin-right: 10px;
-}
-
-button {
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #007BFF;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
-
-#answer {
-  margin-top: 20px;
-  font-size: 18px;
-  font-weight: bold;
-}
-</style>
-<body>
-  <div class="container">
-    <h1>Ask your current question</h1>
-    <label for="question">what is your question：</label>
-    <input type="text" id="question" placeholder="">
-    <button onclick="generateAnswer()">Get answer</button>
-    <div id="answer"></div>
-  </div>
-  <script src="script.js"></script>
-</body>
-<script>
-function generateAnswer() {
-  const question = document.getElementById('question').value;
-  const answerElement = document.getElementById('answer');
-  
-  // Use regular expression to match various mathematical operations
-  const regex = /([0-9.]+)\s*([\+\-\*\/\^]|sqrt)\s*([0-9.]+)/;
-  const match = question.match(regex);
-
-  if (match) {
-    const operand1 = parseFloat(match[1]);
-    const operator = match[2];
-    const operand2 = parseFloat(match[3]);
-    let result;
-
-    switch (operator) {
-      case '+':
-        result = operand1 + operand2;
-        break;
-      case '-':
-        result = operand1 - operand2;
-        break;
-      case '*':
-        result = operand1 * operand2;
-        break;
-      case '/':
-        if (operand2 !== 0) {
-          result = operand1 / operand2;
-        } else {
-          result = 'Cannot divide by zero';
-        }
-        break;
-      case '^':
-        result = Math.pow(operand1, operand2);
-        break;
-      case 'sqrt':
-        result = Math.sqrt(operand1);
-        break;
-      default:
-        result = 'Invalid operator';
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      text-align: center;
+      margin: 50px;
     }
 
-    answerElement.innerText = `Result: ${result}`;
-  } else {
-    answerElement.innerText = 'Invalid math expression';
-  }
-}
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
 
+    h1 {
+      color: #333;
+    }
 
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 10px;
+    }
 
+    input {
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    .btn-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 10px;
+    }
+
+    .btn {
+      padding: 20px;
+      font-size: 24px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 60px;
+      margin: 5px;
+    }
+
+    .btn:hover {
+      background-color: #f0f0f0;
+    }
+
+    .btn-large {
+      padding: 25px;
+      font-size: 20px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 70px;
+      margin: 5px;
+    }
+
+    .btn-large:hover {
+      background-color: #f0f0f0;
+    }
+
+    .superscript {
+      font-size: 14px;
+      vertical-align: super;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Ask anything you want to know</h1>
+    <label for="question">Input:</label>
+    <input type="text" id="question" placeholder="">
+    <div class="btn-container">
+      <button class="btn" onclick="appendCharacter('7')">7</button>
+      <button class="btn" onclick="appendCharacter('8')">8</button>
+      <button class="btn" onclick="appendCharacter('9')">9</button>
+      <button class="btn" onclick="appendCharacter('+')">+</button>
+      <button class="btn" onclick="appendCharacter('4')">4</button>
+      <button class="btn" onclick="appendCharacter('5')">5</button>
+      <button class="btn" onclick="appendCharacter('6')">6</button>
+      <button class="btn" onclick="appendCharacter('-')">-</button>
+      <button class="btn" onclick="appendCharacter('1')">1</button>
+      <button class="btn" onclick="appendCharacter('2')">2</button>
+      <button class="btn" onclick="appendCharacter('3')">3</button>
+      <button class="btn" onclick="appendCharacter('*')">*</button>
+      <button class="btn" onclick="appendCharacter('0')">0</button>
+      <button class="btn" onclick="appendCharacter('.')">.</button>
+      <button class="btn" onclick="appendCharacter('/')">/</button>
+      <button class="btn-large" onclick="appendCharacter('sqrt')">√</button>
+      <button class="btn-large" onclick="appendCharacter('Math.pow(')">x<span class="superscript">y</span></button>
+      <button class="btn-large" onclick="appendCharacter('Math.sin(')">sin</button>
+      <button class="btn-large" onclick="appendCharacter('Math.cos(')">cos</button>
+      <button class="btn-large" onclick="appendCharacter('Math.tan(')">tan</button>
+      <button class="btn btn-large" onclick="clearDisplay()">C</button>
+      <button class="btn btn-large" onclick="calculate()">=</button>
+    </div>
+    <div id="answer"></div>
+  </div>
+
+  <script>
+       let displayValue = '0';
+
+        function appendCharacter(char) {
+        if (displayValue === '0' && char !== '.') {
+            displayValue = char;
+        } else {
+            displayValue += char;
+        }
+        document.getElementById('question').value = displayValue;
+        }
+
+        function clearDisplay() {
+        displayValue = '0';
+        document.getElementById('question').value = displayValue;
+        }
+
+        function calculate() {
+        const question = displayValue;
+        const answerElement = document.getElementById('answer');
+
+        try {
+            const result = evaluateExpression(question);
+            answerElement.innerText = `Result: ${result}`;
+        } catch (error) {
+            answerElement.innerText = `Error: ${error.message}`;
+        }
+        }
+    function generateAnswer() {
+      const question = displayValue;
+      const answerElement = document.getElementById('answer');
+
+      try {
+        const result = evaluateExpression(question);
+        answerElement.innerText = `Result: ${result}`;
+      } catch (error) {
+        answerElement.innerText = `Error: ${error.message}`;
+      }
+    }
+
+    function isOperator(token) {
+      return token === '+' || token === '-' || token === '*' || token === '/' || token === '^' || token === 'sqrt';
+    }
+
+    function getPrecedence(operator) {
+      switch (operator) {
+        case '+':
+        case '-':
+          return 1;
+        case '*':
+        case '/':
+          return 2;
+        case '^':
+        case 'sqrt':
+          return 3;
+        default:
+          return 0;
+      }
+    }
+
+    function applyOperator(operator, operand1, operand2) {
+      switch (operator) {
+        case '+':
+          return operand1 + operand2;
+        case '-':
+          return operand1 - operand2;
+        case '*':
+          return operand1 * operand2;
+        case '/':
+          if (operand2 !== 0) {
+            return operand1 / operand2;
+          } else {
+            throw new Error('Cannot divide by zero');
+          }
+        case '^':
+          return Math.pow(operand1, operand2);
+        case 'sqrt':
+          return Math.sqrt(operand1);
+        default:
+          throw new Error('Invalid operator');
+      }
+    }
+
+    function evaluateExpression(expression) {
+      const tokens = expression.match(/([0-9.]+|\+|\-|\*|\/|\^|sqrt|\(|\))/g);
+
+      const output = [];
+      const operators = [];
+
+      for (const token of tokens) {
+        if (!isNaN(token)) {
+          output.push(parseFloat(token));
+        } else if (isOperator(token)) {
+          while (
+            operators.length > 0 &&
+            getPrecedence(operators[operators.length - 1]) >= getPrecedence(token)
+          ) {
+            const operator = operators.pop();
+            const operand2 = output.pop();
+            const operand1 = output.pop();
+            output.push(applyOperator(operator, operand1, operand2));
+          }
+          operators.push(token);
+        } else if (token === '(') {
+          operators.push(token);
+        } else if (token === ')') {
+          while (operators.length > 0 && operators[operators.length - 1] !== '(') {
+            const operator = operators.pop();
+            const operand2 = output.pop();
+            const operand1 = output.pop();
+            output.push(applyOperator(operator, operand1, operand2));
+          }
+          operators.pop(); // Pop the opening bracket
+        } else {
+          throw new Error('Invalid token: ' + token);
+        }
+      }
+
+      while (operators.length > 0) {
+        const operator = operators.pop();
+        const operand2 = output.pop();
+        const operand1 = output.pop();
+        output.push(applyOperator(operator, operand1, operand2));
+      }
+
+      if (output.length === 1) {
+        return output[0];
+      } else {
+        throw new Error('Invalid expression');
+      }
+    }
   </script>
+</body>
 </html>
