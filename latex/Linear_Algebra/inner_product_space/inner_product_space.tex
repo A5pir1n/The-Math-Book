@@ -1,0 +1,256 @@
+\documentclass[main.tex]{subfiles}
+\begin{document}
+\chapter{Inner Product Spaces}
+\section{Inner Products}
+
+\begin{definition}
+Let $F$ be the field of real numbers or the field of complex numbers, and $V$ a vector space over $F$. An \textbf{inner product} on $V$ is a function which assigns to each ordered pair of vector $\alpha, \beta$ in $V$ a scalar $(\alpha | \beta)$ in $F$ in such a way that for all $\alpha, \beta, \gamma$ in $V$ and all scalars $c$: 
+\begin{enumerate}
+    \item $(\alpha + \beta | \gamma) = (\alpha | \gamma) + (\beta | \gamma)$;
+    \item $(c \alpha | \beta) = c(\alpha | \beta)$;
+    \item $(\beta | \alpha) = ( \Bar{\alpha} | \Bar{\beta})$, the bar denoting complex conjugation;
+    \item $( \alpha | \alpha ) > 0$ if $\alpha \neq 0$. \\
+    \item[] Note that conditions (1), (2) and (3) imply that
+    \item $(\alpha | c \beta + \gamma) = \Bar{c} (\alpha | \beta ) + (\alpha + \gamma)$. 
+\end{enumerate}
+\end{definition}
+
+\begin{example}
+On $F^n$ there is an inner product which we call the \textbf{standard inner product}. It is defined on $\alpha = (x_1, \cdots, x_n)$ and $\beta = (y_1, \cdots, y_n)$ by 
+\begin{equation}
+    (\alpha |\beta ) = \sum_j x_j \Bar{y}_j.
+\end{equation}
+
+If $F = \mathbb{R}$, we can write this as 
+\begin{equation}
+    (\alpha |\beta ) = \sum_j x_j y_j. 
+\end{equation}
+We call this standard inner product the \textbf{dot product} or \textbf{scalar product} and denote it by $\alpha \cdot \beta$. 
+\end{example}
+
+\begin{example}
+    For $\alpha=\left(x_1, x_2\right)$ and $\beta=\left(y_1, y_2\right)$ in $R^2$, let
+    $$
+    (\alpha \mid \beta)=x_1 y_1-x_2 y_1-x_1 y_2+4 x_2 y_2
+    $$
+    Since $(\alpha \mid \alpha)=\left(x_1-x_2\right)^2+3 x_2^2$, it follows that $(\alpha \mid \alpha)>0$ if $\alpha \neq 0$. Conditions (1), (2), and (3) of the definition are easily verified.
+\end{example}
+
+\begin{example}
+    Let $V$ be $F^{n \times n}$, the space of all $n \times n$ matrices over $F$. Then $V$ is isomorphic to $F^{n^2}$ in a natural way. It therefore follows from Example 1 that the equation
+$$
+(A \mid B)=\sum_{j, k} A_{j k} \bar{B}_{j k}
+$$
+
+
+
+defines an inner product on $V$. Furthermore, if we introduce the con jugate transpose matrix $B^*$, where $B_{k j}^*=\bar{B}_{j k}$, we may express this inner product on $F^{n \times n}$ in terms of the trace function:
+$$
+(A \mid B)=\operatorname{tr}\left(A B^*\right)=\operatorname{tr}\left(B^* A\right) .
+$$
+For
+$$
+\begin{aligned}
+\operatorname{tr}\left(A B^*\right) & =\sum_j\left(A B^*\right)_{j j} \\
+& =\sum_j \sum_k A_{j k} B_{k j}^* \\
+& =\sum_j \sum_k A_{j k} \bar{B}_{j k}
+\end{aligned}
+$$
+
+\end{example}
+\begin{example}
+Let $F^{n \times 1}$ be the space of $n \times 1$ (column) matrices over $F$, and let $Q$ be an $n \times n$ invertible matrix over $F$. For $X, Y$ in $F^{n \times 1}$ set
+$$
+(X \mid Y)=Y^* Q^* Q X
+$$
+We are identifying the $1 \times 1$ matrix on the right with its single entry. When $Q$ is the identity matrix, this inner product is essentially the same as that in Example 1 ; we call it the standard inner product on $F_{n \times 1}$. The reader should note that the terminology 'standard inner product' is used in two special contexts. For a general finite-dimensional vector space over $F$, there is no obvious inner product that one may call standard.
+\end{example}
+\example Let $V$ be the vector space of all continuous complex valued functions on the unit interval, $0 \leq t \leq 1$. Let
+$$
+(f \mid g)=\int_a^b \overline{f(t)} g(t) d t .
+$$
+
+
+Condition 1 and 2:
+$$
+( f \mid(b|g)+c|h))=\int \overline{f(x)}(b g(x)+c h(x)) d x=b \int \overline{f} g d x+c \int \overline{f} h d x=b( f \mid g)+c( f \mid h) .
+$$
+Condition 3:
+$$
+( g \mid f)=\int_a^b \overline{g(x)} f(x) d x=\overline{\left(\int_a^b \overline{f(x)} g(x) d x\right)}=\overline{( f \mid g)} .
+$$
+Condition 4:
+$$(f \mid f) = \int_a^b \abs{f(x)}^2 dx $$,
+which is real and non-negative; it is zero only when $f(x) = 0$. 
+
+The reader is probably more familiar with the space of real-valued continuous functions on the unit interval, and for this space the complex conjugate on $g$ may be omitted.
+
+Example 6 . This is really a whole class of examples. One may construct new inner products from a given one by the following method. Let $V$ and $W$ be vector spaces over $F$ and suppose $(\mid)$ is an inner product on $W$. If $T$ is a non-singular linear transformation from $V$ into $W$, then the equation
+$$
+p_T(\alpha, \beta)=(T \alpha \mid T \beta)
+$$
+defines an inner product $p_T$ on $V$. The inner product in Example 4 is a special case of this situation. The following are also special cases.
+(a) Let $V$ be a finite-dimensional vector space, and let
+$$
+B=\left\{\alpha_1, \ldots, \alpha_n\right\}
+$$
+
+
+\begin{definition}
+We denote the positive square root of $(\alpha|\alpha)$ by $\norm{\alpha}$;
+\begin{equation}
+    (\alpha|\alpha) = \norm{\alpha}^2
+\end{equation}
+$\norm{\alpha}$ is called the \textbf{norm} of $\alpha$ with respect to the inner product. We can think of it as a ``length" or ``magnitude" of $\alpha$. 
+\end{definition}
+
+
+\begin{definition}
+We can get the \textbf{quadratic form} of the inner product by the following:
+We know from the property of the inner product that
+\begin{equation}
+    \norm{\alpha \pm \beta}^2 = \norm{\alpha}^2 \pm 2 \Re (\alpha | \beta) + \norm{\beta}^2,
+\end{equation}
+and thus if $(\alpha | \beta)$ is real, 
+\begin{equation}
+    (\alpha | \beta) = \frac{1}{4} \norm{\alpha + \beta}^2 - \frac{1}{4} \norm{\alpha - \beta}^2,
+\end{equation}
+and if $(\alpha | \beta)$ is complex: 
+\begin{equation}
+    (\alpha | \beta) = \frac{1}{4} \norm{\alpha + \beta}^2 - \frac{1}{4} \norm{\alpha - \beta}^2 + \frac{i}{4} \norm{\alpha + i\beta}^2 - \frac{i}{4} \norm{\alpha - i\beta}^2.
+\end{equation}
+\end{definition}
+
+\begin{note}
+Note that
+\begin{align*}
+\norm{\alpha \pm \beta}^2 &= (\alpha + \beta|\alpha + \beta)\\
+&=(\alpha|\alpha) + 2(\alpha|\beta) + (\beta|\beta)\\
+& = \norm{\alpha}^2 + 2(\Re (\alpha|\beta) + \Im (\alpha | \beta)) + \norm{\beta}^2,
+\end{align*}
+but $\norm{\alpha \pm \beta}^2$ has to be real so only the real part of the $(\alpha |\beta)$ is left. 
+\end{note}
+
+\section{Inner Product Spaces}
+\begin{definition}
+    An \textbf{inner product space} is a real or complex vector space, together with a specified inner product on that space. 
+    
+    A finite-dimensional real inner product space is often called a \textbf{Euclidean space}. A complex inner product space is often referred to as a \textbf{unitary space}.
+\end{definition}
+
+\begin{theorem}
+    If $V$ is an inner product space, then for any vectors $\alpha, \beta$ in $V$ and any scalar $c$:
+    \begin{enumerate}
+        \item $\norm{c \alpha} = |c| \norm{\alpha}$;
+        \item $\norm{\alpha} > 0$ for $\alpha \neq 0$;
+        \item $|(\alpha|\beta)| \leq \norm{\alpha} \norm{\beta}$;
+        \item $\norm{\alpha + \beta} \leq \norm{\alpha} + \norm{\beta}$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+Statements (i) and (ii) follow almost immediately from the various definitions involved. 
+    
+The inequality in (iii) is clearly valid when $\alpha=0$. If $\alpha \neq 0$, put
+$$
+\gamma=\beta-\frac{(\beta \mid \alpha)}{\|\alpha\|^2} \alpha .
+$$
+Then $(\gamma \mid \alpha)=(\gamma \mid \beta) - \frac{(\beta \mid \alpha)}{\|\alpha\|^2} (\gamma \mid \alpha) = 0$ and
+$$
+\begin{aligned}
+0 \leq\|\gamma\|^2 & =\left(\beta-\frac{(\beta \mid \alpha)}{\|\alpha\|^2} \alpha \mid \beta-\frac{(\beta \mid \alpha)}{\|\alpha\|^2} \alpha\right) \\
+& =(\beta \mid \beta)-\frac{(\beta \mid \alpha)(\alpha \mid \beta)}{\|\alpha\|^2} \\
+& =\|\beta\|^2-\frac{\|\left.(\alpha \mid \beta)\right|^2}{\|\alpha\|^2}
+\end{aligned}
+$$
+Hence $|(\alpha \mid \beta)|^2 \leq\left.\|\alpha\|\right|^2\|\beta\|^2$. 
+Now using (c) we find that
+$$
+\begin{aligned}
+\|\alpha+\beta\|^2 & =\|\alpha\|^2+(\alpha \mid \beta)+(\beta \mid \alpha)+\|\beta\|^2 \\
+& =\|\alpha\|^2+2 \operatorname{Re}(\alpha \mid \beta)+\|\beta\|^2 \\
+& \leq\|\alpha\|^2+2\|\alpha\|\|\beta\|+\|\beta\|^2 \\
+& =(\|\alpha\|+\|\beta\|)^2 .
+\end{aligned}
+$$
+Thus, $\|\alpha+\beta\| \leq\|\alpha\|+\|\beta\|$.
+\end{proof}
+The inequality in (iii) is called the \textbf{Cauchy-Schwarz inequality}. It has a wide variety of applications. The proof shows that if (for example) $\alpha$ is non-zero, then $|(\alpha \mid \beta)|<\|\alpha\|\|\beta\|$ unless $\gamma = 0$, or
+$$
+\beta=\frac{(\beta \mid \alpha)}{\|\alpha\|^2} \alpha .
+$$
+Thus, equality occurs in (iii) if and only if $\alpha$ and $\beta$ are linearly dependent.
+
+
+\begin{proof}
+    Now suppose that $W$ is a finite-dimensional subspace of $V$. Then we know, as a corollary of Theorem 3, that $W$ has an orthogonal basis. Let $\left\{\alpha_1, \ldots, \alpha_n\right\}$ be any orthogonal basis for $W$ and define $\alpha$ by (8-11). Then, by the computation in the proof of Theorem $3, \beta-\alpha$ is orthogonal to each of the vectors $\alpha_k(\beta-\alpha$ is the vector obtained at the last stage when the orthogonalization process is applied to $\alpha_1, \ldots, \alpha_n, \beta$ ). Thus $\beta-\alpha$ is orthogonal to every linear combination of $\alpha_1, \ldots, \alpha_n$, i.e., to every vector in $W$. If $\gamma$ is in $W$ and $\gamma \neq \alpha$, it follows that $\|\beta-\gamma\|>\|\beta-\alpha\|$. Therefore, $\alpha$ is the best approximation to $\beta$ that lies in $W$.
+\end{proof}
+
+\begin{definition}
+    Let $V$ be an inner product space and $\mathrm{S}$ any set of vectors in $V$. The \textbf{orthogonal complement} of $\mathrm{S}$ is the set $\mathrm{S}^{\perp}$ of all vectors in $V$ which are orthogonal to every vector in $\mathrm{S}$.
+\end{definition}
+
+The orthogonal complement of $V$ is the zero subspace, and conversely $\{0\}^{\perp}=V$. 
+
+If $S$ is any subset of $V$, its orthogonal complement $S^{\perp}$ (S perp) is always a subspace of $V$. For $S$ is non-empty, since it contains 0 ; and whenever $\alpha$ and $\beta$ are in $S^{\perp}$ and $c$ is any scalar,
+$$
+\begin{aligned}
+(c \alpha+\beta \mid \gamma) & =c(\alpha \mid \gamma)+(\beta \mid \gamma) \\
+& =c 0+0 \\
+& =0
+\end{aligned}
+$$
+for every $\gamma$ in $S$, thus $c \alpha+\beta$ also lies in $S^{\perp}$. 
+% Correction from original text
+
+In Theorem 4 the characteristic property of the vector $\alpha$ is that it is the only vector in $W$ such that $\beta-\alpha$ belongs to $W^{\perp}$.
+
+% Not sure why hoffmann wrote this
+
+\begin{definition}Whenever the vector $\alpha$ in Theorem 4 exists it is called the \textbf{orthogonal projection of $\beta$ on $\mathrm{W}$}. If every vector in $V$ has an orthogonal projection on $\mathrm{W}$, the mapping that assigns to each vector in $V$ its orthogonal projection on $\mathrm{W}$ is called the \textbf{orthogonal projection of $V$ on $\mathrm{W}$}.\end{definition}
+
+By Theorem 4 , the orthogonal projection of an inner product space on a finite-dimensional subspace always exists. But Theorem 4 also implies the following result.
+
+\begin{corollary}
+    Let $V$ be an inner product space, W a finite-dimensional subspace, and $\mathrm{E}$ the orthogonal projection of $V$ on $\mathrm{W}$. Then the mapping
+    $$
+    \beta \rightarrow \beta-E \beta
+    $$
+    is the orthogonal projection of $V$ on $\mathrm{W}^{\perp}$.
+\end{corollary}
+\begin{proof}
+    Let $\beta$ be an arbitrary vector in $V$. Then $\beta-E \beta$ is in $W^{\perp}$, and for any $\gamma$ in $W^{\perp}, \beta-\gamma=E \beta+(\beta-E \beta-\gamma)$. Since $E \beta$ is in $W$ and $\beta-E \beta-\gamma$ is in $W^{\perp}$, it follows that
+\end{proof}
+
+
+%%% From MITOCW 8.05 LecNote3
+Before we begin looking at special kinds of operators let us consider a very surprising fact about operators on complex vector spaces, as opposed to operators on real vector spaces.
+
+Suppose we have an operator $T$ that is such that for any vector $v \in V$ the following inner product vanishes
+$$
+\langle v, T v\rangle=0 \quad \text { for all } v \in V .
+$$
+What can we say about the operator $T$ ? The condition states that $T$ is an operator that starting from a vector gives a vector orthogonal to the original one. In a two-dimensional real vector space, this is simply the operator that rotates any vector by ninety degrees! It is quite surprising and important that for complex vector spaces the result is very strong: any such operator $T$ necessarily vanishes. This is a theorem:
+Theorem: Let $T$ be a linear operator in a complex vector space $V$ :
+If $\langle v, T v\rangle=0$ for all $v \in V$, then $T=0$.
+Proof: Any proof must be such that it fails to work for real vector space. Note that the result follows if we could prove that $\langle u, T v\rangle=0$, for all $u, v \in V$. Indeed, if this holds, then take $u=T v$, then $\langle T v, T v\rangle=0$ for all $v$ implies that $T v=0$ for all $v$ and therefore $T=0$.
+
+We will thus try to show that $\langle u, T v\rangle=0$ for all $u, v \in V$. All we know is that objects of the form $\langle \#, T \#\rangle$ vanish, whatever \# is. So we must aim to form linear combinations of such terms in order to reproduce $\langle u, T v\rangle$. We begin by trying the following
+$$
+\langle u+v, T(u+v)\rangle-\langle u-v, T(u-v)\rangle=2\langle u, T v\rangle+2\langle v, T u\rangle .
+$$
+We see that the "diagonal" term vanished, but instead of getting just $\langle u, T v\rangle$ we also got $\langle v, T u\rangle$. Here is where complex numbers help, we can get the same two terms but with opposite signs by trying,
+$$
+\langle u+i v, T(u+i v)\rangle-\langle u-i v, T(u-i v)\rangle=2 i\langle u, T v\rangle-2 i\langle v, T u\rangle .
+$$
+It follows from the last two relations that $$
+\langle u, T v\rangle=\frac{1}{4}\left(\langle u+v, T(u+v)\rangle-\langle u-v, T(u-v)\rangle+\frac{1}{i}\langle u+i v, T(u+i v)\rangle-\frac{1}{i}\langle u-i v, T(u-i v)\rangle\right) .
+$$
+The condition $\langle v, T v\rangle=0$ for all $v$, implies that each term of the above right-hand side vanishes, thus showing that $\langle u, T v\rangle=0$ for all $u, v \in V$. As explained above this proves the result.
+
+\section{Unitary Operators}
+In this section, we consider the concept of an isomorphism between two inner product spaces. If $V$ and $W$ are \textit{vector spaces}, an isomorphism of $V$ onto $W$ is a one-one linear transformation from $V$ onto $W$, i.e., a one-one correspondence between the elements of $V$ and those of $W$, which 'preserves' the vector space operations. Now if $V$ and $W$ are \textit{inner product spaces} which consist of a vector space and a specified inner product on that space, we shall require an isomorphism from $V$ onto $W$ not only to preserve the linear operations, but also to preserve inner products. An isomorphism of an inner product space onto itself is called a 'unitary operator' on that space. We shall consider various examples of unitary operators and establish their basic properties.
+
+\begin{definition}
+Let $\mathrm{V}$ and $\mathrm{W}$ be inner product spaces over the same field, and let $\mathrm{T}$ be a linear transformation from $\mathrm{V}$ into $\mathrm{W}$. We say that $\mathrm{T}$ \textbf{preserves inner products} if $(\mathrm{T} \alpha \mid \mathrm{T} \beta)=(\alpha \mid \beta)$ for all $\alpha, \beta$ in $\mathrm{V}$. An \textbf{isomorphism} of $\mathrm{V}$ onto $\mathrm{W}$ is a vector space isomorphism $\mathrm{T}$ of $\mathrm{V}$ onto $\mathrm{W}$ which also preserves inner products. 
+\end{definition}
+\end{document}

@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+
+<head>
+    <meta charset="utf-8" />
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <meta name="generator" content="pandoc" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <title>inner_product_space</title>
+    <style>
+        html {
+            color: #1a1a1a;
+            background-color: #fdfdfd;
+        }
+
+        body {
+            margin: 0 auto;
+            max-width: 36em;
+            padding-left: 50px;
+            padding-right: 50px;
+            padding-top: 50px;
+            padding-bottom: 50px;
+            hyphens: auto;
+            overflow-wrap: break-word;
+            text-rendering: optimizeLegibility;
+            font-kerning: normal;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                font-size: 0.9em;
+                padding: 12px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+        }
+
+        @media print {
+            html {
+                background-color: white;
+            }
+
+            body {
+                background-color: transparent;
+                color: black;
+                font-size: 12pt;
+            }
+
+            p,
+            h2,
+            h3 {
+                orphans: 3;
+                widows: 3;
+            }
+
+            h2,
+            h3,
+            h4 {
+                page-break-after: avoid;
+            }
+        }
+
+        p {
+            margin: 1em 0;
+        }
+
+        a {
+            color: #1a1a1a;
+        }
+
+        a:visited {
+            color: #1a1a1a;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        svg {
+            height: auto;
+            max-width: 100%;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            margin-top: 1.4em;
+        }
+
+        h5,
+        h6 {
+            font-size: 1em;
+            font-style: italic;
+        }
+
+        h6 {
+            font-weight: normal;
+        }
+
+        ol,
+        ul {
+            padding-left: 1.7em;
+            margin-top: 1em;
+        }
+
+        li>ol,
+        li>ul {
+            margin-top: 0;
+        }
+
+        blockquote {
+            margin: 1em 0 1em 1.7em;
+            padding-left: 1em;
+            border-left: 2px solid #e6e6e6;
+            color: #606060;
+        }
+
+        code {
+            font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+            font-size: 85%;
+            margin: 0;
+            hyphens: manual;
+        }
+
+        pre {
+            margin: 1em 0;
+            overflow: auto;
+        }
+
+        pre code {
+            padding: 0;
+            overflow: visible;
+            overflow-wrap: normal;
+        }
+
+        .sourceCode {
+            background-color: transparent;
+            overflow: visible;
+        }
+
+        hr {
+            background-color: #1a1a1a;
+            border: none;
+            height: 1px;
+            margin: 1em 0;
+        }
+
+        table {
+            margin: 1em 0;
+            border-collapse: collapse;
+            width: 100%;
+            overflow-x: auto;
+            display: block;
+            font-variant-numeric: lining-nums tabular-nums;
+        }
+
+        table caption {
+            margin-bottom: 0.75em;
+        }
+
+        tbody {
+            margin-top: 0.5em;
+            border-top: 1px solid #1a1a1a;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        th {
+            border-top: 1px solid #1a1a1a;
+            padding: 0.25em 0.5em 0.25em 0.5em;
+        }
+
+        td {
+            padding: 0.125em 0.5em 0.25em 0.5em;
+        }
+
+        header {
+            margin-bottom: 4em;
+            text-align: center;
+        }
+
+        #TOC li {
+            list-style: none;
+        }
+
+        #TOC ul {
+            padding-left: 1.3em;
+        }
+
+        #TOC>ul {
+            padding-left: 0;
+        }
+
+        #TOC a:not(:hover) {
+            text-decoration: none;
+        }
+
+        code {
+            white-space: pre-wrap;
+        }
+
+        span.smallcaps {
+            font-variant: small-caps;
+        }
+
+        div.columns {
+            display: flex;
+            gap: min(4vw, 1.5em);
+        }
+
+        div.column {
+            flex: auto;
+            overflow-x: auto;
+        }
+
+        div.hanging-indent {
+            margin-left: 1.5em;
+            text-indent: -1.5em;
+        }
+
+        /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+        ul.task-list[class] {
+            list-style: none;
+        }
+
+        ul.task-list li input[type="checkbox"] {
+            font-size: inherit;
+            width: 0.8em;
+            margin: 0 0.8em 0.2em -1.6em;
+            vertical-align: middle;
+        }
+
+        .display.math {
+            display: block;
+            text-align: center;
+            margin: 0.5rem auto;
+        }
+    </style>
+    <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+    <h1 id="inner-product-spaces">Inner Product Spaces</h1>
+    <h2 id="inner-products">Inner Products</h2>
+    <div class="definition">
+        <p>Let <span class="math inline"><em>F</em></span> be the field of real
+            numbers or the field of complex numbers, and <span class="math inline"><em>V</em></span> a vector space over
+            <span class="math inline"><em>F</em></span>. An <strong>inner product</strong>
+            on <span class="math inline"><em>V</em></span> is a function which
+            assigns to each ordered pair of vector <span class="math inline"><em>α</em>, <em>β</em></span> in <span
+                class="math inline"><em>V</em></span> a scalar <span class="math inline">(<em>α</em>|<em>β</em>)</span>
+            in <span class="math inline"><em>F</em></span> in such a way that for all <span
+                class="math inline"><em>α</em>, <em>β</em>, <em>γ</em></span> in <span
+                class="math inline"><em>V</em></span> and all scalars <span class="math inline"><em>c</em></span>:</p>
+        <ol>
+            <li>
+                <p><span
+                        class="math inline">(<em>α</em>+<em>β</em>|<em>γ</em>) = (<em>α</em>|<em>γ</em>) + (<em>β</em>|<em>γ</em>)</span>;
+                </p>
+            </li>
+            <li>
+                <p><span
+                        class="math inline">(<em>c</em><em>α</em>|<em>β</em>) = <em>c</em>(<em>α</em>|<em>β</em>)</span>;
+                </p>
+            </li>
+            <li>
+                <p><span class="math inline">$(\beta | \alpha) = ( \Bar{\alpha} |
+                        \Bar{\beta})$</span>, the bar denoting complex conjugation;</p>
+            </li>
+            <li>
+                <p><span class="math inline">(<em>α</em>|<em>α</em>) &gt; 0</span>
+                    if <span class="math inline"><em>α</em> ≠ 0</span>.<br />
+                </p>
+            </li>
+            <li>
+                <p>Note that conditions (1), (2) and (3) imply that</p>
+            </li>
+            <li>
+                <p><span class="math inline">$(\alpha | c \beta + \gamma) = \Bar{c}
+                        (\alpha | \beta ) + (\alpha + \gamma)$</span>.</p>
+            </li>
+        </ol>
+    </div>
+    <div class="example">
+        <p>On <span class="math inline"><em>F</em><sup><em>n</em></sup></span>
+            there is an inner product which we call the <strong>standard inner
+                product</strong>. It is defined on <span
+                class="math inline"><em>α</em> = (<em>x</em><sub>1</sub>,⋯,<em>x</em><sub><em>n</em></sub>)</span>
+            and <span class="math inline"><em>β</em> = (<em>y</em><sub>1</sub>,⋯,<em>y</em><sub><em>n</em></sub>)</span>
+            by <span class="math display">$$(\alpha |\beta ) = \sum_j x_j
+                \Bar{y}_j.$$</span></p>
+        <p>If <span class="math inline"><em>F</em> = ℝ</span>, we can write this
+            as <span
+                class="math display">(<em>α</em>|<em>β</em>) = ∑<sub><em>j</em></sub><em>x</em><sub><em>j</em></sub><em>y</em><sub><em>j</em></sub>.</span>
+            We call this standard inner product the <strong>dot product</strong> or
+            <strong>scalar product</strong> and denote it by <span class="math inline"><em>α</em> ⋅ <em>β</em></span>.
+        </p>
+    </div>
+    <div class="example">
+        <p>For <span class="math inline"><em>α</em> = (<em>x</em><sub>1</sub>,<em>x</em><sub>2</sub>)</span>
+            and <span class="math inline"><em>β</em> = (<em>y</em><sub>1</sub>,<em>y</em><sub>2</sub>)</span>
+            in <span class="math inline"><em>R</em><sup>2</sup></span>, let <span
+                class="math display">(<em>α</em>∣<em>β</em>) = <em>x</em><sub>1</sub><em>y</em><sub>1</sub> − <em>x</em><sub>2</sub><em>y</em><sub>1</sub> − <em>x</em><sub>1</sub><em>y</em><sub>2</sub> + 4<em>x</em><sub>2</sub><em>y</em><sub>2</sub></span>
+            Since <span
+                class="math inline">(<em>α</em>∣<em>α</em>) = (<em>x</em><sub>1</sub>−<em>x</em><sub>2</sub>)<sup>2</sup> + 3<em>x</em><sub>2</sub><sup>2</sup></span>,
+            it follows that <span class="math inline">(<em>α</em>∣<em>α</em>) &gt; 0</span> if <span
+                class="math inline"><em>α</em> ≠ 0</span>. Conditions (1), (2), and (3)
+            of the definition are easily verified.</p>
+    </div>
+    <div class="example">
+        <p>Let <span class="math inline"><em>V</em></span> be <span
+                class="math inline"><em>F</em><sup><em>n</em> × <em>n</em></sup></span>,
+            the space of all <span class="math inline"><em>n</em> × <em>n</em></span> matrices over <span
+                class="math inline"><em>F</em></span>. Then <span class="math inline"><em>V</em></span> is isomorphic to
+            <span class="math inline"><em>F</em><sup><em>n</em><sup>2</sup></sup></span>
+            in a natural way. It therefore follows from Example 1 that the equation
+            <span
+                class="math display">(<em>A</em>∣<em>B</em>) = ∑<sub><em>j</em>, <em>k</em></sub><em>A</em><sub><em>j</em><em>k</em></sub><em>B̄</em><sub><em>j</em><em>k</em></sub></span>
+        </p>
+        <p>defines an inner product on <span class="math inline"><em>V</em></span>. Furthermore, if we introduce the
+            con jugate transpose matrix <span class="math inline"><em>B</em><sup>*</sup></span>, where <span
+                class="math inline"><em>B</em><sub><em>k</em><em>j</em></sub><sup>*</sup> = <em>B̄</em><sub><em>j</em><em>k</em></sub></span>,
+            we may express this inner product on <span
+                class="math inline"><em>F</em><sup><em>n</em> × <em>n</em></sup></span>
+            in terms of the trace function: <span
+                class="math display">(<em>A</em>∣<em>B</em>) = tr (<em>A</em><em>B</em><sup>*</sup>) = tr (<em>B</em><sup>*</sup><em>A</em>).</span>
+            For <span class="math display">$$\begin{aligned}
+                \operatorname{tr}\left(A B^*\right) &amp; =\sum_j\left(A B^*\right)_{j
+                j} \\
+                &amp; =\sum_j \sum_k A_{j k} B_{k j}^* \\
+                &amp; =\sum_j \sum_k A_{j k} \bar{B}_{j k}
+                \end{aligned}$$</span></p>
+    </div>
+    <div class="example">
+        <p>Let <span class="math inline"><em>F</em><sup><em>n</em> × 1</sup></span> be the
+            space of <span class="math inline"><em>n</em> × 1</span> (column)
+            matrices over <span class="math inline"><em>F</em></span>, and let <span
+                class="math inline"><em>Q</em></span> be an <span class="math inline"><em>n</em> × <em>n</em></span>
+            invertible matrix
+            over <span class="math inline"><em>F</em></span>. For <span
+                class="math inline"><em>X</em>, <em>Y</em></span> in <span
+                class="math inline"><em>F</em><sup><em>n</em> × 1</sup></span> set <span
+                class="math display">(<em>X</em>∣<em>Y</em>) = <em>Y</em><sup>*</sup><em>Q</em><sup>*</sup><em>Q</em><em>X</em></span>
+            We are identifying the <span class="math inline">1 × 1</span> matrix on
+            the right with its single entry. When <span class="math inline"><em>Q</em></span> is the identity matrix,
+            this inner
+            product is essentially the same as that in Example 1 ; we call it the
+            standard inner product on <span class="math inline"><em>F</em><sub><em>n</em> × 1</sub></span>. The
+            reader should note that the terminology ’standard inner product’ is used
+            in two special contexts. For a general finite-dimensional vector space
+            over <span class="math inline"><em>F</em></span>, there is no obvious
+            inner product that one may call standard.</p>
+    </div>
+    <p>Let <span class="math inline"><em>V</em></span> be the vector space
+        of all continuous complex valued functions on the unit interval, <span
+            class="math inline">0 ≤ <em>t</em> ≤ 1</span>. Let <span class="math display">$$(f \mid g)=\int_a^b
+            \overline{f(t)} g(t) d t
+            .$$</span></p>
+    <p>Condition 1 and 2: <span class="math display">$$( f
+            \mid(b|g)+c|h))=\int \overline{f(x)}(b g(x)+c h(x)) d x=b \int
+            \overline{f} g d x+c \int \overline{f} h d x=b( f \mid g)+c( f \mid h)
+            .$$</span> Condition 3: <span class="math display">$$( g \mid
+            f)=\int_a^b \overline{g(x)} f(x) d x=\overline{\left(\int_a^b
+            \overline{f(x)} g(x) d x\right)}=\overline{( f \mid g)} .$$</span>
+        Condition 4: <span class="math display">$$(f \mid f) = \int_a^b
+            \abs{f(x)}^2 dx$$</span>, which is real and non-negative; it is zero
+        only when <span class="math inline"><em>f</em>(<em>x</em>) = 0</span>.</p>
+    <p>The reader is probably more familiar with the space of real-valued
+        continuous functions on the unit interval, and for this space the
+        complex conjugate on <span class="math inline"><em>g</em></span> may be
+        omitted.</p>
+    <p>Example 6 . This is really a whole class of examples. One may
+        construct new inner products from a given one by the following method.
+        Let <span class="math inline"><em>V</em></span> and <span class="math inline"><em>W</em></span> be vector spaces
+        over <span class="math inline"><em>F</em></span> and suppose <span class="math inline">(∣)</span> is an inner
+        product on <span class="math inline"><em>W</em></span>. If <span class="math inline"><em>T</em></span> is a
+        non-singular linear
+        transformation from <span class="math inline"><em>V</em></span> into
+        <span class="math inline"><em>W</em></span>, then the equation <span
+            class="math display"><em>p</em><sub><em>T</em></sub>(<em>α</em>,<em>β</em>) = (<em>T</em><em>α</em>∣<em>T</em><em>β</em>)</span>
+        defines an inner product <span class="math inline"><em>p</em><sub><em>T</em></sub></span> on <span
+            class="math inline"><em>V</em></span>. The inner product in Example 4 is
+        a special case of this situation. The following are also special cases.
+        (a) Let <span class="math inline"><em>V</em></span> be a
+        finite-dimensional vector space, and let <span
+            class="math display"><em>B</em> = {<em>α</em><sub>1</sub>,…,<em>α</em><sub><em>n</em></sub>}</span>
+    </p>
+    <div class="definition">
+        <p>We denote the positive square root of <span class="math inline">(<em>α</em>|<em>α</em>)</span> by <span
+                class="math inline">$\norm{\alpha}$</span>; <span class="math display">$$(\alpha|\alpha) =
+                \norm{\alpha}^2$$</span> <span class="math inline">$\norm{\alpha}$</span> is called the
+            <strong>norm</strong> of <span class="math inline"><em>α</em></span>
+            with respect to the inner product. We can think of it as a “length" or
+            “magnitude" of <span class="math inline"><em>α</em></span>.
+        </p>
+    </div>
+    <div class="definition">
+        <p>We can get the <strong>quadratic form</strong> of the inner product
+            by the following: We know from the property of the inner product that
+            <span class="math display">$$\norm{\alpha \pm \beta}^2 = \norm{\alpha}^2
+                \pm 2 \Re (\alpha | \beta) + \norm{\beta}^2,$$</span> and thus if <span
+                class="math inline">(<em>α</em>|<em>β</em>)</span> is real, <span class="math display">$$(\alpha |
+                \beta) = \frac{1}{4} \norm{\alpha +
+                \beta}^2 - \frac{1}{4} \norm{\alpha - \beta}^2,$$</span> and if <span
+                class="math inline">(<em>α</em>|<em>β</em>)</span> is complex: <span class="math display">$$(\alpha |
+                \beta) = \frac{1}{4} \norm{\alpha +
+                \beta}^2 - \frac{1}{4} \norm{\alpha - \beta}^2 + \frac{i}{4}
+                \norm{\alpha + i\beta}^2 - \frac{i}{4} \norm{\alpha -
+                i\beta}^2.$$</span>
+        </p>
+    </div>
+    <div class="note">
+        <p>Note that <span class="math display">$$\begin{aligned}
+                \norm{\alpha \pm \beta}^2 &amp;= (\alpha + \beta|\alpha + \beta)\\
+                &amp;=(\alpha|\alpha) + 2(\alpha|\beta) + (\beta|\beta)\\
+                &amp; = \norm{\alpha}^2 + 2(\Re (\alpha|\beta) + \Im (\alpha | \beta)) +
+                \norm{\beta}^2,
+                \end{aligned}$$</span> but <span class="math inline">$\norm{\alpha \pm
+                \beta}^2$</span> has to be real so only the real part of the <span
+                class="math inline">(<em>α</em>|<em>β</em>)</span> is left.</p>
+    </div>
+    <h2 id="inner-product-spaces-1">Inner Product Spaces</h2>
+    <div class="definition">
+        <p>An <strong>inner product space</strong> is a real or complex vector
+            space, together with a specified inner product on that space.</p>
+        <p>A finite-dimensional real inner product space is often called a
+            <strong>Euclidean space</strong>. A complex inner product space is often
+            referred to as a <strong>unitary space</strong>.
+        </p>
+    </div>
+    <div class="theorem">
+        <p>If <span class="math inline"><em>V</em></span> is an inner product
+            space, then for any vectors <span class="math inline"><em>α</em>, <em>β</em></span> in <span
+                class="math inline"><em>V</em></span> and any scalar <span class="math inline"><em>c</em></span>:</p>
+        <ol>
+            <li>
+                <p><span class="math inline">$\norm{c \alpha} = |c|
+                        \norm{\alpha}$</span>;</p>
+            </li>
+            <li>
+                <p><span class="math inline">$\norm{\alpha} &gt; 0$</span> for <span
+                        class="math inline"><em>α</em> ≠ 0</span>;</p>
+            </li>
+            <li>
+                <p><span class="math inline">$|(\alpha|\beta)| \leq \norm{\alpha}
+                        \norm{\beta}$</span>;</p>
+            </li>
+            <li>
+                <p><span class="math inline">$\norm{\alpha + \beta} \leq
+                        \norm{\alpha} + \norm{\beta}$</span>.</p>
+            </li>
+        </ol>
+    </div>
+    <div class="proof">
+        <p><em>Proof.</em> Statements (i) and (ii) follow almost immediately
+            from the various definitions involved.</p>
+        <p>The inequality in (iii) is clearly valid when <span class="math inline"><em>α</em> = 0</span>. If <span
+                class="math inline"><em>α</em> ≠ 0</span>, put <span class="math display">$$\gamma=\beta-\frac{(\beta
+                \mid
+                \alpha)}{\|\alpha\|^2} \alpha .$$</span> Then <span class="math inline">$(\gamma \mid \alpha)=(\gamma
+                \mid \beta) -
+                \frac{(\beta \mid \alpha)}{\|\alpha\|^2} (\gamma \mid \alpha) =
+                0$</span> and <span class="math display">$$\begin{aligned}
+                0 \leq\|\gamma\|^2 &amp; =\left(\beta-\frac{(\beta \mid
+                \alpha)}{\|\alpha\|^2} \alpha \mid \beta-\frac{(\beta \mid
+                \alpha)}{\|\alpha\|^2} \alpha\right) \\
+                &amp; =(\beta \mid \beta)-\frac{(\beta \mid \alpha)(\alpha \mid
+                \beta)}{\|\alpha\|^2} \\
+                &amp; =\|\beta\|^2-\frac{\|\left.(\alpha \mid
+                \beta)\right|^2}{\|\alpha\|^2}
+                \end{aligned}$$</span> Hence <span
+                class="math inline">|(<em>α</em>∣<em>β</em>)|<sup>2</sup> ≤ ∥<em>α</em>∥|<sup>2</sup>∥<em>β</em>∥<sup>2</sup></span>.
+            Now using (c) we find that <span class="math display">$$\begin{aligned}
+                \|\alpha+\beta\|^2 &amp; =\|\alpha\|^2+(\alpha \mid \beta)+(\beta \mid
+                \alpha)+\|\beta\|^2 \\
+                &amp; =\|\alpha\|^2+2 \operatorname{Re}(\alpha \mid \beta)+\|\beta\|^2
+                \\
+                &amp; \leq\|\alpha\|^2+2\|\alpha\|\|\beta\|+\|\beta\|^2 \\
+                &amp; =(\|\alpha\|+\|\beta\|)^2 .
+                \end{aligned}$$</span> Thus, <span
+                class="math inline">∥<em>α</em> + <em>β</em>∥ ≤ ∥<em>α</em>∥ + ∥<em>β</em>∥</span>. ◻</p>
+    </div>
+    <p>The inequality in (iii) is called the <strong>Cauchy-Schwarz
+            inequality</strong>. It has a wide variety of applications. The proof
+        shows that if (for example) <span class="math inline"><em>α</em></span>
+        is non-zero, then <span class="math inline">|(<em>α</em>∣<em>β</em>)| &lt; ∥<em>α</em>∥∥<em>β</em>∥</span>
+        unless <span class="math inline"><em>γ</em> = 0</span>, or <span class="math display">$$\beta=\frac{(\beta \mid
+            \alpha)}{\|\alpha\|^2}
+            \alpha .$$</span> Thus, equality occurs in (iii) if and only if <span class="math inline"><em>α</em></span>
+        and <span class="math inline"><em>β</em></span> are linearly dependent.</p>
+    <div class="proof">
+        <p><em>Proof.</em> Now suppose that <span class="math inline"><em>W</em></span> is a finite-dimensional subspace
+            of <span class="math inline"><em>V</em></span>. Then we know, as a
+            corollary of Theorem 3, that <span class="math inline"><em>W</em></span>
+            has an orthogonal basis. Let <span
+                class="math inline">{<em>α</em><sub>1</sub>,…,<em>α</em><sub><em>n</em></sub>}</span>
+            be any orthogonal basis for <span class="math inline"><em>W</em></span>
+            and define <span class="math inline"><em>α</em></span> by (8-11). Then,
+            by the computation in the proof of Theorem <span class="math inline">3, <em>β</em> − <em>α</em></span> is
+            orthogonal to
+            each of the vectors <span class="math inline"><em>α</em><sub><em>k</em></sub>(<em>β</em> − <em>α</em></span>
+            is the vector obtained at the last stage when the orthogonalization
+            process is applied to <span
+                class="math inline"><em>α</em><sub>1</sub>, …, <em>α</em><sub><em>n</em></sub>, <em>β</em></span>
+            ). Thus <span class="math inline"><em>β</em> − <em>α</em></span> is
+            orthogonal to every linear combination of <span
+                class="math inline"><em>α</em><sub>1</sub>, …, <em>α</em><sub><em>n</em></sub></span>,
+            i.e., to every vector in <span class="math inline"><em>W</em></span>. If
+            <span class="math inline"><em>γ</em></span> is in <span class="math inline"><em>W</em></span> and <span
+                class="math inline"><em>γ</em> ≠ <em>α</em></span>, it follows that
+            <span class="math inline">∥<em>β</em> − <em>γ</em>∥ &gt; ∥<em>β</em> − <em>α</em>∥</span>.
+            Therefore, <span class="math inline"><em>α</em></span> is the best
+            approximation to <span class="math inline"><em>β</em></span> that lies
+            in <span class="math inline"><em>W</em></span>. ◻
+        </p>
+    </div>
+    <div class="definition">
+        <p>Let <span class="math inline"><em>V</em></span> be an inner product
+            space and <span class="math inline">S</span> any set of vectors in <span
+                class="math inline"><em>V</em></span>. The <strong>orthogonal
+                complement</strong> of <span class="math inline">S</span> is the set
+            <span class="math inline">S<sup>⊥</sup></span> of all vectors in <span class="math inline"><em>V</em></span>
+            which are orthogonal to every
+            vector in <span class="math inline">S</span>.
+        </p>
+    </div>
+    <p>The orthogonal complement of <span class="math inline"><em>V</em></span> is the zero subspace, and
+        conversely <span class="math inline">{0}<sup>⊥</sup> = <em>V</em></span>.</p>
+    <p>If <span class="math inline"><em>S</em></span> is any subset of <span class="math inline"><em>V</em></span>, its
+        orthogonal complement <span class="math inline"><em>S</em><sup>⊥</sup></span> (S perp) is always a
+        subspace of <span class="math inline"><em>V</em></span>. For <span class="math inline"><em>S</em></span> is
+        non-empty, since it contains 0
+        ; and whenever <span class="math inline"><em>α</em></span> and <span class="math inline"><em>β</em></span> are
+        in <span class="math inline"><em>S</em><sup>⊥</sup></span> and <span class="math inline"><em>c</em></span> is
+        any scalar, <span class="math display">$$\begin{aligned}
+            (c \alpha+\beta \mid \gamma) &amp; =c(\alpha \mid \gamma)+(\beta \mid
+            \gamma) \\
+            &amp; =c 0+0 \\
+            &amp; =0
+            \end{aligned}$$</span> for every <span class="math inline"><em>γ</em></span> in <span
+            class="math inline"><em>S</em></span>, thus <span
+            class="math inline"><em>c</em><em>α</em> + <em>β</em></span> also lies
+        in <span class="math inline"><em>S</em><sup>⊥</sup></span>.</p>
+    <p>In Theorem 4 the characteristic property of the vector <span class="math inline"><em>α</em></span> is that it is
+        the only vector in
+        <span class="math inline"><em>W</em></span> such that <span class="math inline"><em>β</em> − <em>α</em></span>
+        belongs to <span class="math inline"><em>W</em><sup>⊥</sup></span>.
+    </p>
+    <div class="definition">
+        <p>Whenever the vector <span class="math inline"><em>α</em></span> in
+            Theorem 4 exists it is called the <strong>orthogonal projection of <span
+                    class="math inline"><em>β</em></span> on <span class="math inline">W</span></strong>. If every
+            vector in <span class="math inline"><em>V</em></span> has an orthogonal projection on
+            <span class="math inline">W</span>, the mapping that assigns to each
+            vector in <span class="math inline"><em>V</em></span> its orthogonal
+            projection on <span class="math inline">W</span> is called the
+            <strong>orthogonal projection of <span class="math inline"><em>V</em></span> on <span
+                    class="math inline">W</span></strong>.
+        </p>
+    </div>
+    <p>By Theorem 4 , the orthogonal projection of an inner product space on
+        a finite-dimensional subspace always exists. But Theorem 4 also implies
+        the following result.</p>
+    <div class="corollary">
+        <p>Let <span class="math inline"><em>V</em></span> be an inner product
+            space, W a finite-dimensional subspace, and <span class="math inline">E</span> the orthogonal projection of
+            <span class="math inline"><em>V</em></span> on <span class="math inline">W</span>. Then the mapping <span
+                class="math display"><em>β</em> → <em>β</em> − <em>E</em><em>β</em></span>
+            is the orthogonal projection of <span class="math inline"><em>V</em></span> on <span
+                class="math inline">W<sup>⊥</sup></span>.</p>
+    </div>
+    <div class="proof">
+        <p><em>Proof.</em> Let <span class="math inline"><em>β</em></span> be an
+            arbitrary vector in <span class="math inline"><em>V</em></span>. Then
+            <span class="math inline"><em>β</em> − <em>E</em><em>β</em></span> is in
+            <span class="math inline"><em>W</em><sup>⊥</sup></span>, and for any
+            <span class="math inline"><em>γ</em></span> in <span
+                class="math inline"><em>W</em><sup>⊥</sup>, <em>β</em> − <em>γ</em> = <em>E</em><em>β</em> + (<em>β</em>−<em>E</em><em>β</em>−<em>γ</em>)</span>.
+            Since <span class="math inline"><em>E</em><em>β</em></span> is in <span
+                class="math inline"><em>W</em></span> and <span
+                class="math inline"><em>β</em> − <em>E</em><em>β</em> − <em>γ</em></span>
+            is in <span class="math inline"><em>W</em><sup>⊥</sup></span>, it
+            follows that ◻
+        </p>
+    </div>
+    <p>Before we begin looking at special kinds of operators let us consider
+        a very surprising fact about operators on complex vector spaces, as
+        opposed to operators on real vector spaces.</p>
+    <p>Suppose we have an operator <span class="math inline"><em>T</em></span> that is such that for any vector
+        <span class="math inline"><em>v</em> ∈ <em>V</em></span> the following
+        inner product vanishes <span class="math display">⟨<em>v</em>, <em>T</em><em>v</em>⟩ = 0   for all
+            <em>v</em> ∈ <em>V</em>.</span> What can we say about the operator <span
+            class="math inline"><em>T</em></span> ? The condition states that <span
+            class="math inline"><em>T</em></span> is an operator that starting from
+        a vector gives a vector orthogonal to the original one. In a
+        two-dimensional real vector space, this is simply the operator that
+        rotates any vector by ninety degrees! It is quite surprising and
+        important that for complex vector spaces the result is very strong: any
+        such operator <span class="math inline"><em>T</em></span> necessarily
+        vanishes. This is a theorem: Theorem: Let <span class="math inline"><em>T</em></span> be a linear operator in a
+        complex
+        vector space <span class="math inline"><em>V</em></span> : If <span
+            class="math inline">⟨<em>v</em>, <em>T</em><em>v</em>⟩ = 0</span> for
+        all <span class="math inline"><em>v</em> ∈ <em>V</em></span>, then <span
+            class="math inline"><em>T</em> = 0</span>. Proof: Any proof must be such
+        that it fails to work for real vector space. Note that the result
+        follows if we could prove that <span class="math inline">⟨<em>u</em>, <em>T</em><em>v</em>⟩ = 0</span>, for
+        all <span class="math inline"><em>u</em>, <em>v</em> ∈ <em>V</em></span>. Indeed,
+        if this holds, then take <span class="math inline"><em>u</em> = <em>T</em><em>v</em></span>, then <span
+            class="math inline">⟨<em>T</em><em>v</em>, <em>T</em><em>v</em>⟩ = 0</span>
+        for all <span class="math inline"><em>v</em></span> implies that <span
+            class="math inline"><em>T</em><em>v</em> = 0</span> for all <span class="math inline"><em>v</em></span> and
+        therefore <span class="math inline"><em>T</em> = 0</span>.
+    </p>
+    <p>We will thus try to show that <span class="math inline">⟨<em>u</em>, <em>T</em><em>v</em>⟩ = 0</span> for
+        all <span class="math inline"><em>u</em>, <em>v</em> ∈ <em>V</em></span>. All we
+        know is that objects of the form <span class="math inline">⟨#, <em>T</em>#⟩</span> vanish, whatever # is. So we
+        must aim to form linear combinations of such terms in order to reproduce
+        <span class="math inline">⟨<em>u</em>, <em>T</em><em>v</em>⟩</span>. We
+        begin by trying the following <span
+            class="math display">⟨<em>u</em> + <em>v</em>, <em>T</em>(<em>u</em>+<em>v</em>)⟩ − ⟨<em>u</em> − <em>v</em>, <em>T</em>(<em>u</em>−<em>v</em>)⟩ = 2⟨<em>u</em>, <em>T</em><em>v</em>⟩ + 2⟨<em>v</em>, <em>T</em><em>u</em>⟩.</span>
+        We see that the "diagonal" term vanished, but instead of getting just
+        <span class="math inline">⟨<em>u</em>, <em>T</em><em>v</em>⟩</span> we
+        also got <span class="math inline">⟨<em>v</em>, <em>T</em><em>u</em>⟩</span>. Here is
+        where complex numbers help, we can get the same two terms but with
+        opposite signs by trying, <span
+            class="math display">⟨<em>u</em> + <em>i</em><em>v</em>, <em>T</em>(<em>u</em>+<em>i</em><em>v</em>)⟩ − ⟨<em>u</em> − <em>i</em><em>v</em>, <em>T</em>(<em>u</em>−<em>i</em><em>v</em>)⟩ = 2<em>i</em>⟨<em>u</em>, <em>T</em><em>v</em>⟩ − 2<em>i</em>⟨<em>v</em>, <em>T</em><em>u</em>⟩.</span>
+        It follows from the last two relations that <span class="math display">$$\langle u, T
+            v\rangle=\frac{1}{4}\left(\langle
+            u+v, T(u+v)\rangle-\langle u-v, T(u-v)\rangle+\frac{1}{i}\langle u+i v,
+            T(u+i v)\rangle-\frac{1}{i}\langle u-i v, T(u-i v)\rangle\right)
+            .$$</span> The condition <span class="math inline">⟨<em>v</em>, <em>T</em><em>v</em>⟩ = 0</span> for
+        all <span class="math inline"><em>v</em></span>, implies that each term
+        of the above right-hand side vanishes, thus showing that <span
+            class="math inline">⟨<em>u</em>, <em>T</em><em>v</em>⟩ = 0</span> for
+        all <span class="math inline"><em>u</em>, <em>v</em> ∈ <em>V</em></span>. As
+        explained above this proves the result.
+    </p>
+    <h2 id="unitary-operators">Unitary Operators</h2>
+    <p>In this section, we consider the concept of an isomorphism between
+        two inner product spaces. If <span class="math inline"><em>V</em></span>
+        and <span class="math inline"><em>W</em></span> are <em>vector
+            spaces</em>, an isomorphism of <span class="math inline"><em>V</em></span> onto <span
+            class="math inline"><em>W</em></span> is a one-one linear transformation
+        from <span class="math inline"><em>V</em></span> onto <span class="math inline"><em>W</em></span>, i.e., a
+        one-one correspondence
+        between the elements of <span class="math inline"><em>V</em></span> and
+        those of <span class="math inline"><em>W</em></span>, which ’preserves’
+        the vector space operations. Now if <span class="math inline"><em>V</em></span> and <span
+            class="math inline"><em>W</em></span> are <em>inner product spaces</em>
+        which consist of a vector space and a specified inner product on that
+        space, we shall require an isomorphism from <span class="math inline"><em>V</em></span> onto <span
+            class="math inline"><em>W</em></span> not only to preserve the linear
+        operations, but also to preserve inner products. An isomorphism of an
+        inner product space onto itself is called a ’unitary operator’ on that
+        space. We shall consider various examples of unitary operators and
+        establish their basic properties.</p>
+    <div class="definition">
+        <p>Let <span class="math inline">V</span> and <span class="math inline">W</span> be inner product spaces over
+            the same
+            field, and let <span class="math inline">T</span> be a linear
+            transformation from <span class="math inline">V</span> into <span class="math inline">W</span>. We say that
+            <span class="math inline">T</span> <strong>preserves inner products</strong>
+            if <span class="math inline">(T<em>α</em>∣T<em>β</em>) = (<em>α</em>∣<em>β</em>)</span>
+            for all <span class="math inline"><em>α</em>, <em>β</em></span> in <span class="math inline">V</span>. An
+            <strong>isomorphism</strong> of <span class="math inline">V</span> onto <span class="math inline">W</span>
+            is
+            a vector space isomorphism <span class="math inline">T</span> of <span class="math inline">V</span> onto
+            <span class="math inline">W</span>
+            which also preserves inner products.</p>
+    </div>
+</body>
+
+</html>
