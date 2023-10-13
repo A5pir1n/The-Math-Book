@@ -1,0 +1,81 @@
+\documentclass[main.tex]{subfiles}
+
+\begin{document}
+\section{Normalization of Fourier Transform}
+In the notes on Fourier Transforms, an assertion was made to the effect that if
+$$
+\begin{gathered}
+\mathcal{F}(k)=\frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} f(x) e^{i k x} d x, \text { then } \\
+\int_{-\infty}^{\infty} \mathcal{F}(k) \mathcal{F}^*(k) d k=\int_{-\infty}^{\infty} f(x) f^*(x) d x
+\end{gathered}
+$$
+Minor notational things; note the use of the complex conjugate in both of the last two integrals. We know that in general, a Fourier transform of a real function is not necessarily real. The independent variables $k, x$ and $x^{\prime}$ will be taken to be real. Also, the fancy " $\mathcal{F}$ " is used to distinguish the above form of the Fourier transform from other forms, specifically B\&B's form. Also note that, as in previous notes, $\sqrt{-1}=i$. Anyhow, we have
+$$
+\mathcal{F}(k)=\frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} f(x) e^{i k x} d x, \quad \mathcal{F}^*(k)=\frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} f^*\left(x^{\prime}\right) e^{-i k x^{\prime}} d x^{\prime}
+$$
+Note how cleverly the second integral has been written in terms of $x^{\prime}$ instead of $x$.
+This is useful, because we can now see that
+
+$$
+\begin{aligned}
+\mathcal{F}(k) \mathcal{F}^*(k) & =\frac{1}{2 \pi}\left[\int_{-\infty}^{\infty} f(x) e^{i k x} d x\right]\left[\int_{-\infty}^{\infty} f^*\left(x^{\prime}\right) e^{-i k x^{\prime}} d x^{\prime}\right] \\
+& =\frac{1}{2 \pi} \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} f(x) f^*\left(x^{\prime}\right) e^{i k\left(x^{\prime}-x\right)} d x d x^{\prime}
+\end{aligned}
+$$
+and so
+$$
+\begin{aligned}
+\int_{-\infty}^{\infty} \mathcal{F}(k) \mathcal{F}^*(k) d k & =\frac{1}{2 \pi} \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} f(x) f^*\left(x^{\prime}\right) e^{i k\left(x^{\prime}-x\right)} d x d x^{\prime} d k \\
+& =\int_{-\infty}^{\infty} \int_{-\infty}^{\infty} f(x) f^*\left(x^{\prime}\right)\left[\frac{1}{2 \pi} \int_{-\infty}^{\infty} e^{i k\left(x^{\prime}-x\right)} d k\right] d x d x^{\prime} 
+\end{aligned}
+$$
+Here's the punchline; the term in square brackets is the return of the infamous and illegal $\delta$ - "function"! 
+So, the delta function selects out either $x$ or $x'$ and we can now do either the $x$ or $x^{\prime}$ integral to arrive at the result as given above,
+\begin{align}
+    \int_{-\infty}^{\infty} \mathcal{F}(k) \mathcal{F}^*(k) d k & = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} f(x) f^*\left(x^{\prime}\right)\left[\delta(x' - x)\right] d x d x^{\prime} \\
+    & = \int_{-\infty}^{\infty} f(x) f^*(x) d x
+\end{align}
+Note that this result does not hold if the factor in front of the Fourier transform is anything other than $\frac{1}{\sqrt{2 \pi}}$. This factor is necessary because the equality of the integrals involves the squares of the functions. Very often, but far from always, it is this normalization, derived from the extension of an inner product to function spaces, that we want, and it's a good thing to have.
+
+
+\section{Fourier transform of a Gaussian}
+
+\begin{equation}
+    \mathcal{F}_t\left[A e^{-B(t-L / 2)^2}\right](x) = \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty}\left(A e^{-B(t-L / 2)^2}\right) e^{i x t} d t=\frac{A e^{-x^2 /(4 B)+(i L x) / 2}}{\sqrt{2} \sqrt{B}}
+\end{equation}
+
+
+\begin{proof}
+If $\operatorname{Re}(B)>0$, then:
+$$
+\begin{aligned}
+\mathcal{F}_t\left[A e^{-B(t-L / 2)^2}\right](x) & :=\frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{+\infty} A e^{-B(t-L / 2)^2} e^{\mathrm{i} x t} \mathrm{~d} t \;\; \text{Let 
+$u = B(t - L/2)$,}\\
+& =\frac{A}{\sqrt{2 \pi B}} \int_{-\infty}^{+\infty} e^{-u^2} e^{\mathrm{i} x\left(\frac{u}{\sqrt{B}}+\frac{L}{2}\right)} \mathrm{d} u \\
+& =\frac{A e^{\frac{\mathrm{i} L x}{2}}}{\sqrt{2 \pi B}} \int_{-\infty}^{+\infty} e^{-u^2} e^{\mathrm{i} \frac{x}{\sqrt{B}} u} \mathrm{~d} u \\
+& =\frac{A e^{\frac{\mathrm{i} L x}{2}}}{\sqrt{2 \pi B}}\left[\int_{-\infty}^{+\infty} e^{-u^2} \cos \left(\frac{x}{\sqrt{B}} u\right) \mathrm{d} u+\mathrm{i} \int_{-\infty}^{+\infty} e^{-u^2} \sin \left(\frac{x}{\sqrt{B}} u\right) \mathrm{d} u\right] \\
+& =\frac{A e^{\frac{\mathrm{i} L x}{2}}}{\sqrt{2 \pi B}}\left[\sqrt{\pi} e^{-\left(\frac{x}{2 \sqrt{B}}\right)^2}+\mathrm{i} 0\right] \\
+& =\frac{A e^{\frac{\mathrm{i} L x}{2}}-\frac{x^2}{4 B}}{\sqrt{2 B}}
+\end{aligned}
+$$
+\end{proof}
+
+
+On the other hand, if understanding the integral of the sine is simple, for that of the cosine:
+$$
+I(k):=\int_{-\infty}^{+\infty} e^{-u^2} \cos (k u) \mathrm{d} u
+$$
+differentiating under the integral sign with respect to $k$, we have:
+$$
+I^{\prime}(k)=\int_{-\infty}^{+\infty}-u e^{-u^2} \sin (k u) \mathrm{d} u
+$$
+so, integrating by parts, we have:
+$$
+I^{\prime}(k)=\left[\frac{1}{2} e^{-u^2} \sin (k u)\right]_{-\infty}^{+\infty}-\frac{k}{2} \int_{-\infty}^{+\infty} e^{-u^2} \cos (k u) \mathrm{d} u
+$$
+i.e. with great amazement (at least the first time it should be like this):
+$$
+I^{\prime}(k)=-\frac{k}{2} I(k) \quad \stackrel{\mathrm{ODE}}{\Rightarrow} \quad I(k)=c_1 e^{-(k / 2)^2}
+$$
+Having to hold $I(0)=\sqrt{\pi}$ (another demonstrable result), we have $c_1=\sqrt{\pi}$, end.
+\end{document}

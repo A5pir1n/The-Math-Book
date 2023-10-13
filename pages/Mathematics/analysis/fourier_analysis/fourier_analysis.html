@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+
+<head>
+    <meta charset="utf-8" />
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <meta name="generator" content="pandoc" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <title>fourier_analysis</title>
+    <style>
+        html {
+            color: #1a1a1a;
+            background-color: #fdfdfd;
+        }
+
+        body {
+            margin: 0 auto;
+            max-width: 36em;
+            padding-left: 50px;
+            padding-right: 50px;
+            padding-top: 50px;
+            padding-bottom: 50px;
+            hyphens: auto;
+            overflow-wrap: break-word;
+            text-rendering: optimizeLegibility;
+            font-kerning: normal;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                font-size: 0.9em;
+                padding: 12px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+        }
+
+        @media print {
+            html {
+                background-color: white;
+            }
+
+            body {
+                background-color: transparent;
+                color: black;
+                font-size: 12pt;
+            }
+
+            p,
+            h2,
+            h3 {
+                orphans: 3;
+                widows: 3;
+            }
+
+            h2,
+            h3,
+            h4 {
+                page-break-after: avoid;
+            }
+        }
+
+        p {
+            margin: 1em 0;
+        }
+
+        a {
+            color: #1a1a1a;
+        }
+
+        a:visited {
+            color: #1a1a1a;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        svg {
+            height: auto;
+            max-width: 100%;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            margin-top: 1.4em;
+        }
+
+        h5,
+        h6 {
+            font-size: 1em;
+            font-style: italic;
+        }
+
+        h6 {
+            font-weight: normal;
+        }
+
+        ol,
+        ul {
+            padding-left: 1.7em;
+            margin-top: 1em;
+        }
+
+        li>ol,
+        li>ul {
+            margin-top: 0;
+        }
+
+        blockquote {
+            margin: 1em 0 1em 1.7em;
+            padding-left: 1em;
+            border-left: 2px solid #e6e6e6;
+            color: #606060;
+        }
+
+        code {
+            font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+            font-size: 85%;
+            margin: 0;
+            hyphens: manual;
+        }
+
+        pre {
+            margin: 1em 0;
+            overflow: auto;
+        }
+
+        pre code {
+            padding: 0;
+            overflow: visible;
+            overflow-wrap: normal;
+        }
+
+        .sourceCode {
+            background-color: transparent;
+            overflow: visible;
+        }
+
+        hr {
+            background-color: #1a1a1a;
+            border: none;
+            height: 1px;
+            margin: 1em 0;
+        }
+
+        table {
+            margin: 1em 0;
+            border-collapse: collapse;
+            width: 100%;
+            overflow-x: auto;
+            display: block;
+            font-variant-numeric: lining-nums tabular-nums;
+        }
+
+        table caption {
+            margin-bottom: 0.75em;
+        }
+
+        tbody {
+            margin-top: 0.5em;
+            border-top: 1px solid #1a1a1a;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        th {
+            border-top: 1px solid #1a1a1a;
+            padding: 0.25em 0.5em 0.25em 0.5em;
+        }
+
+        td {
+            padding: 0.125em 0.5em 0.25em 0.5em;
+        }
+
+        header {
+            margin-bottom: 4em;
+            text-align: center;
+        }
+
+        #TOC li {
+            list-style: none;
+        }
+
+        #TOC ul {
+            padding-left: 1.3em;
+        }
+
+        #TOC>ul {
+            padding-left: 0;
+        }
+
+        #TOC a:not(:hover) {
+            text-decoration: none;
+        }
+
+        code {
+            white-space: pre-wrap;
+        }
+
+        span.smallcaps {
+            font-variant: small-caps;
+        }
+
+        div.columns {
+            display: flex;
+            gap: min(4vw, 1.5em);
+        }
+
+        div.column {
+            flex: auto;
+            overflow-x: auto;
+        }
+
+        div.hanging-indent {
+            margin-left: 1.5em;
+            text-indent: -1.5em;
+        }
+
+        /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+        ul.task-list[class] {
+            list-style: none;
+        }
+
+        ul.task-list li input[type="checkbox"] {
+            font-size: inherit;
+            width: 0.8em;
+            margin: 0 0.8em 0.2em -1.6em;
+            vertical-align: middle;
+        }
+
+        .display.math {
+            display: block;
+            text-align: center;
+            margin: 0.5rem auto;
+        }
+    </style>
+    <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+    <h1 id="normalization-of-fourier-transform">Normalization of Fourier
+        Transform</h1>
+    <p>In the notes on Fourier Transforms, an assertion was made to the
+        effect that if <span class="math display">$$\begin{gathered}
+            \mathcal{F}(k)=\frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} f(x) e^{i
+            k x} d x, \text { then } \\
+            \int_{-\infty}^{\infty} \mathcal{F}(k) \mathcal{F}^*(k) d
+            k=\int_{-\infty}^{\infty} f(x) f^*(x) d x
+            \end{gathered}$$</span> Minor notational things; note the use of the
+        complex conjugate in both of the last two integrals. We know that in
+        general, a Fourier transform of a real function is not necessarily real.
+        The independent variables <span class="math inline"><em>k</em>, <em>x</em></span> and <span
+            class="math inline"><em>x</em><sup>′</sup></span> will be taken to be
+        real. Also, the fancy " <span class="math inline">ℱ</span> " is used to
+        distinguish the above form of the Fourier transform from other forms,
+        specifically B&amp;B’s form. Also note that, as in previous notes, <span
+            class="math inline">$\sqrt{-1}=i$</span>. Anyhow, we have <span
+            class="math display">$$\mathcal{F}(k)=\frac{1}{\sqrt{2 \pi}}
+            \int_{-\infty}^{\infty} f(x) e^{i k x} d x, \quad
+            \mathcal{F}^*(k)=\frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty}
+            f^*\left(x^{\prime}\right) e^{-i k x^{\prime}} d x^{\prime}$$</span>
+        Note how cleverly the second integral has been written in terms of <span
+            class="math inline"><em>x</em><sup>′</sup></span> instead of <span class="math inline"><em>x</em></span>.
+        This is useful, because we can
+        now see that</p>
+    <p><span class="math display">$$\begin{aligned}
+            \mathcal{F}(k) \mathcal{F}^*(k) &amp; =\frac{1}{2
+            \pi}\left[\int_{-\infty}^{\infty} f(x) e^{i k x} d
+            x\right]\left[\int_{-\infty}^{\infty} f^*\left(x^{\prime}\right) e^{-i k
+            x^{\prime}} d x^{\prime}\right] \\
+            &amp; =\frac{1}{2 \pi} \int_{-\infty}^{\infty} \int_{-\infty}^{\infty}
+            f(x) f^*\left(x^{\prime}\right) e^{i k\left(x^{\prime}-x\right)} d x d
+            x^{\prime}
+            \end{aligned}$$</span> and so <span class="math display">$$\begin{aligned}
+            \int_{-\infty}^{\infty} \mathcal{F}(k) \mathcal{F}^*(k) d k &amp;
+            =\frac{1}{2 \pi} \int_{-\infty}^{\infty} \int_{-\infty}^{\infty}
+            \int_{-\infty}^{\infty} f(x) f^*\left(x^{\prime}\right) e^{i
+            k\left(x^{\prime}-x\right)} d x d x^{\prime} d k \\
+            &amp; =\int_{-\infty}^{\infty} \int_{-\infty}^{\infty} f(x)
+            f^*\left(x^{\prime}\right)\left[\frac{1}{2 \pi} \int_{-\infty}^{\infty}
+            e^{i k\left(x^{\prime}-x\right)} d k\right] d x d x^{\prime}
+            \end{aligned}$$</span> Here’s the punchline; the term in square brackets
+        is the return of the infamous and illegal <span class="math inline"><em>δ</em></span> - "function"! So, the
+        delta
+        function selects out either <span class="math inline"><em>x</em></span>
+        or <span class="math inline"><em>x</em>′</span> and we can now do either
+        the <span class="math inline"><em>x</em></span> or <span class="math inline"><em>x</em><sup>′</sup></span>
+        integral to arrive at
+        the result as given above, <span class="math display">$$\begin{aligned}
+            \int_{-\infty}^{\infty} \mathcal{F}(k) \mathcal{F}^*(k) d k &amp; =
+            \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} f(x)
+            f^*\left(x^{\prime}\right)\left[\delta(x' - x)\right] d x d x^{\prime}
+            \\
+            &amp; = \int_{-\infty}^{\infty} f(x) f^*(x) d x
+            \end{aligned}$$</span> Note that this result does not hold if the factor
+        in front of the Fourier transform is anything other than <span class="math inline">$\frac{1}{\sqrt{2
+            \pi}}$</span>. This factor is
+        necessary because the equality of the integrals involves the squares of
+        the functions. Very often, but far from always, it is this
+        normalization, derived from the extension of an inner product to
+        function spaces, that we want, and it’s a good thing to have.</p>
+    <h1 id="fourier-transform-of-a-gaussian">Fourier transform of a
+        Gaussian</h1>
+    <p><span class="math display">$$\mathcal{F}_t\left[A e^{-B(t-L /
+            2)^2}\right](x) = \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty}\left(A
+            e^{-B(t-L / 2)^2}\right) e^{i x t} d t=\frac{A e^{-x^2 /(4 B)+(i L x) /
+            2}}{\sqrt{2} \sqrt{B}}$$</span></p>
+    <div class="proof">
+        <p><em>Proof.</em> If <span class="math inline">Re (<em>B</em>) &gt; 0</span>, then: <span
+                class="math display">$$\begin{aligned}
+                \mathcal{F}_t\left[A e^{-B(t-L / 2)^2}\right](x) &amp;
+                :=\frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{+\infty} A e^{-B(t-L / 2)^2}
+                e^{\mathrm{i} x t} \mathrm{~d} t \;\; \text{Let
+                $u = B(t - L/2)$,}\\
+                &amp; =\frac{A}{\sqrt{2 \pi B}} \int_{-\infty}^{+\infty} e^{-u^2}
+                e^{\mathrm{i} x\left(\frac{u}{\sqrt{B}}+\frac{L}{2}\right)} \mathrm{d} u
+                \\
+                &amp; =\frac{A e^{\frac{\mathrm{i} L x}{2}}}{\sqrt{2 \pi B}}
+                \int_{-\infty}^{+\infty} e^{-u^2} e^{\mathrm{i} \frac{x}{\sqrt{B}} u}
+                \mathrm{~d} u \\
+                &amp; =\frac{A e^{\frac{\mathrm{i} L x}{2}}}{\sqrt{2 \pi
+                B}}\left[\int_{-\infty}^{+\infty} e^{-u^2} \cos \left(\frac{x}{\sqrt{B}}
+                u\right) \mathrm{d} u+\mathrm{i} \int_{-\infty}^{+\infty} e^{-u^2} \sin
+                \left(\frac{x}{\sqrt{B}} u\right) \mathrm{d} u\right] \\
+                &amp; =\frac{A e^{\frac{\mathrm{i} L x}{2}}}{\sqrt{2 \pi
+                B}}\left[\sqrt{\pi} e^{-\left(\frac{x}{2 \sqrt{B}}\right)^2}+\mathrm{i}
+                0\right] \\
+                &amp; =\frac{A e^{\frac{\mathrm{i} L x}{2}}-\frac{x^2}{4 B}}{\sqrt{2 B}}
+                \end{aligned}$$</span> ◻</p>
+    </div>
+    <p>On the other hand, if understanding the integral of the sine is
+        simple, for that of the cosine: <span
+            class="math display"><em>I</em>(<em>k</em>) := ∫<sub>−∞</sub><sup>+∞</sup><em>e</em><sup>−<em>u</em><sup>2</sup></sup>cos (<em>k</em><em>u</em>)d<em>u</em></span>
+        differentiating under the integral sign with respect to <span class="math inline"><em>k</em></span>, we have:
+        <span
+            class="math display"><em>I</em><sup>′</sup>(<em>k</em>) = ∫<sub>−∞</sub><sup>+∞</sup> − <em>u</em><em>e</em><sup>−<em>u</em><sup>2</sup></sup>sin (<em>k</em><em>u</em>)d<em>u</em></span>
+        so, integrating by parts, we have: <span class="math display">$$I^{\prime}(k)=\left[\frac{1}{2} e^{-u^2} \sin (k
+            u)\right]_{-\infty}^{+\infty}-\frac{k}{2} \int_{-\infty}^{+\infty}
+            e^{-u^2} \cos (k u) \mathrm{d} u$$</span> i.e. with great amazement (at
+        least the first time it should be like this): <span class="math display">$$I^{\prime}(k)=-\frac{k}{2} I(k) \quad
+            \stackrel{\mathrm{ODE}}{\Rightarrow} \quad I(k)=c_1 e^{-(k /
+            2)^2}$$</span> Having to hold <span class="math inline">$I(0)=\sqrt{\pi}$</span> (another demonstrable
+        result), we have <span class="math inline">$c_1=\sqrt{\pi}$</span>,
+        end.</p>
+</body>
+
+</html>

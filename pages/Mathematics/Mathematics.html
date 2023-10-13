@@ -5,74 +5,108 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Content Collection Page</title>
-    
-    <link rel="stylesheet" href="../css/headings.css" >
-	<link type="text/css" rel="stylesheet" href="../css/index_page.css">
+
+    <link rel="stylesheet" href="../css/headings.css">
+    <link type="text/css" rel="stylesheet" href="../css/index_page.css">
     <link rel="stylesheet" href="math.css">
+    <style>
+        .collapsible {
+            cursor: pointer;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            background-color: #f1f1f1;
+        }
+
+        .collapsible:after {
+            content: '\25B2';
+            /* Unicode character for "up arrow" */
+            float: right;
+            margin-left: 5px;
+        }
+
+        .collapsible.active:after {
+            content: "\25BC";
+            /* Unicode character for "down arrow" */
+        }
+
+        .filter-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            background-color: #f9f9f9;
+            padding-left: 15px;
+        }
+
+        .filter-item {
+            padding: 5px;
+        }
+    </style>
 </head>
 
 <body>
     <header>
-        
         <nav>
             <ul class="nav">
-                <li style="float: left;"><a href="../../index.html"><img src="../img/logo.png" alt="Logo image" class="logo"></a></li>
+                <li style="float: left;"><a href="../../index.html"><img src="../img/logo.png" alt="Logo image"
+                            class="logo"></a></li>
                 <li><a class="nav" href="#">Home</a></li>
                 <li><a class="nav" href="#">Courses</a></li>
                 <li><a class="nav" href="#">Resources</a></li>
                 <li><a class="nav" href="index.html">About</a></li>
             </ul>
         </nav>
-        <h1>Mathematics</h1>
+        <img src="../img/logo.jpeg" alt="The Mathbook" class="logo">
     </header>
     <main>
         <aside>
-            <h2>Filter</h2>
-            <form>
+            <h2>Filters</h2>
+
+            <button type="button" class="collapsible">Departments</button>
+            <div class="filter-content">
+                <!-- Add your filter items for 'Departments' here -->
+            </div>
+
+            <button type="button" class="collapsible">Level</button>
+            <div class="filter-content">
+                <!-- Add your filter items for 'Level' here -->
+            </div>
+
+            <button type="button" class="collapsible">Topics</button>
+            <div class="filter-content">
                 <div class="filter-item">
-                    <input type="checkbox" id="filter1">
-                    Filter 1
+                    <input type="checkbox" id="mathematics">
+                    Mathematics
                 </div>
-                <div class="filter-item">
-                    <input type="checkbox" id="filter2">
-                    Filter 2
-                </div>
-                <div class="filter-item">
-                    <input type="checkbox" id="filter3">
-                    Filter 3
-                </div>
-                <div class="filter-item">
-                    <input type="checkbox" id="filter4">
-                    Filter 4
-                </div>
-                <div class="filter-item">
-                    <input type="checkbox" id="filter4">
-                    Filter 5
-                </div>
-                <div class="filter-item">
-                    <input type="checkbox" id="filter4">
-                    Filter 6
-                </div>
-                <div class="filter-item">
-                    <input type="checkbox" id="filter4">
-                    Filter 7
-                </div>
-                <div class="filter-item">
-                    <input type="checkbox" id="filter4">
-                    Filter 8
-                </div>
-                <div class="filter-item">
-                    <input type="checkbox" id="filter4">
-                    Filter 9
-                </div>
-            </form>
+                <!-- Continue adding the rest of the filter items for 'Topics' as above -->
+            </div>
+
+            <!-- Continue adding more categories as required -->
+
+            <script>
+                var coll = document.getElementsByClassName("collapsible");
+                for (let i = 0; i < coll.length; i++) {
+                    coll[i].addEventListener("click", function () {
+                        this.classList.toggle("active");
+                        var content = this.nextElementSibling;
+                        if (content.style.maxHeight) {
+                            content.style.maxHeight = null;
+                        } else {
+                            content.style.maxHeight = content.scrollHeight + "px";
+                        }
+                    });
+                }
+            </script>
         </aside>
         <section>
             <h2>Featured Courses</h2>
             <ul class="course-list">
                 <li>
                     <h3>Single Variable Calculus</h3>
-                  <p>Description of Course 1...</p>
+                    <p>Description of Course 1...</p>
                 </li>
                 <li>
                     <h3>Multivariable Calculus</h3>
@@ -105,22 +139,22 @@
             </ul>
         </section>
     </main>
-      <!-- Footer -->
-      <footer class="footer">
+    <!-- Footer -->
+    <footer class="footer">
         <div class="footer-inner">
-          <div><i class="fas fa-globe fa-2x"></i> English (United States)</div>
-          <ul>
-            <li><a href="#">Sitemap</a></li>
-          <li><a href="#">Contact Us</a></li>
-          <li><a href="#">Privacy & cookies</a></li>
-          <li><a href="#">Terms of use</a></li>
-          <li><a href="#">Trademarks</a></li>
-          <li><a href="#">Donate</a></li>
-          <li><a href="#">About Us</a></li>
-          <li><a href="#">&copy; The Mathbook 2022</a></li>
-          </ul>
+            <div><i class="fas fa-globe fa-2x"></i> English (United States)</div>
+            <ul>
+                <li><a href="#">Sitemap</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">Privacy & cookies</a></li>
+                <li><a href="#">Terms of use</a></li>
+                <li><a href="#">Trademarks</a></li>
+                <li><a href="#">Donate</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">&copy; The Mathbook 2022</a></li>
+            </ul>
         </div>
-      </footer>
+    </footer>
 </body>
 
 </html>

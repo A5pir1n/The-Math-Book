@@ -11,6 +11,7 @@ body {
     font-size: 15px;
     line-height: 1.5;
 }
+
 ul.course-list {
     display: flex;
     flex-direction: column;
@@ -19,6 +20,7 @@ ul.course-list {
   ul.course-list li {
     display: block;
   }
+  
 header {
     background: #fff;
     padding: 1rem 0;
@@ -27,9 +29,11 @@ header {
 .filter-item {
     padding-left: 1em;
   }
-header h1 {
+
+  header h1 {
     margin-top: 20px;
     color: #000000;
+    font-size: 2rem;   /* Adjust as needed */
 }
 
 section h2{
@@ -41,9 +45,17 @@ aside h2{
 
 main {
     display: flex;
-    padding: 2rem;
+    padding: 8rem;
 }
 
+.logo {
+    max-width: 1000px;  /* Adjust as needed */
+    height: auto;
+    max-height: 1000px; /* Adjust as needed */
+    display: block;
+    margin: 0 auto;    /* Horizontally center if it's a block element */
+}
+  
 section {
     flex: 1
 }
@@ -93,5 +105,4 @@ section {
 aside {
     width: 25%;
     padding-right: 2rem;
-    
 }
