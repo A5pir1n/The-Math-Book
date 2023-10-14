@@ -1,83 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Math Quiz</title>
-  <style>
-    /* Add some basic styling */
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-    }
-    .quiz-container {
-      max-width: 400px;
-      margin: auto;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f0f0f0;
+            text-align: center;
+        }
+
+        .quiz-container {
+            max-width: 400px;
+            margin: auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .options-button {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 15px;
+            font-size: 18px;
+            border: 2px solid #3498db;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #3498db;
+            color: white;
+            transition: background-color 0.3s;
+        }
+
+        .options-button:hover {
+            background-color: #2980b9;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            background-color: #2ecc71;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #27ae60;
+        }
+    </style>
 </head>
+
 <body>
-  <div class="quiz-container">
-    <h1>Math Quiz</h1>
-    <div id="question"></div>
-    <div id="options"></div>
-    <button onclick="generateQuestion()">Generate Question</button>
-    <p>Score: <span id="score">0</span></p>
-  </div>
+    <div class="quiz-container">
+        <h1>Math Quiz</h1>
+        <div id="question"></div>
+        <div id="options"></div>
+        <button onclick="generateQuestion()">Generate Question</button>
+        <p id="question-count">Question: 1/10</p>
+        <p>Score: <span id="score">0</span></p>
+    </div>
 
-  <script>
-    let score = 0;
+    <script>
+        let score = 0;
+        let questionCount = 1;
+        const maxQuestions = 10;
+		const api = "" //haven't finished the function in backend
 
-    function generateQuestion() {
-      const num1 = Math.floor(Math.random() * 10);
-      const num2 = Math.floor(Math.random() * 10);
-      const operators = ['+', '-', '*'];
-      const randomOperatorIndex = Math.floor(Math.random() * operators.length);
-      const operator = operators[randomOperatorIndex];
+        function generateQuestion() {
+            if (questionCount > maxQuestions) {
+                showScore();
+                return;
+            }
 
-      let answer;
-      switch (operator) {
-        case '+':
-          answer = num1 + num2;
-          break;
-        case '-':
-          answer = num1 - num2;
-          break;
-        case '*':
-          answer = num1 * num2;
-          break;
-      }
+            const num1 = Math.floor(Math.random() * 10);
+            const num2 = Math.floor(Math.random() * 10);
+            const operators = ['+', '-', '*'];
+            const randomOperatorIndex = Math.floor(Math.random() * operators.length);
+            const operator = operators[randomOperatorIndex];
 
-      const questionElement = document.getElementById('question');
-      questionElement.textContent = `What is ${num1} ${operator} ${num2}?`;
+            const expression = generateExpression(num1, num2, operator);
 
-      const optionsElement = document.getElementById('options');
-      optionsElement.innerHTML = '';
+            const questionElement = document.getElementById('question');
+            questionElement.textContent = `Question ${questionCount}: ${expression}`;
 
-      const options = [answer, generateRandomOption(answer), generateRandomOption(answer)];
-      options.sort(() => Math.random() - 0.5);
+            const optionsElement = document.getElementById('options');
+            optionsElement.innerHTML = '';
 
-      options.forEach((option) => {
-        const optionButton = document.createElement('button');
-        optionButton.textContent = option;
-        optionButton.addEventListener('click', () => checkAnswer(option, answer));
-        optionsElement.appendChild(optionButton);
-      });
-    }
+            const options = [eval(expression), generateRandomOption(eval(expression)), generateRandomOption(eval(expression))];
+            options.sort(() => Math.random() - 0.5);
 
-    function generateRandomOption(answer) {
-      const min = Math.max(answer - 5, 0);  // Ensuring the minimum is not less than 0
-      const max = answer + 5;
-      return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
+            options.forEach((option) => {
+                const optionButton = document.createElement('button');
+                optionButton.classList.add('options-button');
+                optionButton.textContent = option;
+                optionButton.addEventListener('click', () => checkAnswer(option, eval(expression)));
+                optionsElement.appendChild(optionButton);
+            });
 
-    function checkAnswer(selectedOption, correctAnswer) {
-      if (parseInt(selectedOption) === correctAnswer) {
-        score++;
-        document.getElementById('score').textContent = score;
-      }
-      generateQuestion();
-    }
-  </script>
+            questionCount++;
+            document.getElementById('question-count').textContent = `Question: ${questionCount}/${maxQuestions}`;
+        }
+
+        function generateExpression(num1, num2, operator) {
+            let expression = '';
+            let numParentheses = Math.floor(Math.random() * 3) + 1; // Randomly choose 1 to 3 pairs of parentheses
+
+            for (let i = 0; i < numParentheses; i++) {
+                expression += '(';
+            }
+
+            expression += `${num1} ${operator} ${num2}`;
+
+            for (let i = 0; i < numParentheses; i++) {
+                expression += ')';
+            }
+
+            return expression;
+        }
+
+        function generateRandomOption(answer) {
+            const min = Math.max(answer - 5, 0); // Ensuring the minimum is not less than 0
+            const max = answer + 5;
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function checkAnswer(selectedOption, correctAnswer) {
+            if (parseInt(selectedOption) === correctAnswer) {
+                score++;
+                document.getElementById('score').textContent = score;
+            }
+            generateQuestion();
+        }
+
+        function showScore() {
+            alert(`Quiz completed!\nYour score is: ${score}`);
+            score = 0;
+            questionCount = 1;
+            document.getElementById('score').textContent = score;
+            document.getElementById('question-count').textContent = `Question: ${questionCount}/${maxQuestions}`;
+        }
+		
+		function fetchQuestions() {
+			try {
+				const response = await fetch(apiUrl);
+				if (!response.ok) {
+					throw new Error(`HTTP error! Status: ${response.status}`);
+				}
+				const data = await response.json();
+				return data;
+			} catch (error) {
+			console.error('Error fetching questions:', error);
+			return [];
+			}
+		}
+		
+		function initializeQuiz() {
+			const questions = await fetchQuestions();
+			if (questions.length === 0) {
+				alert('No questions available. Please try again later.');
+				return;
+			}
+
+			let questionIndex = 0;
+
+			function generateQuestion() {
+				if (questionIndex >= questions.length) {
+					showScore();
+					return;
+				}
+
+				const questionData = questions[questionIndex];
+				const questionText = questionData.question;
+				const correctAnswer = questionData.correctAnswer;
+				const options = questionData.options;
+
+				const questionElement = document.getElementById('question');
+				questionElement.textContent = `Question ${questionIndex + 1}: ${questionText}`;
+
+				const optionsElement = document.getElementById('options');
+				optionsElement.innerHTML = '';
+
+				options.forEach((option) => {
+					const optionButton = document.createElement('button');
+					optionButton.classList.add('options-button');
+					optionButton.textContent = option;
+					optionButton.addEventListener('click', () => checkAnswer(option, correctAnswer));
+					optionsElement.appendChild(optionButton);
+				});
+
+				questionIndex++;
+				document.getElementById('question-count').textContent = `Question: ${questionIndex}/${questions.length}`;
+			}
+
+			generateQuestion();
+		}
+    </script>
 </body>
+
 </html>
