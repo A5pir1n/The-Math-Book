@@ -118,6 +118,9 @@
       <button class="btn btn-large" onclick="calculate()">=</button>
     </div>
     <div id="answer"></div>
+    <input type="text" id="searchQuery" placeholder="Enter your query">
+    <button onclick="searchGoogle()">Search</button>
+    <div id="searchResults"></div>
   </div>
 
   <script>
@@ -202,7 +205,29 @@
           throw new Error('Invalid operator');
       }
     }
+    function searchGoogle() {
+  const searchQuery = document.getElementById('searchQuery').value;
 
+  // Check if the query is math-related
+  if (isMathQuery(searchQuery)) {
+    alert("Mathematical queries are not allowed.");
+    return;
+  }
+
+  // Perform a Google search
+  const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`;
+  window.open(googleSearchUrl, '_blank');
+}
+
+function isMathQuery(query) {
+  const mathKeywords = ['+', '-', '*', '/', 'sqrt', 'Math.pow', 'Math.sin', 'Math.cos', 'Math.tan'];
+  for (const keyword of mathKeywords) {
+    if (query.includes(keyword)) {
+      return true;
+    }
+  }
+  return false;
+}
     function evaluateExpression(expression) {
       const tokens = expression.match(/([0-9.]+|\+|\-|\*|\/|\^|sqrt|\(|\))/g);
 
