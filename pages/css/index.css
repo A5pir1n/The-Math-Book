@@ -1,47 +1,52 @@
 html {
-    height: 100%;
-    width: 100%;
-    overflow-x: hidden;
-    padding: 0;
-    margin: 0;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  padding: 0;
+  margin: 0;
 }
 
 body {
-    height: 100%;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 16px;
-    color: #000;
-    font-size: 15px;
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  color: #000;
+  font-size: 15px;
 }
 
 .star {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 .fadeIn {
-    -webkit-animation: animat_show 0.8s;
-    animation: animat_show 0.8s;
-    visibility: visible !important;
+  -webkit-animation: animat_show 0.8s;
+  animation: animat_show 0.8s;
+  visibility: visible !important;
 }
 
-@-webkit-keyframes animat_show{
-    0%{opacity:0}
-    100%{opacity:1}
+@-webkit-keyframes animat_show {
+  0% {
+    opacity: 0
+  }
+
+  100% {
+    opacity: 1
+  }
 }
 
 .full {
-    height: 100%;
-    background-color: white;
-    color: blue;
+  height: 100%;
+  background-color: white;
+  color: blue;
 }
 
 .full2 {
-    height: 100%;
-    background-color: #57A0D4;
-    overflow: hidden;
+  height: 100%;
+  background-color: #57A0D4;
+  overflow: hidden;
 }
 
 .container2 {
@@ -51,18 +56,18 @@ body {
 }
 
 .logo2 {
-    width: 55px;
-    height: 55px;
-    float: left;
+  width: 55px;
+  height: 55px;
+  float: left;
 }
 
 div.resize {
   width: 100vw;
   height: 60vh;
-  
+
 }
 
-.r2{
+.r2 {
   width: 70vw;
   height: 70vh;
   margin: auto;
@@ -85,16 +90,16 @@ div.align {
 }
 
 
-  .search {
-    background-color: #57A0D4;
-    width: 800px;
-    height: 88px;
-    border-radius: 3px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    text-align: cneter;
-  }
+.search {
+  background-color: #57A0D4;
+  width: 800px;
+  height: 88px;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: cneter;
+}
 
 .input {
   all: unset;
@@ -107,7 +112,7 @@ div.align {
 
 ::placeholder {
   color: #fff;
-  opacity: 0.7; 
+  opacity: 0.7;
 }
 
 button {
@@ -150,6 +155,7 @@ li a:hover {
   background-color: #FFF;
   color: #57A0D4;
 }
+
 .active {
   display: block;
   background-color: #5282BF;
@@ -159,19 +165,21 @@ li a:hover {
   text-decoration: none;
   font-size: 20px;
 }
+
 .column {
-float: left;
-margin: auto;
-text-align: center;
+  float: left;
+  margin: auto;
+  text-align: center;
 }
 
 .row:after {
-content: "";
-display: table;
-clear: both;
-height: 200px;
-white-space: nowrap;
+  content: "";
+  display: table;
+  clear: both;
+  height: 200px;
+  white-space: nowrap;
 }
+
 .center {
   display: flex;
   justify-content: center;
@@ -187,8 +195,10 @@ white-space: nowrap;
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .content {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 /* width */
@@ -250,8 +260,8 @@ white-space: nowrap;
 }
 
 .footer li a {
-    text-decoration: none;
-    color: grey;
+  text-decoration: none;
+  color: grey;
 }
 
 .discover {
@@ -333,7 +343,8 @@ h1 {
   padding: 50px 0 0 30px;
 }
 
-.demo p, .carbon p {
+.demo p,
+.carbon p {
   margin: 10px 0 20px;
   font-size: 2vw;
 }
@@ -364,7 +375,8 @@ h1 {
   padding: 1.5vh 2vw;
   background: #262626;
   color: #fff;
-  font-size: 2vw;;
+  font-size: 2vw;
+  ;
   text-decoration: none;
   color: white;
 }
