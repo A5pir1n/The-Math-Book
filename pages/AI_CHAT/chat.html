@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Calculator</title>
+  <style>
+  ul.nav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #57A0D4;
+  margin-bottom: 50px;
+}
+
+.logo {
+    width: 55px;
+    height: 55px;
+    float: left;
+}
+li {
+  float: right;
+}
+
+li a.nav {
+  display: block;
+  color: #FFF;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+li a:hover {
+  background-color: #FFF;
+  color: #57A0D4;
+}
+.active {
+  display: block;
+  background-color: #5282BF;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 20px;
+}
+    /* Footer */
+.footer {
+  background: #f2f2f2;
+  color: #616161;
+  font-size: 12px;
+  padding: 20px 0;
+  margin-top: 50px;
+}
+
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer div {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.footer div i {
+  margin-right: 10px;
+}
+
+.footer ul {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.footer li {
+  margin-right: 30px;
+  margin-bottom: 20px;
+}
+
+.footer li a {
+    text-decoration: none;
+    color: grey;
+}
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      text-align: center;
+      margin: 50px;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .search-container {
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      color: #333;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    .btn-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 10px;
+    }
+
+    .btn {
+      padding: 20px;
+      font-size: 24px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #f0f0f0;
+    }
+
+    .btn-large {
+      padding: 20px;
+      font-size: 20px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-large:hover {
+      background-color: #f0f0f0;
+    }
+
+    .superscript {
+      font-size: 14px;
+      vertical-align: super;
+    }
+
+    #searchResults {
+      display: none;
+      position: absolute;
+      background-color: white;
+      border: 1px solid #ccc;
+      max-height: 300px;
+      overflow-y: auto;
+      z-index: 1;
+    }
+
+    .searchResultItem {
+      padding: 5px;
+      cursor: pointer;
+    }
+
+    .searchResultItem:hover {
+      background-color: #f0f0f0;
+    }
+
+  </style>
+</head>
+<body>
+  <ul class="nav">
+    <li style="float: left;"><a href="../../index.html"><img src="../../img/logo.png" alt="Logo image" class="logo"></a></li>
+    <li style="float: left;"><a class="nav" href="../../index.html">Home</a> </li>
+    <li><a class="nav" href="help.html">Help & Faqs</a></li>
+    <li><a class="active" href="aboutus.html"><b>About us</b></a></li>
+    <li><a class="nav" href="Contact_Us.html">Contact us</a></li>
+    <li><a class="nav" href="donate.html">Support us</a></li>
+
+  </ul>
+  <div class="container">
+    <div class="search-container">
+      <h1>Text Search</h1>
+      <label for="searchQuery">Enter your query:</label>
+      <input type="text" id="searchQuery" placeholder="Search text...">
+      <button onclick="searchGoogle()">Search</button>
+      <div id="searchResults"></div>
+    </div>
+    <h1>Calculator</h1>
+    <label for="question">Input:</label>
+    <input type="text" id="question" placeholder="">
+    <div class="btn-container">
+      <button class="btn" onclick="appendCharacter('7')">7</button>
+      <button class="btn" onclick="appendCharacter('8')">8</button>
+      <button class="btn" onclick="appendCharacter('9')">9</button>
+      <button class="btn" onclick="appendCharacter('+')">+</button>
+      <button class="btn" onclick="appendCharacter('4')">4</button>
+      <button class="btn" onclick="appendCharacter('5')">5</button>
+      <button class="btn" onclick="appendCharacter('6')">6</button>
+      <button class="btn" onclick="appendCharacter('-')">-</button>
+      <button class="btn" onclick="appendCharacter('1')">1</button>
+      <button class="btn" onclick="appendCharacter('2')">2</button>
+      <button class="btn" onclick="appendCharacter('3')">3</button>
+      <button class="btn" onclick="appendCharacter('*')">*</button>
+      <button class="btn" onclick="appendCharacter('0')">0</button>
+      <button class="btn" onclick="appendCharacter('.')">.</button>
+      <button class="btn" onclick="appendCharacter('/')">/</button>
+      <button class="btn-large" onclick="appendCharacter('sqrt')">√</button>
+      <button class="btn-large" onclick="appendCharacter('Math.pow(')">x<span class="superscript">y</span></button>
+      <button class="btn-large" onclick="appendCharacter('Math.sin(')">sin</button>
+      <button class="btn-large" onclick="appendCharacter('Math.cos(')">cos</button>
+      <button class="btn-large" onclick="appendCharacter('Math.tan(')">tan</button>
+      <button class="btn btn-large" onclick="clearDisplay()">C</button>
+      <button class="btn btn-large" onclick="calculate()">=</button>
+    </div>
+    <div id="answer"></div>
+  
+  </div>
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-inner">
+        <div><i class="fas fa-globe fa-2x"></i> English (United States)</div>
+        <ul>
+          <li><a href="#">Sitemap</a></li>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">Privacy & cookies</a></li>
+        <li><a href="#">Terms of use</a></li>
+        <li><a href="#">Trademarks</a></li>
+        <li><a href="#">Donate</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">&copy; The Mathbook 2022</a></li>
+        </ul>
+      </div>
+    </footer>
+</body>
+
+  <script>
+       let displayValue = '0';
+
+        function appendCharacter(char) {
+        if (displayValue === '0' && char !== '.') {
+            displayValue = char;
+        } else {
+            displayValue += char;
+        }
+        document.getElementById('question').value = displayValue;
+        }
+
+        function clearDisplay() {
+        displayValue = '0';
+        document.getElementById('question').value = displayValue;
+        }
+
+        function calculate() {
+        const question = displayValue;
+        const answerElement = document.getElementById('answer');
+
+        try {
+            const result = evaluateExpression(question);
+            answerElement.innerText = `Result: ${result}`;
+        } catch (error) {
+            answerElement.innerText = `Error: ${error.message}`;
+        }
+        }
+    function generateAnswer() {
+      const question = displayValue;
+      const answerElement = document.getElementById('answer');
+
+      try {
+        const result = evaluateExpression(question);
+        answerElement.innerText = `Result: ${result}`;
+      } catch (error) {
+        answerElement.innerText = `Error: ${error.message}`;
+      }
+    }
+
+    function isOperator(token) {
+      return token === '+' || token === '-' || token === '*' || token === '/' || token === '^' || token === 'sqrt';
+    }
+
+    function getPrecedence(operator) {
+      switch (operator) {
+        case '+':
+        case '-':
+          return 1;
+        case '*':
+        case '/':
+          return 2;
+        case '^':
+        case 'sqrt':
+          return 3;
+        default:
+          return 0;
+      }
+    }
+
+    function applyOperator(operator, operand1, operand2) {
+      switch (operator) {
+        case '+':
+          return operand1 + operand2;
+        case '-':
+          return operand1 - operand2;
+        case '*':
+          return operand1 * operand2;
+        case '/':
+          if (operand2 !== 0) {
+            return operand1 / operand2;
+          } else {
+            throw new Error('Cannot divide by zero');
+          }
+        case '^':
+          return Math.pow(operand1, operand2);
+        case 'sqrt':
+          return Math.sqrt(operand1);
+        default:
+          throw new Error('Invalid operator');
+      }
+    }
+    function searchGoogle() {
+  const searchQuery = document.getElementById('searchQuery').value;
+
+  // Check if the query is math-related
+  if (isMathQuery(searchQuery)) {
+    alert("Mathematical queries are not allowed.");
+    return;
+  }
+
+  // Perform a Google search
+  const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`;
+  window.open(googleSearchUrl, '_blank');
+}
+
+function isMathQuery(query) {
+  const mathKeywords = ['+', '-', '*', '/', 'sqrt', 'Math.pow', 'Math.sin', 'Math.cos', 'Math.tan'];
+  for (const keyword of mathKeywords) {
+    if (query.includes(keyword)) {
+      return true;
+    }
+  }
+  return false;
+}
+    function evaluateExpression(expression) {
+      const tokens = expression.match(/([0-9.]+|\+|\-|\*|\/|\^|sqrt|\(|\))/g);
+
+      const output = [];
+      const operators = [];
+
+      for (const token of tokens) {
+        if (!isNaN(token)) {
+          output.push(parseFloat(token));
+        } else if (isOperator(token)) {
+          while (
+            operators.length > 0 &&
+            getPrecedence(operators[operators.length - 1]) >= getPrecedence(token)
+          ) {
+            const operator = operators.pop();
+            const operand2 = output.pop();
+            const operand1 = output.pop();
+            output.push(applyOperator(operator, operand1, operand2));
+          }
+          operators.push(token);
+        } else if (token === '(') {
+          operators.push(token);
+        } else if (token === ')') {
+          while (operators.length > 0 && operators[operators.length - 1] !== '(') {
+            const operator = operators.pop();
+            const operand2 = output.pop();
+            const operand1 = output.pop();
+            output.push(applyOperator(operator, operand1, operand2));
+          }
+          operators.pop(); // Pop the opening bracket
+        } else {
+          throw new Error('Invalid token: ' + token);
+        }
+      }
+
+      while (operators.length > 0) {
+        const operator = operators.pop();
+        const operand2 = output.pop();
+        const operand1 = output.pop();
+        output.push(applyOperator(operator, operand1, operand2));
+      }
+
+      if (output.length === 1) {
+        return output[0];
+      } else {
+        throw new Error('Invalid expression');
+      }
+    }
+  </script>
+</body>
+</html>

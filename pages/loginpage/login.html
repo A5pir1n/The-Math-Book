@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login and Register</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: #333;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Login</h1>
+    <label for="loginUsername">Username:</label>
+    <input type="text" id="loginUsername" placeholder="Enter your username">
+    <label for="loginPassword">Password:</label>
+    <input type="password" id="loginPassword" placeholder="Enter your password">
+    <button onclick="login()">Login</button>
+    <p>Don't have an account? <a href="#" onclick="showRegisterForm()">Register</a></p>
+  </div>
+
+  <div class="container" id="registerForm" style="display: none;">
+    <h1>Register</h1>
+    <label for="registerUsername">Username:</label>
+    <input type="text" id="registerUsername" placeholder="Choose a username">
+    <label for="registerPassword">Password:</label>
+    <input type="password" id="registerPassword" placeholder="Choose a password">
+    <label for="name">Name:</label>
+    <input type="text" id="name" placeholder="Your name">
+    <label for="age">Age:</label>
+    <input type="text" id="age" placeholder="Your age">
+    <label for="grade">Grade:</label>
+    <input type="text" id="grade" placeholder="Your grade">
+    <label for="school">School:</label>
+    <input type="text" id="school" placeholder="Your school">
+    <label for="major">Major:</label>
+    <input type="text" id="major" placeholder="Your major">
+    <button onclick="register()">Register</button>
+    <p>Already have an account? <a href="#" onclick="showLoginForm()">Login</a></p>
+  </div>
+
+  <script>
+    function showRegisterForm() {
+      document.getElementById('registerForm').style.display = 'block';
+    }
+
+    function showLoginForm() {
+      document.getElementById('registerForm').style.display = 'none';
+    }
+
+    function login() {
+      // Implement login functionality here
+      // Retrieve username and password, validate, and log in the user
+    }
+
+    function register() {
+      // Implement registration functionality here
+      // Retrieve username, password, name, age, grade, school, and major, and create a new account
+    }
+  </script>
+</body>
+</html>
