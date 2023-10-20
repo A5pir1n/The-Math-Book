@@ -1,0 +1,317 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800);
+
+body {
+  
+  padding:0;
+  margin:0;
+  background-image: url("http://www.spyderonlines.com/images/wallpapers/blur-wallpaper/2560-1440/blur-wallpaper-18.jpg");
+  font-family: 'Open Sans', sans-serif;
+  
+}
+
+.user-header {
+  
+  height:300px;
+  background-image: url("https://static.pexels.com/photos/20411/pexels-photo-large.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  
+}
+
+.user-info-head {
+  
+    height:50px;
+    width:100%;
+    background-color: rgba(165, 165, 165, 0.31);
+    margin-top:50px;
+  
+}
+
+.user-profile-image {
+  
+  position: relative;
+  height:200px;
+  background-image: url("http://airportrun.it/wp-content/uploads/2014/08/team3.jpg");
+  background-size:cover;
+  background-position: center;
+  -moz-border-radius: 150px; 
+  -webkit-border-radius: 150px; 
+  border-radius: 150px;
+  top:150px;
+  z-index:1;
+  margin: auto;
+  min-width: 200px;
+  min-height:150px;
+  
+}
+
+
+.user-head-info-text {
+  
+  max-width:850px;
+  height:50px;
+  margin-left:250px;
+  backgroun-color:grey;
+  padding-top:5px;
+  color:white;
+  
+}
+
+.user-head-info-text i {
+  padding-left:10px;
+}
+
+.user-head-info-text h4 {
+  max-width:100px;
+  float:left;
+}
+
+.user-head-info-text button {
+  background-color:transparent;
+  border-width:0px;
+}
+
+/* ---------------------------- */
+
+.durum-divi {
+  
+  margin-top:100px;
+  width:350px;
+  height: auto;
+  float:left;
+  
+}
+
+
+/* ---------------------------- */
+
+
+
+.playlist-video {
+  
+  height: 530px;
+  width: 350px;
+  background-color: rgba(128, 128, 128, 0.22);
+  margin-bottom: 50px;
+  
+}
+
+.playlist {
+	list-style-type: none;
+}
+
+.playlist ul a {
+	cursor: pointer;
+	color: #428bca;
+	text-decoration: none;
+}
+
+.playlist ul a:visited {
+	color: #428bca;
+}
+
+.playlist ul a:hover {
+	color: #428bca;
+	text-decoration: underline;
+}
+
+.videogular-container {
+	width: 100%;
+	height: 320px;
+	margin: auto;
+	overflow: hidden;
+}
+
+.videogular-container .skipButton {
+	position: absolute;
+	padding: 10px;
+	top: 10px;
+	right: 10px;
+	z-index: 99999;
+	color: white;
+	cursor: pointer;
+	background-color: #666666;
+	border: 2px #FFFFFF solid;
+	display: none;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-ms-border-radius: 10px;
+	border-radius: 10px;
+}
+
+@media (min-width: 1200px) {
+	.videogular-container {
+		width: 350px;
+		height: 200px;
+	}
+
+	.videogular-container.audio {
+		width: 1170px;
+		height: 50px;
+	}
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+	.videogular-container {
+		width: 940px;
+		height: 528.75px;
+	}
+
+	.videogular-container.audio {
+		width: 940px;
+		height: 50px;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+	.videogular-container {
+		width: 728px;
+		height: 409.5px;
+	}
+
+	.videogular-container.audio {
+		width: 728px;
+		height: 50px;
+	}
+}
+
+
+.playlist-video li {
+  
+  height:100px;
+  width:350px;
+  background-image: url("http://i.hizliresim.com/jnraWm.png");
+  backgroun-size:cover;
+  backgroun-repeat: no-repeat;
+  margin-left:0px;
+  display:                 inline-block;
+  
+}
+
+.playlist-video ul {
+  
+  padding-left:0px;
+  
+}
+
+/* ------------------------------- */
+
+
+/* ------------------------------- */
+
+.durum-baslik {
+  
+  height: 80px;
+  width: 100%;
+  background-color: rgba(128, 128, 128, 0.22);
+  padding-top:5px;
+  padding-left:10px;
+  
+}
+
+
+/* -------------------------------- */
+
+
+input, textarea {
+  outline: none;
+  border: none;
+  display: block;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  font-family: "PT Sans", "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif;
+  font-size: 1rem;
+  color: #555f77;
+}
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+  color: #ced2db;
+}
+input::-moz-placeholder, textarea::-moz-placeholder {
+  color: #ced2db;
+}
+input:-moz-placeholder, textarea:-moz-placeholder {
+  color: #ced2db;
+}
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+  color: #ced2db;
+}
+
+p {
+  line-height: 1.3125rem;
+}
+
+.comments {
+  margin: 2.5rem auto 0;
+  padding: 0 1.25rem;
+  height:100px;
+  background-color: rgba(128, 128, 128, 0.22);
+}
+
+.comment-wrap {
+  margin-bottom: 1.25rem;
+  display: table;
+  width: 100%;
+  min-height: 5.3125rem;
+}
+
+.photo {
+  padding-top: 0.625rem;
+  display: table-cell;
+  width: 3.5rem;
+}
+.photo .avatar {
+  height: 2.25rem;
+  width: 2.25rem;
+  border-radius: 50%;
+  background-size: contain;
+}
+
+.comment-block {
+  padding: 1rem;
+  background-color: #fff;
+  display: table-cell;
+  vertical-align: top;
+  border-radius: 0.1875rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.08);
+}
+.comment-block textarea {
+  width: 100%;
+  resize: none;
+}
+
+.comment-text {
+  margin-bottom: 1.25rem;
+}
+
+.bottom-comment {
+  color: #acb4c2;
+  font-size: 0.875rem;
+}
+
+.comment-date {
+  float: left;
+}
+
+.comment-actions {
+  float: right;
+}
+.comment-actions li {
+  display: inline;
+  margin: -2px;
+  cursor: pointer;
+}
+.comment-actions li.complain {
+  padding-right: 0.75rem;
+  border-right: 1px solid #e1e5eb;
+}
+.comment-actions li.reply {
+  padding-left: 0.75rem;
+  padding-right: 0.125rem;
+}
+.comment-actions li:hover {
+  color: #0095ff;
+}
+
+/* -------------------------------- */

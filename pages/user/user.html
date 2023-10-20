@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 50px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .header img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+
+        .header-info {
+            flex: 1;
+        }
+
+        .date {
+            color: gray;
+            font-size: 14px;
+        }
+
+        .content img {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+
+        .content p {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        button {
+            padding: 10px 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .follow-btn {
+            background-color: #4CAF50;
+            color: #fff;
+        }
+
+        .message-btn {
+            background-color: #007BFF;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="path_to_user_image.jpg" alt="User">
+            <div class="header-info">
+                <h2>User Name</h2>
+                <p class="date">Date Information Here</p>
+            </div>
+        </div>
+        <div class="content">
+            <img src="path_to_content_image.jpg" alt="Content Image">
+            <p>Content Title</p>
+        </div>
+        <div class="action-buttons">
+            <button class="follow-btn">Username</button>
+            <button class="message-btn">Username</button>
+        </div>
+    </div>
+</body>
+
+</html>
