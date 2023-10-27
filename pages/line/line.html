@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Graph Plotter</title>
+    <style>
+        #graph-container {
+            width: 500px;
+            height: 500px;
+            border: 1px solid #ccc;
+            position: relative;
+        }
+
+        #x-axis, #y-axis {
+            position: absolute;
+            background-color: #ccc;
+            height: 1px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Graph Plotter</h1>
+    <div id="graph-container">
+        <canvas id="graph" width="500" height="500"></canvas>
+        <div id="x-axis" style="bottom: 250px;"></div>
+        <div id="y-axis" style="left: 250px;"></div>
+    </div>
+    <p>Enter the equation of the first curve:</p>
+    <input type="text" id="equation1" placeholder="e.g. x + 2*y or x^2 + y^2">
+    <p>Enter the equation of the second curve:</p>
+    <input type="text" id="equation2" placeholder="e.g. x + 2*y or x^2 + y^2">
+    <button onclick="plotGraph()">Plot Graph</button>
+    
+    <p id="intersection-point"></p>
+
+    <script>
+        const canvas = document.getElementById('graph');
+        const ctx = canvas.getContext('2d');
+
+        function plotGraph() {
+            const equation1 = document.getElementById('equation1').value;
+            const equation2 = document.getElementById('equation2').value;
+            const minX = -10;
+            const maxX = 10;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.beginPath();
+            ctx.strokeStyle = 'blue';
+            ctx.lineWidth = 2;
+
+            // 绘制x轴和y轴
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            ctx.moveTo(centerX, 0);
+            ctx.lineTo(centerX, canvas.height);
+            ctx.moveTo(0, centerY);
+            ctx.lineTo(canvas.width, centerY);
+            ctx.stroke();
+
+            // 绘制方格线，一个空格单位为10
+            for (let i = 10; i < canvas.width; i += 10) {
+                ctx.beginPath();
+                ctx.moveTo(i, 0);
+                ctx.lineTo(i, canvas.height);
+                ctx.moveTo(0, i);
+                ctx.lineTo(canvas.width, i);
+                ctx.strokeStyle = '#ccc';
+                ctx.stroke();
+            }
+
+            ctx.beginPath();
+            ctx.strokeStyle = 'blue';
+            ctx.lineWidth = 2;
+
+            for (let x = minX; x <= maxX; x += 0.1) {
+                const y1 = calculateY(equation1, x);
+                const y2 = calculateY(equation2, x);
+                const screenX = centerX + x * 10;  // 将x坐标映射到画布上
+                const screenY1 = centerY - y1 * 10;  // 将y坐标映射到画布上
+                const screenY2 = centerY - y2 * 10;  // 将y坐标映射到画布上
+
+                ctx.lineTo(screenX, screenY1);
+            }
+
+            ctx.stroke();
+
+            const equation1Value = calculateY(equation1, 0);
+            const equation2Value = calculateY(equation2, 0);
+
+            if (Math.abs(equation1Value - equation2Value) < 0.01) {
+                document.getElementById('intersection-point').textContent = `Intersection point: (x = 0, y = ${equation1Value.toFixed(2)})`;
+            } else {
+                document.getElementById('intersection-point').textContent = "No intersection point found at x = 0";
+            }
+        }
+
+        function calculateY(equation, x) {
+            // Parse the equation and calculate y for a given x
+            const equationParts = equation.split(' ');
+            const xIndex = equationParts.indexOf('x');
+            const yIndex = equationParts.indexOf('y');
+            let y = 0;
+
+            if (xIndex !== -1) {
+                y = eval(equation.replace('x', x));
+            } else if (yIndex !== -1) {
+                // Handle cases like "x + 2*y" where x is explicitly defined
+                const xValue = x;
+                y = eval(equation.replace('y', `(${xValue})`));
+            }
+
+            return y;
+        }
+    </script>
+</body>
+</html>
