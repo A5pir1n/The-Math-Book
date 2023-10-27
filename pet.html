@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Study Plan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #study-time-input {
+            width: 100%;
+        }
+
+        #topic-input {
+            width: 100%;
+        }
+
+        #start-button {
+            display: block;
+            margin: 20px auto;
+        }
+
+        #countdown {
+            text-align: center;
+            font-size: 24px;
+        }
+
+        #current-time {
+            text-align: center;
+            font-size: 18px;
+        }
+
+        #topics-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #topics-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        #topics-list li label {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Study Plan</h1>
+        <label for="study-time-input">How Long You Need to Study（min）:</label>
+        <input type="number" id="study-time-input">
+        <label for="topic-input">How Many Topic You Want To Learn (max 5):</label>
+        <input type="text" id="topic-input">
+        <button id="add-topic-button">Add Topic</button>
+        <ul id="topics-list"></ul>
+        <button id="start-button">Start Study</button>
+        <div id="countdown"></div>
+        <div id="current-time"></div>
+    </div>
+
+    <script>
+        let studyTime = 0;
+        let topics = [];
+
+        document.getElementById("add-topic-button").addEventListener("click", function() {
+            const topicInput = document.getElementById("topic-input");
+            const topicsList = document.getElementById("topics-list");
+
+            if (topics.length < 5 && topicInput.value.trim() !== "") {
+                topics.push(topicInput.value);
+                const li = document.createElement("li");
+                li.innerHTML = `<input type="checkbox" id="topic-${topics.length - 1}" value="${topicInput.value}"><label for="topic-${topics.length - 1}">${topicInput.value}</label>`;
+                topicsList.appendChild(li);
+                topicInput.value = "";
+            }
+        });
+
+        document.getElementById("start-button").addEventListener("click", function() {
+            const studyTimeInput = document.getElementById("study-time-input");
+            studyTime = parseInt(studyTimeInput.value);
+            if (studyTime > 0 && topics.length > 0) {
+                // Disable input elements
+                studyTimeInput.disabled = true;
+                document.getElementById("topic-input").disabled = true;
+                document.getElementById("add-topic-button").disabled = true;
+
+                // Start countdown
+                startCountdown();
+            }
+        });
+
+        function startCountdown() {
+            const countdown = document.getElementById("countdown");
+            const currentTime = document.getElementById("current-time");
+
+            let remainingTime = studyTime * 60;
+            countdown.innerHTML = formatTime(remainingTime);
+
+            const timer = setInterval(function() {
+                remainingTime--;
+                if (remainingTime <= 0) {
+                    clearInterval(timer);
+                    countdown.innerHTML = "Study END!!!!";
+                } else {
+                    countdown.innerHTML = formatTime(remainingTime);
+                }
+
+                const now = new Date();
+                currentTime.innerHTML = `NOW: ${now.toLocaleTimeString()}`;
+            }, 1000);
+        }
+
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${minutes} Minute ${secs} second`;
+        }
+    </script>
+</body>
+</html>
