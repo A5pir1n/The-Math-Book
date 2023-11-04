@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Management System</title>
+    <style>
+        /* Updated styles for a more appealing layout with a light blue color scheme */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e0f7fa; /* Light blue color */
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            display: flex;
+        }
+        .sidebar {
+            width: 20%;
+            background-color: #0288d1; /* Light blue color */
+            color: #fff;
+            padding: 20px;
+        }
+        .main-content {
+            width: 80%;
+            padding: 20px;
+        }
+        input[type="text"],
+        input[type="password"],
+        button {
+            margin: 5px 0;
+            padding: 8px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        table,
+        th,
+        td {
+            border: 1px solid #b3e5fc; /* Light blue color */
+        }
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #01579b; /* Darker blue color */
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>Management System</h2>
+            <input type="text" id="username" placeholder="Username"><br>
+            <input type="password" id="password" placeholder="Password"><br>
+            <button onclick="login()">Login</button>
+        </div>
+        <div class="main-content" id="main-content">
+            <!-- This is the main content, it will change based on login status -->
+        </div>
+    </div>
+
+    <script>
+        function login() {
+            let username = document.getElementById('username').value;
+            let password = document.getElementById('password').value;
+
+            if (username === 'admin123' && password === '123456') {
+                showLoggedInContent();
+            } else {
+                alert('Incorrect username or password');
+            }
+        }
+
+        function showLoggedInContent() {
+            let mainContent = document.getElementById('main-content');
+            mainContent.innerHTML = `
+                <h2>Welcome, Administrator</h2>
+                <div>
+                    <h3>Site Visits</h3>
+                    <p>Total site visits in the last month: 1000</p>
+                    <p>Daily site visits: 50</p>
+                </div>
+                <div>
+                    <h3>User Data</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Password</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>User1</td>
+                                <td>Password1</td>
+                            </tr>
+                            <tr>
+                                <td>User2</td>
+                                <td>Password2</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <h3>Set Administrator</h3>
+                    <input type="text" id="newUsername" placeholder="New Username"><br>
+                    <input type="password" id="newPassword" placeholder="New Password"><br>
+                    <button onclick="addAdmin()">Add Administrator</button>
+                </div>
+            `;
+        }
+
+        function addAdmin() {
+            let newUsername = document.getElementById('newUsername').value;
+            let newPassword = document.getElementById('newPassword').value;
+
+            alert('New administrator added successfully');
+        }
+    </script>
+</body>
+</html>
