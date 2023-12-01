@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    #app {
+      max-width: 800px;
+      margin: 20px auto;
+      text-align: center;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    #schedule {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      grid-gap: 1px;
+      border: 1px solid #ccc;
+    }
+
+    #schedule div {
+      padding: 10px;
+      border: 1px solid #eee;
+      text-align: left;
+    }
+
+    label {
+      margin-top: 10px;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 8px;
+      cursor: pointer;
+    }
+  </style>
+  <title>Schedule</title>
+</head>
+<body>
+  <div id="app">
+    <h1>Study Schedule</h1>
+    <label for="start-date">Start Date:</label>
+    <input type="date" id="start-date">
+    <label for="start-time">Daily Start Time:</label>
+    <input type="time" id="start-time" value="08:00">
+    <button id="generate-schedule">Generate Schedule</button>
+    <div id="schedule"></div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+      const scheduleContainer = document.getElementById('schedule');
+      const startDateInput = document.getElementById('start-date');
+      const startTimeInput = document.getElementById('start-time');
+      const generateButton = document.getElementById('generate-schedule');
+
+      function updateSchedule() {
+        const startDate = new Date(startDateInput.value);
+        const startTime = startTimeInput.value;
+        scheduleContainer.innerHTML = '';
+
+        // Create header
+        const headerRow = document.createElement('div');
+        headerRow.classList.add('header-row');
+        daysOfWeek.forEach(day => {
+          const cell = document.createElement('div');
+          cell.textContent = day;
+          headerRow.appendChild(cell);
+        });
+        scheduleContainer.appendChild(headerRow);
+
+        // Create time slots and schedule grid
+        for (let i = 0; i < 7; i++) {
+          const currentDate = new Date(startDate);
+          currentDate.setDate(startDate.getDate() + i);
+
+          const row = document.createElement('div');
+          row.classList.add('time-slot-row');
+
+          daysOfWeek.forEach(day => {
+            const cell = document.createElement('div');
+            cell.classList.add('schedule-cell');
+            cell.setAttribute('data-date', currentDate.toISOString().split('T')[0]);
+            cell.setAttribute('data-time', startTime);
+            row.appendChild(cell);
+
+            // Increment time by one hour each time
+            const nextTime = new Date(currentDate);
+            nextTime.setHours(parseInt(startTime.split(':')[0], 10) + (i * 24));
+            nextTime.setMinutes(startTime.split(':')[1]);
+
+            const timeString = `${nextTime.toLocaleDateString()} ${nextTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+            cell.textContent = timeString;
+          });
+
+          scheduleContainer.appendChild(row);
+        }
+      }
+
+      // Event listener for the Generate Schedule button
+      generateButton.addEventListener('click', updateSchedule);
+
+      // Event listeners for date and time input changes
+      startDateInput.addEventListener('change', updateSchedule);
+      startTimeInput.addEventListener('change', updateSchedule);
+
+      // Event listener for schedule cell clicks
+      scheduleContainer.addEventListener('click', function(event) {
+        const cell = event.target;
+        if (cell.classList.contains('schedule-cell')) {
+          const dateTimeString = cell.textContent;
+          const courseName = prompt(`Enter study plan for ${dateTimeString}:`);
+          if (courseName !== null) {
+            cell.textContent = `${dateTimeString}\n${courseName}`;
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>
