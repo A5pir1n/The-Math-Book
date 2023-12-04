@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearningHub</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            width: 80%;
+            max-width: 600px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            color: #555;
+        }
+
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #topics-list {
+            list-style-type: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+
+        #topics-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        #topics-list li label {
+            flex: 1;
+            margin-left: 10px;
+        }
+
+        #countdown, #current-time {
+            text-align: center;
+            font-size: 24px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>LearningHub</h1>
+        <label for="study-time-input">How Long You Need to Study (min):</label>
+        <input type="number" id="study-time-input" placeholder="Enter study time">
+        <label for="topic-input">How Many Topics You Want To Learn (max 5):</label>
+        <input type="text" id="topic-input" placeholder="Enter topic">
+        <button id="add-topic-button">Add Topic</button>
+        <ul id="topics-list"></ul>
+        <button id="start-button">Start Study</button>
+        <div id="countdown"></div>
+        <div id="current-time"></div>
+    </div>
+
+    <script>
+        let studyTime = 0;
+        let topics = [];
+
+        document.getElementById("add-topic-button").addEventListener("click", function() {
+            const topicInput = document.getElementById("topic-input");
+            const topicsList = document.getElementById("topics-list");
+
+            if (topics.length < 5 && topicInput.value.trim() !== "") {
+                topics.push(topicInput.value);
+                const li = document.createElement("li");
+                li.innerHTML = `<label><input type="checkbox" id="topic-${topics.length - 1}" value="${topicInput.value}">${topicInput.value}</label>`;
+                topicsList.appendChild(li);
+                topicInput.value = "";
+            }
+        });
+
+        document.getElementById("start-button").addEventListener("click", function() {
+            const studyTimeInput = document.getElementById("study-time-input");
+            studyTime = parseInt(studyTimeInput.value);
+            if (studyTime > 0 && topics.length > 0) {
+                // Disable input elements
+                studyTimeInput.disabled = true;
+                document.getElementById("topic-input").disabled = true;
+                document.getElementById("add-topic-button").disabled = true;
+
+                // Start countdown
+                startCountdown();
+            }
+        });
+
+        function startCountdown() {
+            const countdown = document.getElementById("countdown");
+            const currentTime = document.getElementById("current-time");
+
+            let remainingTime = studyTime * 60;
+            countdown.innerHTML = formatTime(remainingTime);
+
+            const timer = setInterval(function() {
+                remainingTime--;
+                if (remainingTime <= 0) {
+                    clearInterval(timer);
+                    countdown.innerHTML = "Study END!!!!";
+                } else {
+                    countdown.innerHTML = formatTime(remainingTime);
+                }
+
+                const now = new Date();
+                currentTime.innerHTML = `NOW: ${now.toLocaleTimeString()}`;
+            }, 1000);
+        }
+
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${minutes} Minute ${secs} second`;
+        }
+    </script>
+</body>
+</html>
