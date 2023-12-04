@@ -28,6 +28,11 @@
             margin-bottom: 5px;
         }
 
+        .input-group {
+            margin-bottom: 10px;
+            display: none;
+        }
+
         #generateButton {
             background-color: #3498db;
             color: #fff;
@@ -37,40 +42,24 @@
             cursor: pointer;
         }
 
-        .input-group {
+        #backgroundImageInput {
             margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
-    <h1>Page Generator</h1>
+    <h1>Static Page Generator</h1>
 
     <div class="component-options">
-        <label><input type="checkbox" id="listComponent"> List</label>
-        <label><input type="checkbox" id="navigationComponent"> Navigation</label>
-        <label><input type="checkbox" id="multiImageComponent"> Multiple Images</label>
-        <label><input type="checkbox" id="bigTitleComponent"> Big Title</label>
-        <label><input type="checkbox" id="smallTitleComponent"> Small Title</label>
-        <label><input type="checkbox" id="midTitleComponent"> Middle Title</label>
+        <label><input type="checkbox" class="component" data-group="bigTitleInputGroup"> Big Title</label>
+        <label><input type="checkbox" class="component" data-group="smallTitleInputGroup"> Small Title</label>
+        <label><input type="checkbox" class="component" data-group="explanationInputGroup"> Explanation</label>
+        <label><input type="checkbox" class="component" data-group="imageInputGroup"> Image</label>
+        <label><input type="checkbox" class="component" data-group="videoInputGroup"> Video</label>
         <!-- Add more component options as needed -->
     </div>
 
     <div id="editor">
-        <div class="input-group" id="listInputGroup">
-            <label for="listInput">List Items (comma-separated):</label>
-            <input type="text" id="listInput">
-        </div>
-
-        <div class="input-group" id="navigationInputGroup">
-            <label for="navigationInput">Navigation Links (comma-separated):</label>
-            <input type="text" id="navigationInput">
-        </div>
-
-        <div class="input-group" id="multiImageInputGroup">
-            <label for="multiImageInput">Image URLs (comma-separated):</label>
-            <input type="text" id="multiImageInput">
-        </div>
-
         <div class="input-group" id="bigTitleInputGroup">
             <label for="bigTitleInput">Big Title Content:</label>
             <input type="text" id="bigTitleInput">
@@ -81,9 +70,24 @@
             <input type="text" id="smallTitleInput">
         </div>
 
-        <div class="input-group" id="midTitleInputGroup">
-            <label for="midTitleInput">Middle Title Content:</label>
-            <input type="text" id="midTitleInput">
+        <div class="input-group" id="explanationInputGroup">
+            <label for="explanationInput">Explanation Content:</label>
+            <textarea id="explanationInput"></textarea>
+        </div>
+
+        <div class="input-group" id="imageInputGroup">
+            <label for="imageInput">Image URL:</label>
+            <input type="text" id="imageInput">
+        </div>
+
+        <div class="input-group" id="videoInputGroup">
+            <label for="videoInput">Video URL:</label>
+            <input type="text" id="videoInput">
+        </div>
+
+        <div class="input-group" id="backgroundImageInput">
+            <label for="backgroundImage">Background Image URL:</label>
+            <input type="text" id="backgroundImage">
         </div>
         <!-- Add more input groups for other components -->
     </div>
@@ -94,118 +98,66 @@
 
     <script>
         function generatePage() {
-            const listComponent = document.getElementById('listComponent').checked;
-            const navigationComponent = document.getElementById('navigationComponent').checked;
-            const multiImageComponent = document.getElementById('multiImageComponent').checked;
-            const bigTitleComponent = document.getElementById('bigTitleComponent').checked;
-            const smallTitleComponent = document.getElementById('smallTitleComponent').checked;
-            const midTitleComponent = document.getElementById('midTitleComponent').checked;
-            // Add more component variables as needed
+            const components = document.querySelectorAll('.component:checked');
+            const preview = document.getElementById('preview');
+            const pageContent = [];
 
-            let pageContent = '';
+            components.forEach(component => {
+                const group = component.dataset.group;
+                const input = document.getElementById(`${group}Input`).value;
 
-            if (listComponent) {
-                const listInput = document.getElementById('listInput').value;
-                const listItems = listInput.split(',').map(item => item.trim());
-                pageContent += '<ul>';
-                listItems.forEach(item => {
-                    pageContent += `<li>${item}</li>`;
-                });
-                pageContent += '</ul>';
-            }
+                switch (group) {
+                    case 'bigTitleInputGroup':
+                        pageContent.push(`<h1>${input}</h1>`);
+                        break;
 
-            if (navigationComponent) {
-                const navigationInput = document.getElementById('navigationInput').value;
-                const navigationLinks = navigationInput.split(',').map(link => link.trim());
-                pageContent += '<nav>';
-                navigationLinks.forEach(link => {
-                    pageContent += `<a href="#">${link}</a> | `;
-                });
-                pageContent = pageContent.slice(0, -2); // Remove the last "|"
-                pageContent += '</nav>';
-            }
+                    case 'smallTitleInputGroup':
+                        pageContent.push(`<h2>${input}</h2>`);
+                        break;
 
-            if (multiImageComponent) {
-                const multiImageInput = document.getElementById('multiImageInput').value;
-                const imageUrls = multiImageInput.split(',').map(url => url.trim());
-                imageUrls.forEach(url => {
-                    pageContent += `<img src="${url}" alt="Generated Image">`;
-                });
-            }
+                    case 'explanationInputGroup':
+                        pageContent.push(`<p>${input}</p>`);
+                        break;
 
-            if (bigTitleComponent) {
-                const bigTitleInput = document.getElementById('bigTitleInput').value;
-                pageContent += `<h1>${bigTitleInput}</h1>`;
-            }
+                    case 'imageInputGroup':
+                        const imageUrl = document.getElementById('imageInput').value;
+                        pageContent.push(`<img src="${imageUrl}" alt="Generated Image">`);
+                        break;
 
-            if (smallTitleComponent) {
-                const smallTitleInput = document.getElementById('smallTitleInput').value;
-                pageContent += `<h2>${smallTitleInput}</h2>`;
-            }
+                    case 'videoInputGroup':
+                        const videoUrl = document.getElementById('videoInput').value;
+                        pageContent.push(`<iframe width="560" height="315" src="${videoUrl}" frameborder="0" allowfullscreen></iframe>`);
+                        break;
+                    // Add more cases for other components
+                }
+            });
 
-            if (midTitleComponent) {
-                const midTitleInput = document.getElementById('midTitleInput').value;
-                pageContent += `<h3>${midTitleInput}</h3>`;
-            }
-            // Add more conditions for other components
+            const backgroundImageUrl = document.getElementById('backgroundImage').value;
+            document.body.style.backgroundImage = `url('${backgroundImageUrl}')`;
 
-            document.getElementById('preview').innerHTML = pageContent;
+            preview.innerHTML = '';
+            pageContent.forEach(content => {
+                preview.innerHTML += content;
+            });
         }
 
         // Toggle input groups based on selected components
-        document.getElementById('listComponent').addEventListener('change', toggleInputGroup);
-        document.getElementById('navigationComponent').addEventListener('change', toggleInputGroup);
-        document.getElementById('multiImageComponent').addEventListener('change', toggleInputGroup);
-        document.getElementById('bigTitleComponent').addEventListener('change', toggleInputGroup);
-        document.getElementById('smallTitleComponent').addEventListener('change', toggleInputGroup);
-        document.getElementById('midTitleComponent').addEventListener('change', toggleInputGroup);
-        // Add more event listeners for other components
+        document.querySelectorAll('.component').forEach(component => {
+            component.addEventListener('change', toggleInputGroup);
+        });
 
         function toggleInputGroup() {
-            const listInputGroup = document.getElementById('listInputGroup');
-            const navigationInputGroup = document.getElementById('navigationInputGroup');
-            const multiImageInputGroup = document.getElementById('multiImageInputGroup');
-            const bigTitleInputGroup = document.getElementById('bigTitleInputGroup');
-            const smallTitleInputGroup = document.getElementById('smallTitleInputGroup');
-            const midTitleInputGroup = document.getElementById('midTitleInputGroup');
-            // Add more input groups as needed
+            const components = document.querySelectorAll('.component:checked');
+            const inputGroups = document.querySelectorAll('.input-group');
 
-            if (document.getElementById('listComponent').checked) {
-                listInputGroup.style.display = 'block';
-            } else {
-                listInputGroup.style.display = 'none';
-            }
+            inputGroups.forEach(group => {
+                group.style.display = 'none';
+            });
 
-            if (document.getElementById('navigationComponent').checked) {
-                navigationInputGroup.style.display = 'block';
-            } else {
-                navigationInputGroup.style.display = 'none';
-            }
-
-            if (document.getElementById('multiImageComponent').checked) {
-                multiImageInputGroup.style.display = 'block';
-            } else {
-                multiImageInputGroup.style.display = 'none';
-            }
-
-            if (document.getElementById('bigTitleComponent').checked) {
-                bigTitleInputGroup.style.display = 'block';
-            } else {
-                bigTitleInputGroup.style.display = 'none';
-            }
-
-            if (document.getElementById('smallTitleComponent').checked) {
-                smallTitleInputGroup.style.display = 'block';
-            } else {
-                smallTitleInputGroup.style.display = 'none';
-            }
-
-            if (document.getElementById('midTitleComponent').checked) {
-                midTitleInputGroup.style.display = 'block';
-            } else {
-                midTitleInputGroup.style.display = 'none';
-            }
-            // Toggle other input groups based on selected components
+            components.forEach(component => {
+                const group = component.dataset.group;
+                document.getElementById(group).style.display = 'block';
+            });
         }
     </script>
 </body>
