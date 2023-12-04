@@ -8,39 +8,69 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
+      background-color: #f4f4f4;
     }
 
     #app {
       max-width: 800px;
       margin: 20px auto;
       text-align: center;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
     h1 {
       color: #333;
     }
 
-    #schedule {
-      display: grid;
-      grid-template-columns: repeat(8, 1fr);
-      grid-gap: 1px;
-      border: 1px solid #ccc;
-    }
-
-    #schedule div {
-      padding: 10px;
-      border: 1px solid #eee;
-      text-align: left;
-    }
-
     label {
       margin-top: 10px;
+      display: block;
+    }
+
+    input {
+      margin-top: 5px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
     }
 
     button {
       margin-top: 10px;
-      padding: 8px;
+      padding: 10px;
       cursor: pointer;
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+    }
+
+    #schedule {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      grid-template-rows: repeat(13, 1fr);
+      grid-gap: 1px;
+      border: 1px solid #ccc;
+      margin-top: 20px;
+    }
+
+    .header-cell, .time-cell {
+      padding: 10px;
+      border: 1px solid #eee;
+      text-align: center;
+    }
+
+    .time-cell {
+      background-color: #eee;
+    }
+
+    .schedule-cell {
+      padding: 10px;
+      border: 1px solid #eee;
+      text-align: left;
+      min-height: 60px; /* Ensure each cell has a minimum height */
     }
   </style>
   <title>Schedule</title>
@@ -69,41 +99,32 @@
         const startTime = startTimeInput.value;
         scheduleContainer.innerHTML = '';
 
-        // Create header
+        // Create header row for days
         const headerRow = document.createElement('div');
         headerRow.classList.add('header-row');
         daysOfWeek.forEach(day => {
           const cell = document.createElement('div');
+          cell.classList.add('header-cell');
           cell.textContent = day;
           headerRow.appendChild(cell);
         });
         scheduleContainer.appendChild(headerRow);
 
-        // Create time slots and schedule grid
+        // Create time cells in the first column
+        for (let i = 8; i <= 20; i++) {
+          const timeCell = document.createElement('div');
+          timeCell.classList.add('time-cell');
+          timeCell.textContent = `${i}:00`;
+          scheduleContainer.appendChild(timeCell);
+        }
+
+        // Create schedule cells
         for (let i = 0; i < 7; i++) {
-          const currentDate = new Date(startDate);
-          currentDate.setDate(startDate.getDate() + i);
-
-          const row = document.createElement('div');
-          row.classList.add('time-slot-row');
-
           daysOfWeek.forEach(day => {
             const cell = document.createElement('div');
             cell.classList.add('schedule-cell');
-            cell.setAttribute('data-date', currentDate.toISOString().split('T')[0]);
-            cell.setAttribute('data-time', startTime);
-            row.appendChild(cell);
-
-            // Increment time by one hour each time
-            const nextTime = new Date(currentDate);
-            nextTime.setHours(parseInt(startTime.split(':')[0], 10) + (i * 24));
-            nextTime.setMinutes(startTime.split(':')[1]);
-
-            const timeString = `${nextTime.toLocaleDateString()} ${nextTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
-            cell.textContent = timeString;
+            scheduleContainer.appendChild(cell);
           });
-
-          scheduleContainer.appendChild(row);
         }
       }
 
@@ -121,7 +142,7 @@
           const dateTimeString = cell.textContent;
           const courseName = prompt(`Enter study plan for ${dateTimeString}:`);
           if (courseName !== null) {
-            cell.textContent = `${dateTimeString}\n${courseName}`;
+            cell.innerHTML = `<div>${dateTimeString}<br>${courseName}</div>`;
           }
         }
       });
