@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equation Solver</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #equationType {
+            margin: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .equation-button {
+            margin: 5px;
+            padding: 10px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .equation-button:hover {
+            background-color: #ddd;
+        }
+
+        #inputs {
+            margin: 20px;
+        }
+
+        #result {
+            margin: 20px;
+            font-size: 18px;
+            display: flex;
+            justify-content: center;
+        }
+
+        button {
+            margin: 5px;
+            padding: 10px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Equation Solver</h1>
+
+        <div id="equationType">
+            <button class="equation-button" onclick="showInputs('quadratic')">Quadratic Equation</button>
+            <button class="equation-button" onclick="showInputs('linear')">Linear Equation</button>
+            <button class="equation-button" onclick="showInputs('systemOfTwo')">System of Two Equations</button>
+            <button class="equation-button" onclick="showInputs('systemOfThree')">System of Three Equations</button>
+        </div>
+
+    <div id="inputs">
+        <h2>Enter Coefficients/Constants:</h2>
+        <label>a: <input type="text" id="inputA"></label>
+        <label>b: <input type="text" id="inputB"></label>
+        <label>c: <input type="text" id="inputC"></label>
+        <label>d: <input type="text" id="inputD"></label>
+        <label>e: <input type="text" id="inputE"></label>
+        <label>f: <input type="text" id="inputF"></label>
+        <label>g: <input type="text" id="inputG"></label>
+        <label>h: <input type="text" id="inputH"></label>
+        <label>i: <input type="text" id="inputI"></label>
+        <label>j: <input type="text" id="inputJ"></label>
+        <label>k: <input type="text" id="inputK"></label>
+        <label>l: <input type="text" id="inputL"></label>
+    </div>
+
+    <button onclick="solveEquation('quadratic')">Solve Quadratic Equation</button>
+    <button onclick="solveEquation('linear')">Solve Linear Equation</button>
+    <button onclick="solveEquation('systemOfTwo')">Solve System of Two Equations</button>
+    <button onclick="solveEquation('systemOfThree')">Solve System of Three Equations</button>
+
+    <div id="result"></div>
+
+    <script>
+        function showInputs(type) {
+            const inputsDiv = document.getElementById("inputs");
+            if (type === 'quadratic') {
+                inputsDiv.innerHTML = `
+                    <h2>Enter Coefficients/Constants:</h2>
+                    <label>a: <input type="text" id="inputA"></label>
+                    <label>b: <input type="text" id="inputB"></label>
+                    <label>c: <input type="text" id="inputC"></label>`;
+            } else if (type === 'linear') {
+                inputsDiv.innerHTML = `
+                    <h2>Enter Coefficients/Constants:</h2>
+                    <label>a: <input type="text" id="inputA"></label>
+                    <label>b: <input type="text" id="inputB"></label>`;
+            } else if (type === 'systemOfTwo') {
+                inputsDiv.innerHTML = `
+                    <h2>Enter Coefficients/Constants:</h2>
+                    <label>a: <input type="text" id="inputA"></label>
+                    <label>b: <input type="text" id="inputB"></label>
+                    <label>c: <input type="text" id="inputC"></label>
+                    <label>d: <input type="text" id="inputD"></label>
+                    <label>e: <input type="text" id="inputE"></label>
+                    <label>f: <input type="text" id="inputF"></label>`;
+            } else if (type === 'systemOfThree') {
+                inputsDiv.innerHTML = `
+                    <h2>Enter Coefficients/Constants:</h2>
+                    <label>a: <input type="text" id="inputA"></label>
+                    <label>b: <input type="text" id="inputB"></label>
+                    <label>c: <input type="text" id="inputC"></label>
+                    <label>d: <input type="text" id="inputD"></label>
+                    <label>e: <input type="text" id="inputE"></label>
+                    <label>f: <input type="text" id="inputF"></label>
+                    <label>g: <input type="text" id="inputG"></label>
+                    <label>h: <input type="text" id="inputH"></label>
+                    <label>i: <input type="text" id="inputI"></label>
+                    <label>j: <input type="text" id="inputJ"></label>
+                    <label>k: <input type="text" id="inputK"></label>
+                    <label>l: <input type="text" id="inputL"></label>`;
+            }
+        }
+
+        function solveEquation(type) {
+            const resultDiv = document.getElementById("result");
+            const inputsDiv = document.getElementById("inputs");
+
+            let result;
+            let a = parseFloat(document.getElementById("inputA").value);
+            let b = parseFloat(document.getElementById("inputB").value);
+            let c = parseFloat(document.getElementById("inputC").value);
+            let d = parseFloat(document.getElementById("inputD").value);
+            let e = parseFloat(document.getElementById("inputE").value);
+            let f = parseFloat(document.getElementById("inputF").value);
+            let g = parseFloat(document.getElementById("inputG").value);
+            let h = parseFloat(document.getElementById("inputH").value);
+            let i = parseFloat(document.getElementById("inputI").value);
+            let j = parseFloat(document.getElementById("inputJ").value);
+            let k = parseFloat(document.getElementById("inputK").value);
+            let l = parseFloat(document.getElementById("inputL").value);
+
+            switch (type) {
+                case 'quadratic':
+                    result = solveQuadratic(a, b, c);
+                    break;
+                case 'linear':
+                    result = solveLinear(a, b);
+                    break;
+                case 'systemOfTwo':
+                    result = solveSystemOfTwoEquations(a, b, c, d, e, f);
+                    break;
+                case 'systemOfThree':
+                    result = solveSystemOfThreeEquations(a, b, c, d, e, f, g, h, i, j, k, l);
+                    break;
+            }
+
+            resultDiv.innerHTML = "<h2>Solution:</h2>";
+            
+            if (Array.isArray(result) && result.length > 0) {
+                resultDiv.innerHTML += result.map(item => `<p>${item}</p>`).join("");
+            } else {
+                resultDiv.innerHTML += "<p>No real solutions.</p>";
+            }
+        }
+    </script>
+</body>
+</html>
