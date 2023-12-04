@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Tools</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        #calculator {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        #chart {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Math Tools!</h1>
+
+    <!-- Calculator Section -->
+    <div id="calculator">
+        <h2>Calculator</h2>
+        <p>Enter a mathematical expression below and click "Calculate."</p>
+        <input type="text" id="calcInput" placeholder="Enter expression">
+        <button onclick="calculate()">Calculate</button>
+        <p id="calcResult"></p>
+    </div>
+
+    <!-- Chart Drawing Tool Section -->
+    <div id="chart">
+        <h2>Chart Drawing Tool</h2>
+        <p>Visualize data with our simple chart drawing tool. Edit the sample data and click "Draw Chart."</p>
+        <canvas id="myChart" width="400" height="200"></canvas>
+        <button onclick="drawChart()">Draw Chart</button>
+    </div>
+
+    <!-- Additional Information Section -->
+    <div id="info">
+        <h2>Additional Information</h2>
+        <p>This webpage provides essential mathematical tools for quick calculations and data visualization.</p>
+        <p>The <strong>Calculator</strong> supports basic arithmetic operations. Enter expressions like "2+2" and click "Calculate."</p>
+        <p>The <strong>Chart Drawing Tool</strong> uses Chart.js library for creating simple bar charts. Edit the data, then click "Draw Chart."</p>
+        <p>Feel free to expand and customize this webpage for more advanced mathematical functionalities!</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Calculator functionality
+        function calculate() {
+            var input = document.getElementById("calcInput").value;
+            try {
+                var result = eval(input);
+                document.getElementById("calcResult").innerText = "Result: " + result;
+            } catch (error) {
+                document.getElementById("calcResult").innerText = "Invalid input";
+            }
+        }
+
+        // Chart Drawing Tool functionality
+        function drawChart() {
+            var newData = generateRandomData();
+            
+            myChart.data.datasets[0].data = newData;
+            myChart.update();
+        }
+
+        // Generate random data for the Chart Drawing Tool
+        function generateRandomData() {
+            var newData = [];
+            for (var i = 0; i < 5; i++) {
+                newData.push(Math.floor(Math.random() * 20) + 1);
+            }
+            return newData;
+        }
+    </script>
+</body>
+</html>
