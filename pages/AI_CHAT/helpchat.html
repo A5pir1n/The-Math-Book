@@ -103,9 +103,9 @@
 
         // Predefined questions and answers for testing
         const qaPairs = [
-            { question: "What services do you offer?", answer: "We offer a variety of services including..."},
-            { question: "How can I contact support?", answer: "You can contact support by..."},
-            { question: "What are your business hours?", answer: "Our business hours are..."}
+            { question: "What services do you offer?", answer: "Our website provides an interactive and comprehensive learning experience in advanced mathematics. We offer engaging learning tools like quizzes and simulations, optimized for both desktop and mobile use. You can also access to personalized user profiles, and a structured educational path to guide you from basic to advanced mathematical concepts."},
+            { question: "How can I contact support?", answer: "chenhaotan0102@gmail.com"},
+            { question: "What are your business hours?", answer: "whenever I have time to check my email"}
         ];
 
         // Display suggested questions
@@ -125,21 +125,58 @@
         }
 
         function sendMessage() {
-            const userMessage = userInput.value;
-            if (userMessage.trim() === '') return;
+            const userMessage = userInput.value.trim().toLowerCase(); // Convert the input to lowercase for case-insensitive matching
 
-            displayUserMessage(userMessage);
-            const agentReply = "Thank you for your message. An agent will assist you shortly.";
-            displayAgentMessage(agentReply);
+            // Check if all specified keywords are present in the user's message
+            if (userMessage.includes('donate') && userMessage.includes('you')) {
+                displayUserMessage(userInput.value);
+                const agentReply = "When you enter the homepage of our website, there will be 4 navigation options at the top. Select and click the support us button, and a donate page will appear. Select the amount you want to donate, click Confirm and you can pay with Palpay. Or you can use this link: www.themathbook.org Thank you for your support!"; // Respond with the specified message
+                displayAgentMessage(agentReply);
+            } 
+            else if (userMessage.includes('use') && userMessage.includes('calculator')) {
+                displayUserMessage(userInput.value);
+                const agentReply = "When you use the small calculator window, you have two input methods: 1. Use buttons to input, 2. If you think clicking the buttons will waste your time, you can also use the keyboard to input. After inputting, click the Calculate button to get the result."; // Respond with the specified message
+                displayAgentMessage(agentReply);
+            }
+            else if (userMessage.includes('my') && userMessage.includes('birthday')) {
+                displayUserMessage(userInput.value);
+                const agentReply = "Happy birthday!!!!";
+                displayAgentMessage(agentReply);
+            }
+            else if (userMessage.includes('your') && userMessage.includes('birthday')) {
+                displayUserMessage(userInput.value);
+                const agentReply = "I was born in RCOS, fall of 2023";
+                displayAgentMessage(agentReply);
+            }
+            else if (userMessage.includes('ok')) {
+                displayUserMessage(userInput.value);
+                const agentReply = "Is there anything else you would like to know"; // Respond with the specified message
+                displayAgentMessage(agentReply);
+            }
+            else if (userMessage.includes('no')&& userMessage.includes('thanks')) {
+                displayUserMessage(userInput.value);
+                const agentReply = "Thanks for your questions and support, have a nice day!!"; // Respond with the specified message
+                displayAgentMessage(agentReply);
+            }
+            else {
+                displayUserMessage(userInput.value);
+                 // Display the user's original message
+                const agentReply = "Thank you for your message. An agent will assist you shortly.";
+                displayAgentMessage(agentReply);
+            }
 
             userInput.value = '';
         }
-
         function sendSuggestedAnswer(answer) {
-            displayUserMessage(answer);
-            const agentReply = "Is there anything else you would like to know?";
-            displayAgentMessage(agentReply);
-        }
+    if (answer) {
+        displayAgentMessage(answer); // Display the predefined answer
+    } else {
+        const userMessage = "Is there anything else you would like to know?";
+        displayUserMessage(userMessage); // Display the user's message
+        const agentReply = "Thank you for your message. An agent will assist you shortly.";
+        displayAgentMessage(agentReply);
+    }
+}
 
         function displayUserMessage(message) {
             const userMessageElement = document.createElement('div');
