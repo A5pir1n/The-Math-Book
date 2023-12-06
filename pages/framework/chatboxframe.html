@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interface</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        #container {
+            display: flex;
+            flex: 1;
+        }
+
+        #navigation {
+            width: 300px;
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #questions {
+            margin-bottom: 20px;
+        }
+
+        #content {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .question {
+            background-color: #fff;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .question:hover {
+            background-color: #f2f2f2;
+        }
+
+        .question h3 {
+            margin: 0;
+            color: #333;
+        }
+
+        .answer {
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="navigation">
+            <h2>Recent Questions</h2>
+            <div id="questions">
+                <div class="question" onclick="showAnswer('1')">
+                    <h3>How does GPT work?</h3>
+                </div>
+                <div class="question" onclick="showAnswer('2')">
+                    <h3>What is the latest version of GPT?</h3>
+                </div>
+                <!-- Add more questions as needed -->
+            </div>
+        </div>
+        <div id="content">
+            <div id="answer-1" class="answer" style="display:none;">
+                <h3>How does Mathbook work?</h3>
+                <p>sajdbasijdka;osjdsao;ljdasl;ldk;aojsld;kjaslkdjasdaksjdlahsdkjasdjaskkldakslkjdkajdslkajdlasskjdaljsdklsad</p>
+            </div>
+            <div id="answer-2" class="answer" style="display:none;">
+                <h3>What is the latest version of mathbook?</h3>
+                <p>As of my knowledge cutoff in January 2022</p>
+            </div>
+            <!-- Add more answers as needed -->
+        </div>
+    </div>
+
+    <script>
+        function showAnswer(questionId) {
+            // Hide all answers
+            const answers = document.querySelectorAll('.answer');
+            answers.forEach(answer => {
+                answer.style.display = 'none';
+            });
+
+            // Show the selected answer
+            const selectedAnswer = document.getElementById(`answer-${questionId}`);
+            if (selectedAnswer) {
+                selectedAnswer.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
