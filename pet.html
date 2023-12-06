@@ -4,40 +4,61 @@
     <title>Study Plan</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
         }
 
         .container {
-            max-width: 600px;
+            max-width: 800px;
             margin: 0 auto;
             padding: 20px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         h1 {
             text-align: center;
+            color: #3498db;
         }
 
-        #study-time-input {
-            width: 100%;
-        }
-
-        #topic-input {
-            width: 100%;
-        }
-
-        #start-button {
+        label {
             display: block;
+            margin: 10px 0;
+            font-size: 1.2em;
+        }
+
+        input[type="number"], input[type="text"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            display: block;
+            width: 200px;
+            padding: 10px;
             margin: 20px auto;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
         }
 
-        #countdown {
-            text-align: center;
-            font-size: 24px;
+        button:hover {
+            background-color: #2874a6;
         }
 
-        #current-time {
+        #countdown, #current-time {
             text-align: center;
-            font-size: 18px;
+            margin-top: 20px;
+            font-size: 20px;
+            color: #e74c3c;
         }
 
         #topics-list {
@@ -46,42 +67,58 @@
         }
 
         #topics-list li {
+            background-color: #ecf0f1;
+            border: 1px solid #bdc3c7;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 4px;
             display: flex;
             align-items: center;
-            margin-bottom: 10px;
+            justify-content: space-between;
         }
 
         #topics-list li label {
-            flex: 1;
+            margin: 0;
+        }
+
+        #next-topic-button {
+            width: auto;
+            background-color: #2ecc71;
+        }
+
+        #next-topic-button:hover {
+            background-color: #27ae60;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Study Plan</h1>
-        <label for="study-time-input">How Long You Need to Study（min）:</label>
+        <label for="study-time-input">How Long You Need to Study for Each Topic (min):</label>
         <input type="number" id="study-time-input">
-        <label for="topic-input">How Many Topic You Want To Learn (max 5):</label>
+        <label for="topic-input">Add a Topic:</label>
         <input type="text" id="topic-input">
         <button id="add-topic-button">Add Topic</button>
         <ul id="topics-list"></ul>
         <button id="start-button">Start Study</button>
         <div id="countdown"></div>
         <div id="current-time"></div>
+        <button id="next-topic-button">Next Topic</button>
     </div>
 
     <script>
         let studyTime = 0;
         let topics = [];
+        let currentTopicIndex = 0;
 
         document.getElementById("add-topic-button").addEventListener("click", function() {
             const topicInput = document.getElementById("topic-input");
             const topicsList = document.getElementById("topics-list");
 
-            if (topics.length < 5 && topicInput.value.trim() !== "") {
+            if (topicInput.value.trim() !== "") {
                 topics.push(topicInput.value);
                 const li = document.createElement("li");
-                li.innerHTML = `<input type="checkbox" id="topic-${topics.length - 1}" value="${topicInput.value}"><label for="topic-${topics.length - 1}">${topicInput.value}</label>`;
+                li.innerHTML = `<label>${topicInput.value}</label>`;
                 topicsList.appendChild(li);
                 topicInput.value = "";
             }
@@ -96,25 +133,38 @@
                 document.getElementById("topic-input").disabled = true;
                 document.getElementById("add-topic-button").disabled = true;
 
-                // Start countdown
+                // Start countdown for the first topic
                 startCountdown();
             }
         });
 
+        document.getElementById("next-topic-button").addEventListener("click", function() {
+            currentTopicIndex++;
+            startCountdown();
+        });
+
         function startCountdown() {
+            if (currentTopicIndex >= topics.length) {
+                document.getElementById("countdown").innerHTML = "All topics completed!";
+                document.getElementById("next-topic-button").style.display = "none";
+                return;
+            }
+
+            document.getElementById("next-topic-button").style.display = "none";
             const countdown = document.getElementById("countdown");
             const currentTime = document.getElementById("current-time");
 
             let remainingTime = studyTime * 60;
-            countdown.innerHTML = formatTime(remainingTime);
+            countdown.innerHTML = `Studying: ${topics[currentTopicIndex]} - ${formatTime(remainingTime)}`;
 
             const timer = setInterval(function() {
                 remainingTime--;
                 if (remainingTime <= 0) {
                     clearInterval(timer);
-                    countdown.innerHTML = "Study END!!!!";
+                    countdown.innerHTML = `Topic "${topics[currentTopicIndex]}" is finished, please do the next one when you are ready`;
+                    document.getElementById("next-topic-button").style.display = "block";
                 } else {
-                    countdown.innerHTML = formatTime(remainingTime);
+                    countdown.innerHTML = `Studying: ${topics[currentTopicIndex]} - ${formatTime(remainingTime)}`;
                 }
 
                 const now = new Date();
@@ -125,7 +175,7 @@
         function formatTime(seconds) {
             const minutes = Math.floor(seconds / 60);
             const secs = seconds % 60;
-            return `${minutes} Minute ${secs} second`;
+            return `${minutes}m ${secs}s`;
         }
     </script>
 </body>
