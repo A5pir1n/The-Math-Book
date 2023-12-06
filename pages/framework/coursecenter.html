@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Dashboard</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        #dashboard {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 400px;
+        }
+
+        h1, h2, h3 {
+            color: #333;
+        }
+
+        #semester-selector {
+            margin-bottom: 20px;
+        }
+
+        select {
+            padding: 8px;
+            font-size: 16px;
+        }
+
+        #courses {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .course {
+            border-bottom: 1px solid #ccc;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="dashboard">
+        <h1>Course Dashboard</h1>
+
+        <div id="semester-selector">
+            <label for="semester">Select Semester:</label>
+            <select id="semester" onchange="loadCourses()">
+                <option value="spring">Spring 2023</option>
+                <option value="summer">Summer 2023</option>
+                <option value="fall">Fall 2023</option>
+                <!-- Add more terms as needed -->
+            </select>
+        </div>
+
+        <h2 id="semester-title">Courses for Spring 2023:</h2>
+
+        <ul id="courses">
+            <!-- Course items will be dynamically loaded here -->
+            
+        </ul>
+    </div>
+
+    <script>
+        function loadCourses() {
+            const semesterSelector = document.getElementById('semester');
+            const selectedSemester = semesterSelector.value;
+            const semesterTitle = document.getElementById('semester-title');
+            const coursesList = document.getElementById('courses');
+
+            // Clear previous courses
+            coursesList.innerHTML = '';
+
+            // Set semester title
+            semesterTitle.textContent = `Courses for ${selectedSemester.charAt(0).toUpperCase() + selectedSemester.slice(1)} 2023:`;
+
+            // Simulated API call to get courses data
+            const coursesData = getMockCoursesData(selectedSemester);
+
+            // Populate courses list
+            coursesData.forEach(course => {
+                const courseItem = document.createElement('li');
+                courseItem.classList.add('course');
+                courseItem.textContent = `${course.code} - ${course.name}`;
+                coursesList.appendChild(courseItem);
+            });
+        }
+
+        function getMockCoursesData(semester) {
+            // Simulated courses data
+            const terms = [];
+
+            for (let i = 1; i <= 10; i++) {
+                const term = {
+                    name: `Term ${i}`,
+                    courses: []
+                };
+
+                for (let j = 1; j <= 10; j++) {
+                    term.courses.push({ code: `COURSE${i * 10 + j}`, name: `Course ${i * 10 + j}` });
+                }
+
+                terms.push(term);
+            }
+
+            // Find the selected term
+            const selectedTerm = terms.find(term => term.name.toLowerCase() === semester.toLowerCase());
+
+            return selectedTerm ? selectedTerm.courses : [];
+        }
+
+        // Load courses for the initial semester
+        loadCourses();
+    </script>
+</body>
+</html>
