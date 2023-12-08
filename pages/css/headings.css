@@ -1,6 +1,6 @@
 .logo {
-	width: 58px;
-	height: 58px;
+	width: 78px;
+	height: 78px;
 	float: left;
 }
 .opensource {
@@ -23,9 +23,9 @@ li a.nav {
   display: block;
   color: #FFF;
   text-align: center;
-  padding: 14px 16px;
+  padding: 20px 16px;
   text-decoration: none;
-  font-size: 20px;
+  font-size: 24px;
 }
 
 li a:hover {

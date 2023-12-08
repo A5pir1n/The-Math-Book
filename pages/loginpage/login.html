@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link type="text/css" rel="stylesheet" href="../css/index.css">
   <title>Login and Register</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f0f0f0;
-      text-align: center;
+      font-family: 'Montserrat', Arial, Helvetica, sans-serif;
     }
 
     .container {
@@ -51,9 +51,37 @@
       cursor: pointer;
       font-size: 16px;
     }
+
+    .r2 {
+      width: 70vw;
+      height: 50vh;
+      margin: auto;
+    }
+
+    .logo {
+      max-width: 100%;
+      height: auto;
+      max-height: 100%;
+      display: block;
+    }
   </style>
 </head>
+
 <body>
+  <ul class="nav">
+    <li style="float: left;"><a href="index.html"><img src="../img/logo.png" alt="Logo image" class="logo2"></a></li>
+    <li style="float: left;"><a class="active" href="index.html"><b>Home</b></a> </li>
+    <li style="float: left;"><a class="active" href="pages/loginpage/login.html"><b>Log In</b></a> </li>
+    <li><a class="nav" href="pages/homepage/help.html">Help & Faqs</a></li>
+    <li><a class="nav" href="pages/homepage/aboutus.html">About us</a></li>
+    <li><a class="nav" href="pages/homepage/Contact_Us.html">Contact us</a></li>
+    <li><a class="nav" href="pages/homepage/donate.html">Support us</a></li>
+  </ul>
+  <div class="r2">
+    <img src="../img/logo.jpeg" alt="The Mathbook" class="logo">
+  </div>
+
+
   <div class="container">
     <h1>Login</h1>
     <label for="loginUsername">Username:</label>
@@ -104,4 +132,5 @@
     }
   </script>
 </body>
+
 </html>
