@@ -6,8 +6,8 @@
     <style>
         /* Styles can be customized as needed */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f0f0f0;
             margin: 0;
             padding: 20px;
         }
@@ -19,19 +19,27 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+        }
         label {
             display: block;
             margin-bottom: 5px;
+            font-weight: 600;
         }
-        input[type="text"] {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-        }
+        input[type="date"],
+        input[type="time"],
         textarea {
             width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 100px;
         }
         button {
             padding: 10px 20px;
@@ -40,9 +48,23 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            margin-right: 10px;
+        }
+        button:last-child {
+            margin-right: 0;
         }
         .plan-list {
             margin-top: 20px;
+        }
+        .plan-item {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        .plan-item p {
+            margin: 0;
         }
     </style>
 </head>
@@ -51,11 +73,11 @@
         <h2>Weekly Planner</h2>
         <form id="plannerForm">
             <label for="planDay">Select Day:</label>
-            <input type="date" id="planDay">
+            <input type="date" id="planDay" required>
             <label for="planTime">Select Time:</label>
-            <input type="time" id="planTime">
+            <input type="time" id="planTime" required>
             <label for="planNote">Add Note:</label>
-            <textarea id="planNote" rows="4"></textarea>
+            <textarea id="planNote" rows="4" required></textarea>
             <button type="button" onclick="addPlan()">Add Plan</button>
             <button type="button" onclick="clearPlans()">Clear Plans</button>
         </form>
@@ -72,7 +94,8 @@
 
             const planList = document.getElementById('planList');
             const planItem = document.createElement('div');
-            planItem.innerHTML = `<p><strong>${day} at ${time}</strong>: ${note}</p >`;
+            planItem.classList.add('plan-item');
+            planItem.innerHTML = `<p><strong>${day} at ${time}</strong>: ${note}</p>`;
             planList.appendChild(planItem);
 
             document.getElementById('plannerForm').reset();
@@ -84,4 +107,3 @@
     </script>
 </body>
 </html>
-
