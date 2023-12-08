@@ -1,0 +1,24 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#questionDisplayArea {
+    margin-bottom: 20px;
+}
+
+#answerField {
+    margin-bottom: 10px;
+}
+
+#automaticAnalysisArea {
+    margin-top: 20px;
+    background-color: #f8f8f8;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
