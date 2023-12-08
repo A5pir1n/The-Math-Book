@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathBook Membership</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        #membership-modal {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 400px;
+            text-align: center;
+        }
+
+        h1, h2, h3 {
+            color: #333;
+        }
+
+        #membership-details {
+            margin-bottom: 20px;
+        }
+
+        input[type="radio"] {
+            margin: 0 5px;
+        }
+
+        #checkout-button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        #checkout-form {
+            display: none;
+            margin-top: 20px;
+        }
+
+        #checkout-form label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        #checkout-form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        #checkout-form #pay-button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div id="membership-modal">
+        <h1>MathBook Membership</h1>
+
+        <div id="membership-details">
+            <label>
+                <input type="radio" name="membership" id="regular" onchange="enableCheckout()"> Regular Membership - $10/month
+            </label>
+            <p>Access to basic math resources and exercises.</p>
+
+            <label>
+                <input type="radio" name="membership" id="premium" onchange="enableCheckout()"> Premium Membership - $20/month
+            </label>
+            <p>Unlock advanced features, personalized learning plans, and priority support.</p>
+        </div>
+
+        <button id="checkout-button" onclick="showCheckoutForm()" disabled>Checkout</button>
+
+        <div id="checkout-form">
+            <label for="card-number">Card Number:</label>
+            <input type="text" id="card-number" placeholder="Enter your card number">
+
+            <label for="security-code">Security Code:</label>
+            <input type="text" id="security-code" placeholder="Enter security code">
+
+            <label for="expiry-date">Expiry Date:</label>
+            <input type="text" id="expiry-date" placeholder="Enter expiry date (MM/YYYY)">
+
+            <label for="amount">Amount:</label>
+            <input type="text" id="amount" readonly>
+
+            <button id="pay-button" onclick="processPayment()">Pay Now</button>
+        </div>
+    </div>
+
+    <script>
+        function enableCheckout() {
+            const checkoutButton = document.getElementById('checkout-button');
+            const regularMembership = document.getElementById('regular');
+            const premiumMembership = document.getElementById('premium');
+
+            // Enable Checkout button when a membership is selected
+            checkoutButton.disabled = !(regularMembership.checked || premiumMembership.checked);
+        }
+
+        function showCheckoutForm() {
+            const checkoutForm = document.getElementById('checkout-form');
+            const regularMembership = document.getElementById('regular');
+
+            // Populate amount based on membership type
+            const amountField = document.getElementById('amount');
+            amountField.value = regularMembership.checked ? '$10.00' : '$20.00';
+
+            // Hide membership details and show checkout form
+            document.getElementById('membership-details').style.display = 'none';
+            checkoutForm.style.display = 'block';
+        }
+
+        function processPayment() {
+            // Simulated payment processing logic
+            alert('Payment processed successfully!');
+        }
+    </script>
+</body>
+</html>
+

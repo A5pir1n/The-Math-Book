@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Graph Plotter</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        #graph-container {
+            width: 500px;
+            height: 500px;
+            border: 1px solid #ccc;
+            position: relative;
+            overflow: hidden;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #x-axis, #y-axis, #z-axis {
+            position: absolute;
+            background-color: #ccc;
+            height: 1px;
+            width: 100%;
+        }
+
+        #equation-inputs {
+            margin-top: 20px;
+        }
+
+        input, button {
+            margin-bottom: 10px;
+            padding: 8px;
+            font-size: 14px;
+        }
+
+        button {
+            background-color: #3498db;
+            color: #fff;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+        }
+
+        p {
+            margin-bottom: 5px;
+        }
+
+        #intersection-points {
+            margin-top: 10px;
+            color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+    <h1>Graph Plotter</h1>
+    <div id="graph-container">
+        <canvas id="graph" width="500" height="500"></canvas>
+        <div id="x-axis" style="bottom: 250px;"></div>
+        <div id="y-axis" style="left: 250px;"></div>
+        <div id="z-axis" style="left: 250px;"></div>
+    </div>
+    <div id="equation-inputs">
+        <p>Enter the equation of the first curve:</p>
+        <input type="text" id="equation1" placeholder="e.g. x + 2*y + 3*z or x^2 + y^2 + z^2">
+        <p>Enter the equation of the second curve:</p>
+        <input type="text" id="equation2" placeholder="e.g. x + 2*y + 3*z or x^2 + y^2 + z^2">
+        <button onclick="plotGraph()">Plot Graph</button>
+    </div>
+    
+    <p id="intersection-points"></p>
+
+    <script>
+        const canvas = document.getElementById('graph');
+        const ctx = canvas.getContext('2d');
+
+        function plotGraph() {
+            const equation1 = document.getElementById('equation1').value;
+            const equation2 = document.getElementById('equation2').value;
+            const minX = -10;
+            const maxX = 10;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.beginPath();
+            ctx.strokeStyle = '#3498db';
+            ctx.lineWidth = 2;
+
+            // Draw x-axis, y-axis, and z-axis
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            ctx.moveTo(centerX, 0);
+            ctx.lineTo(centerX, canvas.height);
+            ctx.moveTo(0, centerY);
+            ctx.lineTo(canvas.width, centerY);
+            ctx.moveTo(centerX, 0);
+            ctx.lineTo(centerX, canvas.height);
+            ctx.stroke();
+
+            // Draw grid lines
+            for (let i = 10; i < canvas.width; i += 10) {
+                ctx.beginPath();
+                ctx.moveTo(i, 0);
+                ctx.lineTo(i, canvas.height);
+                ctx.moveTo(0, i);
+                ctx.lineTo(canvas.width, i);
+                ctx.strokeStyle = '#ccc';
+                ctx.stroke();
+            }
+
+            ctx.beginPath();
+            ctx.strokeStyle = '#3498db';
+            ctx.lineWidth = 2;
+
+            let intersectionPoints = [];
+
+            for (let x = minX; x <= maxX; x += 0.1) {
+                const y1 = calculateY(equation1, x);
+                const y2 = calculateY(equation2, x);
+                const screenX = centerX + x * 10;
+                const screenY1 = centerY - y1 * 10;
+                const screenY2 = centerY - y2 * 10;
+
+                ctx.lineTo(screenX, screenY1);
+
+                // Check for intersection
+                if (Math.abs(screenY1 - screenY2) < 1) {
+                    intersectionPoints.push({ x, y: y1 });
+                }
+            }
+
+            ctx.stroke();
+
+            if (intersectionPoints.length > 0) {
+                const pointsText = intersectionPoints.map(point => `(${point.x.toFixed(2)}, ${point.y.toFixed(2)})`).join(' and ');
+                document.getElementById('intersection-points').textContent = `Intersection point(s): ${pointsText}`;
+            } else {
+                document.getElementById('intersection-points').textContent = "No intersection points found";
+            }
+        }
+
+        function calculateY(equation, x) {
+            // Parse the equation and calculate y for a given x
+            const equationParts = equation.split(' ');
+            const xIndex = equationParts.indexOf('x');
+            const yIndex = equationParts.indexOf('y');
+            const zIndex = equationParts.indexOf('z');
+            let y = 0;
+
+            if (xIndex !== -1) {
+                y = eval(equation.replace('x', x));
+            } else if (yIndex !== -1) {
+                const xValue = x;
+                y = eval(equation.replace('y', `(${xValue})`));
+            } else if (zIndex !== -1) {
+                const xValue = x;
+                y = eval(equation.replace('z', `(${xValue})`));
+            }
+
+            return y;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake Shopping Cart</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1, h2 {
+            color: #333;
+            text-align: center;
+        }
+
+        #cart, #checkout {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        input {
+            padding: 10px;
+            margin: 5px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Fake Shopping Cart</h1>
+
+<div id="cart">
+    <!-- Shopping cart content will be displayed here -->
+</div>
+
+<button onclick="checkout()">Checkout</button>
+
+<div id="checkout" style="display: none;">
+    <h2>Checkout</h2>
+    <label for="name">Name:</label>
+    <input type="text" id="name" required><br>
+    <label for="email">Email:</label>
+    <input type="email" id="email" required><br>
+    <label for="address">Address:</label>
+    <input type="text" id="address" required><br>
+    <label for="cardNumber">Card Number:</label>
+    <input type="text" id="cardNumber" required><br>
+    <label for="expiryDate">Expiry Date:</label>
+    <input type="text" id="expiryDate" placeholder="MM/YY" required><br>
+    <label for="securityCode">Security Code:</label>
+    <input type="text" id="securityCode" required><br>
+
+    <label for="shippingMethod">Shipping Method:</label>
+    <select id="shippingMethod" onchange="updateTotal()">
+        <option value="free">Free Shipping</option>
+        <option value="standard">Standard Shipping (+$5)</option>
+        <option value="express">Express Shipping (+$10)</option>
+    </select>
+
+    <div>
+        <label>Total Amount: $</label>
+        <span id="totalAmount">0.00</span>
+    </div>
+
+    <button onclick="submitPayment()">Submit Payment</button>
+</div>
+
+<script>
+    // Fake shopping cart data
+    const cartItems = [
+        { id: 1, name: 'Product 1', price: 20, quantity: 1 },
+        { id: 2, name: 'Product 2', price: 30, quantity: 2 },
+        { id: 3, name: 'Product 3', price: 15, quantity: 1 },
+    ];
+
+    // Shipping prices
+    const shippingPrices = {
+        free: 0,
+        standard: 5,
+        express: 10,
+    };
+
+    // Function to display shopping cart
+    function displayCart() {
+        const cartElement = document.getElementById('cart');
+        cartElement.innerHTML = '<h2>Shopping Cart</h2>';
+
+        cartItems.forEach(item => {
+            cartElement.innerHTML += `
+                <div>
+                    <span>${item.name} - $${item.price} - Quantity: ${item.quantity}</span>
+                    <button onclick="increaseQuantity(${item.id})">+</button>
+                    <button onclick="decreaseQuantity(${item.id})">-</button>
+                    <button onclick="removeItem(${item.id})">Remove</button>
+                </div>
+            `;
+        });
+
+        updateTotal();
+    }
+
+    // Function to increase quantity
+    function increaseQuantity(itemId) {
+        const item = cartItems.find(item => item.id === itemId);
+        if (item) {
+            item.quantity += 1;
+            displayCart();
+        }
+    }
+
+    // Function to decrease quantity
+    function decreaseQuantity(itemId) {
+        const item = cartItems.find(item => item.id === itemId);
+        if (item && item.quantity > 1) {
+            item.quantity -= 1;
+            displayCart();
+        }
+    }
+
+    // Function to remove item
+    function removeItem(itemId) {
+        const itemIndex = cartItems.findIndex(item => item.id === itemId);
+        if (itemIndex !== -1) {
+            cartItems.splice(itemIndex, 1);
+            displayCart();
+        }
+    }
+
+    // Function to update total amount
+    function updateTotal() {
+        const shippingMethod = document.getElementById('shippingMethod').value;
+        const totalAmountElement = document.getElementById('totalAmount');
+
+        let totalAmount = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+        totalAmount += shippingPrices[shippingMethod];
+
+        totalAmountElement.textContent = totalAmount.toFixed(2);
+    }
+
+    // Function to show checkout section
+    function checkout() {
+        const cartElement = document.getElementById('cart');
+        const checkoutElement = document.getElementById('checkout');
+
+        cartElement.style.display = 'none';
+        checkoutElement.style.display = 'block';
+
+        updateTotal();
+    }
+
+    // Function to submit payment
+    function submitPayment() {
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const address = document.getElementById('address').value;
+        const cardNumber = document.getElementById('cardNumber').value;
+        const expiryDate = document.getElementById('expiryDate').value;
+        const securityCode = document.getElementById('securityCode').value;
+        const shippingMethod = document.getElementById('shippingMethod').value;
+        const totalAmount = document.getElementById('totalAmount').textContent;
+
+        // In a real application, this is where you would send the payment information to the server
+        // For simplicity, let's just display an alert here
+        alert(`Payment successful!\nName: ${name}\nEmail: ${email}\nAddress: ${address}\nCard Number: ${cardNumber}\nExpiry Date: ${expiryDate}\nSecurity Code: ${securityCode}\nShipping Method: ${shippingMethod}\nTotal Amount: $${totalAmount}`);
+    }
+
+    // Initialize and display the shopping cart
+    displayCart();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        #chatbox-container {
+            width: 400px;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        #chatbox {
+            width: 100%;
+            height: 400px;
+            overflow-y: auto;
+            padding: 15px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .message {
+            max-width: 70%;
+            margin-bottom: 10px;
+            word-wrap: break-word;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .user-message {
+            background-color: #3498db;
+            color: #fff;
+            align-self: flex-start;
+        }
+
+        .agent-message {
+            background-color: #fff;
+            color: #333;
+            align-self: flex-end;
+        }
+
+        .timestamp {
+            font-size: 0.8em;
+            color: #888;
+            margin-top: 3px;
+        }
+
+        .input-container {
+            display: flex;
+            padding: 10px;
+            background-color: #eee;
+            border-top: 1px solid #ccc;
+        }
+
+        #userInput {
+            flex: 1;
+            padding: 8px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #sendButton {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .suggested-question {
+            cursor: pointer;
+            color: #3498db;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="chatbox-container">
+        <div id="chatbox"></div>
+        <div class="input-container">
+            <input type="text" id="userInput" placeholder="Type your message...">
+            <button id="sendButton" onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        const chatbox = document.getElementById('chatbox');
+        const userInput = document.getElementById('userInput');
+
+        // Predefined questions and answers for testing
+        const qaPairs = [
+            { question: "What services do you offer?", answer: "Our website provides an interactive and comprehensive learning experience in advanced mathematics. We offer engaging learning tools like quizzes and simulations, optimized for both desktop and mobile use. You can also access to personalized user profiles, and a structured educational path to guide you from basic to advanced mathematical concepts."},
+            { question: "How can I contact support?", answer: "chenhaotan0102@gmail.com"},
+            { question: "What are your business hours?", answer: "whenever I have time to check my email"}
+        ];
+
+        // Display suggested questions
+        qaPairs.forEach(qaPair => {
+            const suggestedQuestion = document.createElement('div');
+            suggestedQuestion.classList.add('suggested-question');
+            suggestedQuestion.textContent = qaPair.question;
+            suggestedQuestion.addEventListener('click', () => sendSuggestedAnswer(qaPair.answer));
+            chatbox.appendChild(suggestedQuestion);
+        });
+
+        function getCurrentTime() {
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            return `${hours}:${minutes}`;
+        }
+
+        function sendMessage() {
+            const userMessage = userInput.value.trim().toLowerCase(); // Convert the input to lowercase for case-insensitive matching
+
+            // Check if all specified keywords are present in the user's message
+            if (userMessage.includes('donate') && userMessage.includes('you')) {
+                displayUserMessage(userInput.value);
+                const agentReply = "When you enter the homepage of our website, there will be 4 navigation options at the top. Select and click the support us button, and a donate page will appear. Select the amount you want to donate, click Confirm and you can pay with Palpay. Or you can use this link: www.themathbook.org Thank you for your support!"; // Respond with the specified message
+                displayAgentMessage(agentReply);
+            } 
+            else if (userMessage.includes('use') && userMessage.includes('calculator')) {
+                displayUserMessage(userInput.value);
+                const agentReply = "When you use the small calculator window, you have two input methods: 1. Use buttons to input, 2. If you think clicking the buttons will waste your time, you can also use the keyboard to input. After inputting, click the Calculate button to get the result."; // Respond with the specified message
+                displayAgentMessage(agentReply);
+            }
+            else if (userMessage.includes('my') && userMessage.includes('birthday')) {
+                displayUserMessage(userInput.value);
+                const agentReply = "Happy birthday!!!!";
+                displayAgentMessage(agentReply);
+            }
+            else if (userMessage.includes('your') && userMessage.includes('birthday')) {
+                displayUserMessage(userInput.value);
+                const agentReply = "I was born in RCOS, fall of 2023";
+                displayAgentMessage(agentReply);
+            }
+            else if (userMessage.includes('ok')) {
+                displayUserMessage(userInput.value);
+                const agentReply = "Is there anything else you would like to know"; // Respond with the specified message
+                displayAgentMessage(agentReply);
+            }
+            else if (userMessage.includes('no')&& userMessage.includes('thanks')) {
+                displayUserMessage(userInput.value);
+                const agentReply = "Thanks for your questions and support, have a nice day!!"; // Respond with the specified message
+                displayAgentMessage(agentReply);
+            }
+            else {
+                displayUserMessage(userInput.value);
+                 // Display the user's original message
+                const agentReply = "Thank you for your message. An agent will assist you shortly.";
+                displayAgentMessage(agentReply);
+            }
+
+            userInput.value = '';
+        }
+        function sendSuggestedAnswer(answer) {
+    if (answer) {
+        displayAgentMessage(answer); // Display the predefined answer
+    } else {
+        const userMessage = "Is there anything else you would like to know?";
+        displayUserMessage(userMessage); // Display the user's message
+        const agentReply = "Thank you for your message. An agent will assist you shortly.";
+        displayAgentMessage(agentReply);
+    }
+}
+
+        function displayUserMessage(message) {
+            const userMessageElement = document.createElement('div');
+            userMessageElement.classList.add('message', 'user-message');
+            userMessageElement.textContent = message;
+
+            const timestampElement = document.createElement('div');
+            timestampElement.classList.add('timestamp');
+            timestampElement.textContent = getCurrentTime();
+
+            userMessageElement.appendChild(timestampElement);
+            chatbox.appendChild(userMessageElement);
+        }
+
+        function displayAgentMessage(message) {
+            const agentMessageElement = document.createElement('div');
+            agentMessageElement.classList.add('message', 'agent-message');
+            agentMessageElement.textContent = message;
+
+            const timestampElement = document.createElement('div');
+            timestampElement.classList.add('timestamp');
+            timestampElement.textContent = getCurrentTime();
+
+            agentMessageElement.appendChild(timestampElement);
+            chatbox.appendChild(agentMessageElement);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    #app {
+      max-width: 800px;
+      margin: 20px auto;
+      text-align: center;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    label {
+      margin-top: 10px;
+      display: block;
+    }
+
+    input {
+      margin-top: 5px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 10px;
+      cursor: pointer;
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+    }
+
+    #schedule {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      grid-template-rows: repeat(13, 1fr);
+      grid-gap: 1px;
+      border: 1px solid #ccc;
+      margin-top: 20px;
+    }
+
+    .header-cell, .time-cell {
+      padding: 10px;
+      border: 1px solid #eee;
+      text-align: center;
+    }
+
+    .time-cell {
+      background-color: #eee;
+    }
+
+    .schedule-cell {
+      padding: 10px;
+      border: 1px solid #eee;
+      text-align: left;
+      min-height: 60px; /* Ensure each cell has a minimum height */
+    }
+  </style>
+  <title>Schedule</title>
+</head>
+<body>
+  <div id="app">
+    <h1>Study Schedule</h1>
+    <label for="start-date">Start Date:</label>
+    <input type="date" id="start-date">
+    <label for="start-time">Daily Start Time:</label>
+    <input type="time" id="start-time" value="08:00">
+    <button id="generate-schedule">Generate Schedule</button>
+    <div id="schedule"></div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+      const scheduleContainer = document.getElementById('schedule');
+      const startDateInput = document.getElementById('start-date');
+      const startTimeInput = document.getElementById('start-time');
+      const generateButton = document.getElementById('generate-schedule');
+
+      function updateSchedule() {
+        const startDate = new Date(startDateInput.value);
+        const startTime = startTimeInput.value;
+        scheduleContainer.innerHTML = '';
+
+        // Create header row for days
+        const headerRow = document.createElement('div');
+        headerRow.classList.add('header-row');
+        daysOfWeek.forEach(day => {
+          const cell = document.createElement('div');
+          cell.classList.add('header-cell');
+          cell.textContent = day;
+          headerRow.appendChild(cell);
+        });
+        scheduleContainer.appendChild(headerRow);
+
+        // Create time cells in the first column
+        for (let i = 8; i <= 20; i++) {
+          const timeCell = document.createElement('div');
+          timeCell.classList.add('time-cell');
+          timeCell.textContent = `${i}:00`;
+          scheduleContainer.appendChild(timeCell);
+        }
+
+        // Create schedule cells
+        for (let i = 0; i < 7; i++) {
+          daysOfWeek.forEach(day => {
+            const cell = document.createElement('div');
+            cell.classList.add('schedule-cell');
+            scheduleContainer.appendChild(cell);
+          });
+        }
+      }
+
+      // Event listener for the Generate Schedule button
+      generateButton.addEventListener('click', updateSchedule);
+
+      // Event listeners for date and time input changes
+      startDateInput.addEventListener('change', updateSchedule);
+      startTimeInput.addEventListener('change', updateSchedule);
+
+      // Event listener for schedule cell clicks
+      scheduleContainer.addEventListener('click', function(event) {
+        const cell = event.target;
+        if (cell.classList.contains('schedule-cell')) {
+          const dateTimeString = cell.textContent;
+          const courseName = prompt(`Enter study plan for ${dateTimeString}:`);
+          if (courseName !== null) {
+            cell.innerHTML = `<div>${dateTimeString}<br>${courseName}</div>`;
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

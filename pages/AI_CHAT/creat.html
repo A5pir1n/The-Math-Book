@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        #preview {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .component-options {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+
+        .component-options label {
+            margin-right: 15px;
+            margin-bottom: 5px;
+        }
+
+        .input-group {
+            margin-bottom: 10px;
+            display: none;
+        }
+
+        #generateButton {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #backgroundImageInput {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Static Page Generator</h1>
+
+    <div class="component-options">
+        <label><input type="checkbox" class="component" data-group="bigTitleInputGroup"> Big Title</label>
+        <label><input type="checkbox" class="component" data-group="smallTitleInputGroup"> Small Title</label>
+        <label><input type="checkbox" class="component" data-group="explanationInputGroup"> Explanation</label>
+        <label><input type="checkbox" class="component" data-group="imageInputGroup"> Image</label>
+        <label><input type="checkbox" class="component" data-group="videoInputGroup"> Video</label>
+        <!-- Add more component options as needed -->
+    </div>
+
+    <div id="editor">
+        <div class="input-group" id="bigTitleInputGroup">
+            <label for="bigTitleInput">Big Title Content:</label>
+            <input type="text" id="bigTitleInput">
+        </div>
+
+        <div class="input-group" id="smallTitleInputGroup">
+            <label for="smallTitleInput">Small Title Content:</label>
+            <input type="text" id="smallTitleInput">
+        </div>
+
+        <div class="input-group" id="explanationInputGroup">
+            <label for="explanationInput">Explanation Content:</label>
+            <textarea id="explanationInput"></textarea>
+        </div>
+
+        <div class="input-group" id="imageInputGroup">
+            <label for="imageInput">Image URL:</label>
+            <input type="text" id="imageInput">
+        </div>
+
+        <div class="input-group" id="videoInputGroup">
+            <label for="videoInput">Video URL:</label>
+            <input type="text" id="videoInput">
+        </div>
+
+        <div class="input-group" id="backgroundImageInput">
+            <label for="backgroundImage">Background Image URL:</label>
+            <input type="text" id="backgroundImage">
+        </div>
+        <!-- Add more input groups for other components -->
+    </div>
+
+    <button id="generateButton" onclick="generatePage()">Generate</button>
+
+    <div id="preview"></div>
+
+    <script>
+        function generatePage() {
+            const components = document.querySelectorAll('.component:checked');
+            const preview = document.getElementById('preview');
+            const pageContent = [];
+
+            components.forEach(component => {
+                const group = component.dataset.group;
+                const input = document.getElementById(`${group}Input`).value;
+
+                switch (group) {
+                    case 'bigTitleInputGroup':
+                        pageContent.push(`<h1>${input}</h1>`);
+                        break;
+
+                    case 'smallTitleInputGroup':
+                        pageContent.push(`<h2>${input}</h2>`);
+                        break;
+
+                    case 'explanationInputGroup':
+                        pageContent.push(`<p>${input}</p>`);
+                        break;
+
+                    case 'imageInputGroup':
+                        const imageUrl = document.getElementById('imageInput').value;
+                        pageContent.push(`<img src="${imageUrl}" alt="Generated Image">`);
+                        break;
+
+                    case 'videoInputGroup':
+                        const videoUrl = document.getElementById('videoInput').value;
+                        pageContent.push(`<iframe width="560" height="315" src="${videoUrl}" frameborder="0" allowfullscreen></iframe>`);
+                        break;
+                    // Add more cases for other components
+                }
+            });
+
+            const backgroundImageUrl = document.getElementById('backgroundImage').value;
+            document.body.style.backgroundImage = `url('${backgroundImageUrl}')`;
+
+            preview.innerHTML = '';
+            pageContent.forEach(content => {
+                preview.innerHTML += content;
+            });
+        }
+
+        // Toggle input groups based on selected components
+        document.querySelectorAll('.component').forEach(component => {
+            component.addEventListener('change', toggleInputGroup);
+        });
+
+        function toggleInputGroup() {
+            const components = document.querySelectorAll('.component:checked');
+            const inputGroups = document.querySelectorAll('.input-group');
+
+            inputGroups.forEach(group => {
+                group.style.display = 'none';
+            });
+
+            components.forEach(component => {
+                const group = component.dataset.group;
+                document.getElementById(group).style.display = 'block';
+            });
+        }
+    </script>
+</body>
+</html>

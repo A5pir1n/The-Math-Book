@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Class Schedule Generator</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    table {
+      margin: 20px auto;
+      border-collapse: collapse;
+      width: 80%;
+      max-width: 800px;
+    }
+
+    td {
+      border: 1px solid #ccc;
+      height: 50px;
+      padding: 5px;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    .draggable {
+      cursor: move;
+      user-select: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Class Schedule Generator</h1>
+
+    <table id="courseTable" class="table table-bordered">
+      <thead class="thead-light">
+        <tr>
+          <td>Day/Time</td>
+          <td>01<br>9:30-10:20</td>
+          <td>02<br>10:20-11:10</td>
+          <td>03<br>11:10-12:00</td>
+          <td>12:00-12:40</td>
+          <td>04<br>12:40-1:30</td>
+          <td>05<br>1:30-2:20</td>
+          <td>06<br>2:20-3:10</td>
+          <td>07<br>3:10-4:00</td>
+        </tr>
+      </thead>
+      <tr>
+        <td>Monday</td>
+        <td contenteditable="true"></td>
+        <td contenteditable="true"></td>
+        <td contenteditable="true"></td>
+        <td rowspan="6" contenteditable="true">
+          <h2>Lunch<br>Break</h2>
+        </td>
+        <td colspan="3" contenteditable="true"></td>
+        <td contenteditable="true"></td>
+      </tr>
+      <tr>
+        <td>Tuesday</td>
+        <td colspan="3" contenteditable="true"></td>
+        <td contenteditable="true"></td>
+        <td contenteditable="true"></td>
+        <td contenteditable="true"></td>
+        <td contenteditable="true"></td>
+      </tr>
+      <tr>
+        <td>Wednesday</td>
+        <td contenteditable="true"></td>
+        <td contenteditable="true"></td>
+        <td contenteditable="true"></td>
+        <td contenteditable="true"></td>
+        <td colspan="3" contenteditable="true"></td>
+      </tr>
+      <tr>
+        <td>Thursday</td>
+        <td contenteditable="true"></td>
+        <td contenteditable="true"></td>
+        <td contenteditable="true"></td>
+        <td colspan="3" contenteditable="true"></td>
+        <td contenteditable="true"></td>
+      </tr>
+      <tr>
+        <td>Friday</td>
+        <td colspan="3" contenteditable="true"></td>
+        <td contenteditable="true"></td>
+        <td contenteditable="true"></td>
+        <td contenteditable="true"></td>
+        <td contenteditable="true"></td>
+      </tr>
+      <tr>
+        <td>Saturday</td>
+        <td contenteditable="true"></td>
+        <td contenteditable="true"></td>
+        <td contenteditable="true"></td>
+        <td colspan="3" contenteditable="true"></td>
+        <td contenteditable="true"></td>
+      </tr>
+    </table>
+
+    <script src="https://unpkg.com/interactjs@1.10.11/dist/interact.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const table = document.getElementById('courseTable');
+
+        interact('.draggable')
+          .draggable({
+            modifiers: [
+              interact.modifiers.restrictRect({
+                restriction: 'parent',
+                endOnly: true,
+              }),
+            ],
+            listeners: {
+              move(event) {
+                const target = event.target;
+                const x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
+                const y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+
+                target.style.webkitTransform = target.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
+                target.setAttribute('data-x', x);
+                target.setAttribute('data-y', y);
+              },
+            },
+          })
+          .resizable({
+            edges: { left: true, right: true },
+            restrictEdges: {
+              outer: 'parent',
+              endOnly: true,
+            },
+            restrictSize: {
+              min: { width: 50 },
+            },
+            listeners: {
+              move(event) {
+                const target = event.target;
+                const x = (parseFloat(target.getAttribute('data-x')) || 0);
+                const y = (parseFloat(target.getAttribute('data-y')) || 0);
+
+                target.style.width = event.rect.width + 'px';
+                target.setAttribute('data-width', event.rect.width);
+              },
+            },
+          });
+
+        // Add event listener to each editable cell
+        table.querySelectorAll('[contenteditable="true"]').forEach(cell => {
+          cell.addEventListener('click', function() {
+            this.focus();
+          });
+        });
+      });
+    </script>
+  </body>
+  </html>

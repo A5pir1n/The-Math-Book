@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interface</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        #container {
+            display: flex;
+            flex: 1;
+        }
+
+        #navigation {
+            width: 300px;
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #questions {
+            margin-bottom: 20px;
+        }
+
+        #content {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .question {
+            background-color: #fff;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .question:hover {
+            background-color: #f2f2f2;
+        }
+
+        .question h3 {
+            margin: 0;
+            color: #333;
+        }
+
+        .answer {
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #new-question {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        #new-question input {
+            flex: 1;
+            padding: 8px;
+        }
+
+        #generate-btn {
+            background-color: #3498db;
+            color: #fff;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 16px;
+        }
+
+        #loading {
+            display: none;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="navigation">
+            <h2>Recent Questions</h2>
+            <div id="questions">
+                <div class="question" onclick="showAnswer('1')">
+                    <h3>How does Mathbook work?</h3>
+                </div>
+                <div class="question" onclick="showAnswer('2')">
+                    <h3>What is the latest version of Mathbook?</h3>
+                </div>
+                <div class="question" onclick="showAnswer('3')">
+                    <h3>Can Mathbook solve calculus problems?</h3>
+                </div>
+                <div class="question" onclick="showAnswer('4')">
+                    <h3>Is Mathbook suitable for high school students?</h3>
+                </div>
+                <div class="question" onclick="showAnswer('5')">
+                    <h3>How do I integrate Mathbook with other tools?</h3>
+                </div>
+                <div class="question" onclick="showAnswer('6')">
+                    <h3>What programming languages does Mathbook support?</h3>
+                </div>
+                <div class="question" onclick="showAnswer('7')">
+                    <h3>Can Mathbook handle symbolic algebra?</h3>
+                </div>
+                <div class="question" onclick="showAnswer('8')">
+                    <h3>How secure is Mathbook for sensitive calculations?</h3>
+                </div>
+                <div class="question" onclick="showAnswer('9')">
+                    <h3>What are the system requirements for using Mathbook?</h3>
+                </div>
+                <div class="question" onclick="showAnswer('10')">
+                    <h3>Is Mathbook open source?</h3>
+                </div>
+            </div>
+
+            <div id="new-question">
+                <input type="text" id="userQuestion" placeholder="Ask a new question...">
+                <button id="generate-btn" onclick="generateAnswer()">Ask</button>
+                <span id="loading">Generating...</span>
+            </div>
+        </div>
+
+        <div id="content">
+            <div id="answer-1" class="answer" style="display:none;">
+                <h3>How does Mathbook work?</h3>
+                <p>sajdbasijdka;osjdsao;ljdasl;ldk;aojsld;kjaslkdjasdaksjdlahsdkjasdjaskkldakslkjdkajdslkajdlasskjdaljsdklsad</p>
+            </div>
+            <div id="answer-2" class="answer" style="display:none;">
+                <h3>What is the latest version of Mathbook?</h3>
+                <p>As of my knowledge cutoff in January 2022</p>
+            </div>
+            <!-- Add more answers as needed -->
+        </div>
+    </div>
+
+    <script>
+        const questionsAndAnswers = {
+            "1": { question: "How does Mathbook work?", answer: "sajdbasijdka;osjdsao;ljdasl;ldk;aojsld;kjaslkdjasdaksjdlahsdkjasdjaskkldakslkjdkajdslkajdlasskjdaljsdklsad" },
+            "2": { question: "What is the latest version of Mathbook?", answer: "As of my knowledge cutoff in January 2022" },
+            "3": { question: "Can Mathbook solve calculus problems?", answer: "Yes, Mathbook is designed to handle various mathematical problems, including calculus." },
+            "4": { question: "Is Mathbook suitable for high school students?", answer: "Absolutely! Mathbook is designed to be user-friendly and suitable for students at all levels, including high school." },
+            "5": { question: "How do I integrate Mathbook with other tools?", answer: "Integration instructions depend on the specific tools. Mathbook provides documentation for integrating with various platforms." },
+            "6": { question: "What programming languages does Mathbook support?", answer: "Mathbook supports multiple programming languages, including Python, JavaScript, and more." },
+            "7": { question: "Can Mathbook handle symbolic algebra?", answer: "Yes, Mathbook has capabilities for symbolic algebraic computations." },
+            "8": { question: "How secure is Mathbook for sensitive calculations?", answer: "Mathbook employs advanced security measures to ensure the privacy and security of sensitive calculations." },
+            "9": { question: "What are the system requirements for using Mathbook?", answer: "System requirements may vary. Check Mathbook's official documentation for the most up-to-date information." },
+            "10": { question: "Is Mathbook open source?", answer: "No, Mathbook is not open source. It is a proprietary software developed by XYZ Corporation." }
+        };
+
+        function showAnswer(questionId) {
+            // Hide all answers
+            const answers = document.querySelectorAll('.answer');
+            answers.forEach(answer => {
+                answer.style.display = 'none';
+            });
+
+            // Show the selected answer
+            const selectedAnswer = document.getElementById(`answer-${questionId}`);
+            if (selectedAnswer) {
+                selectedAnswer.style.display = 'block';
+            }
+        }
+
+        function generateAnswer() {
+            const userQuestionInput = document.getElementById('userQuestion');
+            const userQuestion = userQuestionInput.value.trim();
+
+            if (userQuestion === '') {
+                alert('Please enter a valid question.');
+                return;
+            }
+
+            // Display "Generating..." message
+            const loadingMessage = document.getElementById('loading');
+            loadingMessage.style.display = 'inline';
+
+            // Simulate API call (replace with actual backend API call)
+            setTimeout(() => {
+                // Simulated API response
+                const generatedAnswer = "This is a generated answer for your question.";
+
+                // Hide loading message
+                loadingMessage.style.display = 'none';
+
+                // Display generated answer
+                const content = document.getElementById('content');
+                content.innerHTML += `
+                    <div class="answer">
+                        <h3>${userQuestion}</h3>
+                        <p>${generatedAnswer}</p>
+                    </div>
+                `;
+            }, 2000); // Simulated 2-second delay for answer generation
+        }
+    </script>
+</body>
+</html>
